@@ -2,6 +2,10 @@
 
 Konmego Client App
 
+
+## indtall quaser cli globally
+npm install -g @quasar/cli
+
 ## Install the dependencies
 ```bash
 yarn
