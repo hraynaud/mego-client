@@ -1,52 +1,57 @@
 <template>
-  <div class="q-pa-md" style="max-width: 400px">
-    <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-      <q-input
-        filled
-        v-model="login"
-        label="email *"
-        lazy-rules
-        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
-      />
-
-      <q-input
-        filled
-        type="password"
-        v-model="password"
-        label="password *"
-        lazy-rules
-        :rules="[
-          (val) =>
-            (val !== null && val !== '' && val.length > 8) ||
-            'Please enter password',
-        ]"
-      />
-
-      <q-input
-        filled
-        type="password"
-        v-model="passwordConfirmation"
-        label="password confirmation"
-        lazy-rules
-        :rules="[
-          (val) =>
-            (val !== null && val !== '' && val.length > 8) ||
-            'Please enter password',
-        ]"
-      />
-
-      <div>
-        <q-btn label="Submit" type="submit" color="primary" />
+  <q-page
+    class="window-height window-width row justify-center items-center"
+    style="background: linear-gradient(#8274c5, #5a4a9f)"
+  >
+    <q-card square class="shadow-24" style="width: 300px; height: 485px">
+      <q-card-section class="bg-deep-purple-7">
+        <h4 class="text-h5 text-white q-my-md">Registration</h4>
+      </q-card-section>
+      <q-card-section>
+        <q-form class="q-px-sm q-pt-xl q-pb-lg">
+          <q-input square clearable v-model="email" type="email" label="Email">
+            <template v-slot:prepend>
+              <q-icon name="email" />
+            </template>
+          </q-input>
+          <!-- <q-input
+            square
+            clearable
+            v-model="username"
+            type="username"
+            label="Username"
+          >
+            <template v-slot:prepend>
+              <q-icon name="person" />
+            </template>
+          </q-input> -->
+          <q-input
+            square
+            clearable
+            v-model="password"
+            type="password"
+            label="Password"
+          >
+            <template v-slot:prepend>
+              <q-icon name="lock" />
+            </template>
+          </q-input>
+        </q-form>
+      </q-card-section>
+      <q-card-actions class="q-px-lg">
         <q-btn
-          label="Reset"
-          type="reset"
-          color="primary"
-          flat
-          class="q-ml-sm"
+          unelevated
+          size="lg"
+          color="purple-4"
+          class="full-width text-white"
+          label="Get Started"
         />
-      </div>
-    </q-form>
-  </div>
+      </q-card-actions>
+      <!-- <q-card-section class="text-center q-pa-sm">
+        <p class="text-grey-6">Return to login</p>
+      </q-card-section> -->
+    </q-card>
+  </q-page>
 </template>
 
 <script lang="ts">

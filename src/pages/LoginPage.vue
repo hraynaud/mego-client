@@ -3,136 +3,48 @@
     class="window-height window-width row justify-center items-center"
     style="background: linear-gradient(#8274c5, #5a4a9f)"
   >
-    <div class="column q-pa-lg">
-      <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 485px">
-          <q-card-section class="bg-deep-purple-7">
-            <h4 class="text-h5 text-white q-my-md">Company &amp; Co</h4>
-            <div
-              class="absolute-bottom-right q-pr-md"
-              style="transform: translateY(50%)"
-            >
-              <q-btn fab icon="add" color="purple-4" />
-            </div>
-          </q-card-section>
-          <q-card-section>
-            <q-form class="q-px-sm q-pt-xl">
-              <q-input
-                square
-                clearable
-                v-model="email"
-                type="email"
-                label="Email"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="email" />
-                </template>
-              </q-input>
-              <q-input
-                square
-                clearable
-                v-model="password"
-                type="password"
-                label="Password"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="lock" />
-                </template>
-              </q-input>
-            </q-form>
-          </q-card-section>
-          <q-card-section>
-            <div class="text-center q-pa-md q-gutter-md">
-              <q-btn round color="indigo-7">
-                <q-icon name="fab fa-facebook-f" size="1.2rem" />
-              </q-btn>
-              <q-btn round color="red-8">
-                <q-icon name="fab fa-google-plus-g" size="1.2rem" />
-              </q-btn>
-              <q-btn round color="light-blue-5">
-                <q-icon name="fab fa-twitter" size="1.2rem" />
-              </q-btn>
-            </div>
-          </q-card-section>
-          <q-card-actions class="q-px-lg">
-            <q-btn
-              unelevated
-              size="lg"
-              color="purple-4"
-              class="full-width text-white"
-              label="Sign In"
-            />
-          </q-card-actions>
-          <q-card-section class="text-center q-pa-sm">
-            <p class="text-grey-6">Forgot your password?</p>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
-    <div class="column q-pa-lg">
-      <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 485px">
-          <q-card-section class="bg-deep-purple-7">
-            <h4 class="text-h5 text-white q-my-md">Registration</h4>
-            <div
-              class="absolute-bottom-right q-pr-md"
-              style="transform: translateY(50%)"
-            >
-              <q-btn fab icon="close" color="purple-4" />
-            </div>
-          </q-card-section>
-          <q-card-section>
-            <q-form class="q-px-sm q-pt-xl q-pb-lg">
-              <q-input
-                square
-                clearable
-                v-model="email"
-                type="email"
-                label="Email"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="email" />
-                </template>
-              </q-input>
-              <q-input
-                square
-                clearable
-                v-model="username"
-                type="username"
-                label="Username"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="person" />
-                </template>
-              </q-input>
-              <q-input
-                square
-                clearable
-                v-model="password"
-                type="password"
-                label="Password"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="lock" />
-                </template>
-              </q-input>
-            </q-form>
-          </q-card-section>
-          <q-card-actions class="q-px-lg">
-            <q-btn
-              unelevated
-              size="lg"
-              color="purple-4"
-              class="full-width text-white"
-              label="Get Started"
-            />
-          </q-card-actions>
-          <q-card-section class="text-center q-pa-sm">
-            <p class="text-grey-6">Return to login</p>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
+    <q-card square class="shadow-24" style="width: 300px; height: 485px">
+      <q-card-section class="bg-deep-purple-7">
+        <h4 class="text-h5 text-white q-my-md">Login</h4>
+      </q-card-section>
+      <q-form
+        @submit="onSubmit"
+        @reset="onReset"
+        class="q-px-sm q-pt-xl q-pb-lg"
+      >
+        <q-card-section>
+          <q-input square clearable v-model="email" type="email" label="Email">
+            <template v-slot:prepend>
+              <q-icon name="email" />
+            </template>
+          </q-input>
+          <q-input
+            square
+            clearable
+            v-model="password"
+            type="password"
+            label="Password"
+          >
+            <template v-slot:prepend>
+              <q-icon name="lock" />
+            </template>
+          </q-input>
+        </q-card-section>
+        <q-card-actions class="q-px-lg">
+          <q-btn
+            unelevated
+            size="lg"
+            color="purple-4"
+            class="full-width text-white"
+            label="Login"
+            type="submit"
+          />
+        </q-card-actions>
+      </q-form>
+      <q-card-section class="text-center q-pa-sm">
+        <p class="text-grey-6">Forgot Password?</p>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
@@ -140,22 +52,73 @@
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
 import { Login } from '../core/models';
+import { apiService } from '../core/services';
+import { authService } from '../core/services';
+// import { authService, router } from '../core/services';
 
 export default {
+  // setup() {
+  //   const $q = useQuasar();
+
+  //   const email = ref(null);
+  //   const password = ref(null);
+
+  //   const doLogin = (loginModel: Login) => {
+  //     console.log('loggin in?', loginModel);
+  //   };
+
+  // function switchToRegister() {
+  //   // this.$navigateTo(Registration, {
+  //   //   frame: 'root',
+  //   //   clearHistory: true,
+  //   // });
+  // }
+
+  // return {
+  //   email,
+  //   password,
+
+  //   onSubmit() {
+  //     console.log('am I here?');
+
+  //     if (!email.value || !password.value) {
+  //       $q.notify({
+  //         color: 'red-4',
+  //         textColor: 'white',
+  //         icon: 'cloud_done',
+  //         message: 'Please provide both a valid email and password.',
+  //       });
+
+  //       return;
+  //     } else {
+  //       const loginModel: Login = {
+  //         email: email.value,
+  //         password: password.value,
+  //       };
+  //       doLogin(loginModel);
+  //     }
+  //   },
+
+  //   onReset() {
+  //     email.value = null;
+  //     password.value = null;
+  //   },
+  // };
+
   setup() {
     const $q = useQuasar();
+
     const email = ref(null);
     const password = ref(null);
+
     const doLogin = (loginModel: Login) => {
+      authService.login(loginModel.email, loginModel.password);
       console.log('loggin in?', loginModel);
     };
 
-    // function switchToRegister() {
-    //   // this.$navigateTo(Registration, {
-    //   //   frame: 'root',
-    //   //   clearHistory: true,
-    //   // });
-    // }
+    if (process.env.DEV) {
+      console.log(`!!! Base url: ${process.env.BASE_URL}`);
+    }
 
     return {
       email,
@@ -164,19 +127,23 @@ export default {
       onSubmit() {
         if (!email.value || !password.value) {
           $q.notify({
-            color: 'red-4',
+            color: 'red-5',
             textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Please provide both a valid email and password.',
+            icon: 'warning',
+            message: 'please enter email and password',
           });
-
-          return;
         } else {
           const loginModel: Login = {
             email: email.value,
             password: password.value,
           };
           doLogin(loginModel);
+          $q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: 'Submitted',
+          });
         }
       },
 
@@ -186,5 +153,53 @@ export default {
       },
     };
   },
+
+  // },
 };
 </script>
+
+<!-- <script>
+import { authService, router } from "../_services";
+
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      submitted: false,
+      loading: false,
+      returnUrl: "",
+      error: ""
+    };
+  },
+  created() {
+    // log out user for now if navigations ends up on this page.
+    authService.logout();
+
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.$route.query.returnUrl || "/";
+  },
+  methods: {
+    handleSubmit(e) {
+      this.submitted = true;
+      const { email, password } = this;
+
+      if (!(email && password)) {
+        return;
+      }
+
+      this.loading = true;
+      authService
+        .login(email, password)
+        .then(() => {
+          this.loading = false;
+          return router.push(this.returnUrl);
+        })
+        .catch(error => {
+          this.error = error.message;
+          this.loading = false;
+        });
+    }
+  }
+};
+</script> -->
