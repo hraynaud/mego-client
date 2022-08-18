@@ -45,7 +45,7 @@ function stringify(payload = {}) {
 function errHandler(error: any) {
   let msg;
   if (error.response) {
-    msg = error.response.data.error;
+    msg = error.response.headers['x-message'];
   } else if (error.request) {
     msg = 'Server not responding';
   } else {

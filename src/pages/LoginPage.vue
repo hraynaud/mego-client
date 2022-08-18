@@ -78,7 +78,12 @@ export default {
         .catch((err) => {
           error = err.message;
           console.log('error:', error);
-          // this.loading = false;
+          $q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'warning',
+            message: error,
+          });
         });
     };
 
