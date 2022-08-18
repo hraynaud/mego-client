@@ -51,78 +51,44 @@
 <script lang="ts">
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { Login } from '../core/models';
-import { apiService } from '../core/services';
 import { authService } from '../core/services';
-// import { authService, router } from '../core/services';
 
 export default {
-  // setup() {
-  //   const $q = useQuasar();
-
-  //   const email = ref(null);
-  //   const password = ref(null);
-
-  //   const doLogin = (loginModel: Login) => {
-  //     console.log('loggin in?', loginModel);
-  //   };
-
-  // function switchToRegister() {
-  //   // this.$navigateTo(Registration, {
-  //   //   frame: 'root',
-  //   //   clearHistory: true,
-  //   // });
-  // }
-
-  // return {
-  //   email,
-  //   password,
-
-  //   onSubmit() {
-  //     console.log('am I here?');
-
-  //     if (!email.value || !password.value) {
-  //       $q.notify({
-  //         color: 'red-4',
-  //         textColor: 'white',
-  //         icon: 'cloud_done',
-  //         message: 'Please provide both a valid email and password.',
-  //       });
-
-  //       return;
-  //     } else {
-  //       const loginModel: Login = {
-  //         email: email.value,
-  //         password: password.value,
-  //       };
-  //       doLogin(loginModel);
-  //     }
-  //   },
-
-  //   onReset() {
-  //     email.value = null;
-  //     password.value = null;
-  //   },
-  // };
-
   setup() {
     const $q = useQuasar();
+    const router = useRouter();
 
     const email = ref(null);
     const password = ref(null);
+    let submitted = false;
+    let loading = false;
+    let returnUrl = '';
+    let error = '';
 
     const doLogin = (loginModel: Login) => {
-      authService.login(loginModel.email, loginModel.password);
-      console.log('loggin in?', loginModel);
+      loading = true;
+      authService
+        .login(loginModel.email, loginModel.password)
+        .then(() => {
+          loading = false;
+          router.push('/');
+        })
+        .catch((err) => {
+          error = err.message;
+          console.log('error:', error);
+          // this.loading = false;
+        });
     };
-
-    if (process.env.DEV) {
-      console.log(`!!! Base url: ${process.env.BASE_URL}`);
-    }
 
     return {
       email,
       password,
+      submitted,
+      loading,
+      returnUrl,
+      error,
 
       onSubmit() {
         if (!email.value || !password.value) {
@@ -138,12 +104,6 @@ export default {
             password: password.value,
           };
           doLogin(loginModel);
-          $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted',
-          });
         }
       },
 
@@ -153,53 +113,5 @@ export default {
       },
     };
   },
-
-  // },
 };
 </script>
-
-<!-- <script>
-import { authService, router } from "../_services";
-
-export default {
-  data() {
-    return {
-      email: "",
-      password: "",
-      submitted: false,
-      loading: false,
-      returnUrl: "",
-      error: ""
-    };
-  },
-  created() {
-    // log out user for now if navigations ends up on this page.
-    authService.logout();
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.$route.query.returnUrl || "/";
-  },
-  methods: {
-    handleSubmit(e) {
-      this.submitted = true;
-      const { email, password } = this;
-
-      if (!(email && password)) {
-        return;
-      }
-
-      this.loading = true;
-      authService
-        .login(email, password)
-        .then(() => {
-          this.loading = false;
-          return router.push(this.returnUrl);
-        })
-        .catch(error => {
-          this.error = error.message;
-          this.loading = false;
-        });
-    }
-  }
-};
-</script> -->
