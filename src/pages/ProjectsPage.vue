@@ -1,42 +1,56 @@
 <template>
-  <div>
-    <h1>Project List</h1>
-    <div class="nav">
-      <p>
-        <router-link to="/login">logout</router-link>
-      </p>
-      <p>
-        <router-link to="/home">Home</router-link>
-      </p>
+  <q-page>
+    <div>
+      <h5>Project List</h5>
+
+      <div class="main">
+        <q-form @submit.prevent="onSubmit">
+          <div class="row items-center justify-evenly">
+            <h5>Search Projects:</h5>
+            <div style="min-width: 250px; max-width: 300px">
+              <q-select
+                filled
+                v-model="friend"
+                single
+                :options="friends"
+                :option-value="(opt) => opt?.id"
+                :option-label="(opt) => opt?.attributes?.firstName"
+                use-chips
+                label="Friends"
+              />
+            </div>
+            <div style="min-width: 250px; max-width: 300px">
+              <q-select
+                filled
+                v-model="topic"
+                single
+                :options="topics"
+                :option-value="(opt) => opt?.id"
+                :option-label="(opt) => opt?.attributes?.name"
+                use-chips
+                label="Topics"
+              />
+            </div>
+            <q-btn unelevated size="m" class="" label="Search" type="submit" />
+          </div>
+        </q-form>
+
+        <h5>Search Results</h5>
+        <q-list dense bordered padding class="rounded-borders">
+          <q-item clickable v-ripple v-for="p in projects" :key="p.id">
+            <q-item-section>
+              {{ p.attributes.name }}
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </div>
     </div>
-    <div class="main">
-      <form @submit.prevent="onSubmit">
-        <h2>Filter By:</h2>
-        <label for="person">Friend</label>
-        <select v-model="friend">
-          <option v-for="friend in friends" :key="friend.id" :value="friend.id">
-            {{ friend.attributes.firstName }}
-          </option>
-        </select>
-        <label for="topic">Topic</label>
-        <select v-model="topic">
-          <option v-for="topic in topics" :key="topic.id" :value="topic.id">
-            {{ topic.attributes.name }}
-          </option>
-        </select>
-        <button class="btn btn-primary">Go</button>
-      </form>
-      <h1>Projects</h1>
-      <ul>
-        <li v-for="p in projects" :key="p.id">{{ p.attributes.name }}</li>
-      </ul>
-    </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
-import { apiService } from '../_services';
-import { jsonResponseHandler } from '../_services';
+import { apiService } from '../core/services';
+import { jsonResponseHandler } from '../core/services';
 export default {
   data() {
     return {
@@ -45,21 +59,30 @@ export default {
       friends: [],
       topics: [],
       projects: [],
+      selectedFriends: [],
+      selectedTopics: [],
     };
   },
 
   methods: {
     onSubmit(e) {
       this.submitted = true;
+      console.log('form submitted');
       this.loadProjects()
-        .then((response) => this.setData(response))
+        .then((response) => this.setProjects(response.data))
         .catch(function (error) {
           console.log(error);
         });
     },
     loadProjects() {
       const { friend, topic } = this;
-      return apiService.post('api/v1/projects/search', { friend, topic });
+      const friendId = friend?.id;
+      const topicId = topic?.id;
+      // eslint-disable-next-line quotes
+      return apiService.post('api/v1/projects/search', {
+        friend: friendId,
+        topic: topicId,
+      });
     },
 
     setData(response) {
@@ -80,11 +103,14 @@ export default {
       this.topics = this.getSortedData(jsonResponse, 'topics', 'name');
     },
     getSortedData(jsonResponse, data, key) {
-      return jsonResponseHandler.setSortedData(jsonResponse, data, key);
+      if (jsonResponse[data])
+        return jsonResponseHandler.setSortedData(jsonResponse, data, key);
+      else return [];
     },
   },
 
   beforeRouteEnter: function (to, from, next) {
+    console.log('loading projects');
     next((vm) =>
       vm
         .loadProjects()
