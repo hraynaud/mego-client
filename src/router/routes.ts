@@ -7,20 +7,14 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: 'homepage',
-        component: () => import('pages/HomePage.vue'),
+        name: 'projects',
+        component: () => import('pages/ProjectsPage.vue'),
         meta: { requiresAuth: true },
       },
       {
-        path: '/project/new',
+        path: 'project/new',
         name: 'project.new',
-        component: () => import('pages/ProjectFormPage.vue'),
-        meta: { requiresAuth: true },
-      },
-      {
-        path: '/project/',
-        name: 'project',
-        component: () => import('pages/ProjectFormPage.vue'),
+        component: () => import('src/pages/NewProjectPage.vue'),
         meta: { requiresAuth: true },
       },
     ],

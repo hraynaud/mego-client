@@ -2,7 +2,7 @@
   "name": "mego-client",
   "version": "0.0.1",
   "description": "Konmego Client App",
-  "productName": "megoapp",
+  "productName": "Konmego",
   "author": "herby.raynaud@gmail.com",
   "private": true,
   "scripts": {
