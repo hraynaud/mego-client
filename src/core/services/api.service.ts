@@ -1,6 +1,6 @@
 import { SESSION_AUTH_KEY } from '../models/constants';
 
-import { api } from 'boot/axios';
+import { http } from 'boot/axios';
 import { Method } from 'axios';
 
 function post(path: string, payload = {}) {
@@ -9,12 +9,12 @@ function post(path: string, payload = {}) {
 }
 
 function get(path: string, params = {}) {
-  return api.get(path, { ...params });
+  return http.get(path, { ...params });
   // return execute('GET', path, {}, params);
 }
 
 function execute(method: Method, path: string, payload = {}, params = {}) {
-  return api
+  return http
     .request({ method: method, data: payload, params: params, url: path })
     .catch(errHandler);
 }
@@ -42,6 +42,14 @@ function stringify(payload = {}) {
   return { data: JSON.stringify(payload) };
 }
 
+function setHeader(hdr: string, val: string) {
+  http.defaults.headers.common[hdr] = val;
+}
+
+function getHeader(hdr: string) {
+  return http.defaults.headers.common[hdr];
+}
+
 function errHandler(error: any) {
   let msg;
   if (error.response) {
@@ -57,4 +65,6 @@ function errHandler(error: any) {
 export const apiService = {
   post,
   get,
+  setHeader,
+  getHeader,
 };

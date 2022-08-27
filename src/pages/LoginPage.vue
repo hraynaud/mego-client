@@ -1,8 +1,5 @@
 <template>
-  <q-page
-    class="window-height window-width row justify-center items-center"
-    style="background: linear-gradient(#8274c5, #5a4a9f)"
-  >
+  <q-page class="window-height window-width row justify-center items-center">
     <q-card square class="shadow-24" style="width: 300px; height: 485px">
       <q-card-section class="bg-deep-purple-7">
         <h4 class="text-h5 text-white q-my-md">Login</h4>
@@ -34,8 +31,7 @@
           <q-btn
             unelevated
             size="lg"
-            color="purple-4"
-            class="full-width text-white"
+            class="full-width text-primary"
             label="Login"
             type="submit"
           />
@@ -59,7 +55,6 @@ export default {
   setup() {
     const $q = useQuasar();
     const router = useRouter();
-
     const email = ref(null);
     const password = ref(null);
     let submitted = false;
@@ -73,7 +68,7 @@ export default {
         .login(loginModel.email, loginModel.password)
         .then(() => {
           loading = false;
-          router.push('/');
+          router.replace('/');
         })
         .catch((err) => {
           error = err.message;
