@@ -79,7 +79,7 @@ export default {
       const friendId = friend?.id;
       const topicId = topic?.id;
       // eslint-disable-next-line quotes
-      return apiService.post('api/v1/projects/search', {
+      return apiService.post('/projects/search', {
         friend: friendId,
         topic: topicId,
       });
