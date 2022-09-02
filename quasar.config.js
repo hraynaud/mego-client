@@ -55,7 +55,9 @@ module.exports = configure(function (ctx) {
       },
 
       env: {
-        BASE_URL: ctx.dev ? 'http://localhost:3000' : 'htt://www.yousfulee.com',
+        BASE_URL: ctx.dev
+          ? 'http://localhost:3000/api/v1'
+          : 'htt://www.yousfulee.com/api/v1',
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
