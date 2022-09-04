@@ -36,6 +36,14 @@
               <q-item-section> Add Project </q-item-section>
             </q-item>
 
+            <q-item clickable v-ripple to="/endorsements">
+              <q-item-section avatar>
+                <q-icon name="approval" />
+              </q-item-section>
+
+              <q-item-section> Endorsement </q-item-section>
+            </q-item>
+
             <q-item clickable v-ripple to="/logout">
               <q-item-section avatar>
                 <q-icon name="send" />

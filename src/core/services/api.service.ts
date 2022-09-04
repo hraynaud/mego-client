@@ -9,8 +9,7 @@ function post(path: string, payload = {}) {
 }
 
 function get(path: string, params = {}) {
-  return http.get(path, { ...params });
-  // return execute('GET', path, {}, params);
+  return execute('GET', path, {}, params);
 }
 
 function execute(method: Method, path: string, payload = {}, params = {}) {
