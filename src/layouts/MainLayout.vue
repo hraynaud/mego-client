@@ -41,18 +41,10 @@
                 <q-icon name="approval" />
               </q-item-section>
 
-              <q-item-section> Endorsement </q-item-section>
+              <q-item-section> Endorsements </q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple to="/logout">
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section> Send </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple to="/auth/login">
+            <q-item clickable v-ripple @click.prevent="logout">
               <q-item-section avatar>
                 <q-icon name="logout" />
               </q-item-section>
@@ -99,10 +91,13 @@
 
 <script>
 import { ref } from 'vue';
+import { authService } from 'src/core/services';
+import { useRouter } from 'vue-router';
 
 export default {
   setup() {
     const miniState = ref(false);
+    const router = useRouter();
 
     return {
       drawer: ref(false),
@@ -119,6 +114,10 @@ export default {
           // intended for switching drawer to "normal" mode only
           e.stopPropagation();
         }
+      },
+      logout() {
+        authService.logout();
+        router.replace('/auth/login');
       },
     };
   },

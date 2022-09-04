@@ -4,9 +4,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
+    meta: { requiresAuth: true },
     children: [
       {
-        path: '',
+        path: 'projects',
         name: 'projects',
         component: () => import('pages/ProjectsPage.vue'),
         meta: { requiresAuth: true },
@@ -14,13 +15,13 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'project/new',
         name: 'project.new',
-        component: () => import('src/pages/NewProjectPage.vue'),
+        component: () => import('pages/NewProjectPage.vue'),
         meta: { requiresAuth: true },
       },
       {
         path: 'endorsements',
         name: 'endorsements',
-        component: () => import('src/pages/EndorsementsPage.vue'),
+        component: () => import('pages/EndorsementsPage.vue'),
         meta: { requiresAuth: true },
       },
     ],
@@ -34,6 +35,11 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'login',
         name: 'login',
+        component: () => import('pages/LoginPage.vue'),
+      },
+      {
+        path: 'logout',
+        name: 'logout',
         component: () => import('pages/LoginPage.vue'),
       },
       {

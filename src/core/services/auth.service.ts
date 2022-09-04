@@ -8,6 +8,8 @@ export const authService = {
   login,
   logout,
   currentUser,
+  isLoggedIn,
+  isLoggedOut,
 };
 
 function login(email: string, password: string) {
@@ -23,9 +25,16 @@ function logout() {
 
 function currentUser() {
   const val = localStorage.getItem(SESSION_USER_KEY);
-  console.log('Found current user:', val);
   if (val) return JSON.parse(val);
   else return undefined;
+}
+
+function isLoggedIn() {
+  return currentUser() !== undefined;
+}
+
+function isLoggedOut() {
+  return currentUser() === undefined;
 }
 
 function handleLogin(response: any) {
