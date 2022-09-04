@@ -48,80 +48,72 @@
   </q-page>
 </template>
 
-<script>
-import { apiService } from '../core/services';
+<script setup>
+import { projectService } from '../core/services';
 import { jsonResponseHandler } from '../core/services';
-export default {
-  data() {
-    return {
-      friend: null,
-      topic: null,
-      friends: [],
-      topics: [],
-      projects: [],
-      selectedFriends: [],
-      selectedTopics: [],
-    };
-  },
+import { ref, onMounted } from 'vue';
 
-  methods: {
-    onSubmit(e) {
-      this.submitted = true;
-      console.log('form submitted');
-      this.loadProjects()
-        .then((response) => this.setProjects(response.data))
+const friend = ref();
+const topic = ref();
+const friends = ref([]);
+const topics = ref([]);
+const projects = ref([]);
+
+let submitted = false;
+
+const onSubmit = (e) => {
+  submitted = true;
+  console.log(submitted);
+  const friendId = friend?.value?.id;
+  const topicId = topic?.value?.id;
+  loadProjects({
+    friend: friendId,
+    topic: topicId,
+  });
+};
+const loadProjects = (params) => {
+  return projectService
+    .getProjects(params)
+    .then((resp) => setData(resp))
         .catch(function (error) {
           console.log(error);
         });
-    },
-    loadProjects() {
-      const { friend, topic } = this;
-      const friendId = friend?.id;
-      const topicId = topic?.id;
-      // eslint-disable-next-line quotes
-      return apiService.post('/projects/search', {
-        friend: friendId,
-        topic: topicId,
-      });
-    },
+};
 
-    setData(response) {
-      this.setFriends(response.data);
-      this.setProjects(response.data);
-      this.setTopics(response.data);
-    },
+const setData = (response) => {
+  setFriends(response.data);
+  setProjects(response.data);
+  setTopics(response.data);
+};
 
-    setProjects(jsonResponse) {
-      this.projects = this.getSortedData(jsonResponse, 'projects', 'name');
-    },
+const setProjects = (jsonResponse) => {
+  projects.value = getSortedData(jsonResponse, 'projects', 'name');
+};
 
-    setFriends(jsonResponse) {
-      this.friends = this.getSortedData(jsonResponse, 'friends', 'firstName');
-    },
+const setFriends = (jsonResponse) => {
+  friends.value = getSortedData(jsonResponse, 'friends', 'firstName');
+};
 
-    setTopics(jsonResponse) {
-      this.topics = this.getSortedData(jsonResponse, 'topics', 'name');
-    },
-    getSortedData(jsonResponse, data, key) {
+const setTopics = (jsonResponse) => {
+  topics.value = getSortedData(jsonResponse, 'topics', 'name');
+};
+const getSortedData = (jsonResponse, data, key) => {
       if (jsonResponse[data])
         return jsonResponseHandler.setSortedData(jsonResponse, data, key);
       else return [];
-    },
-  },
-
-  beforeRouteEnter: function (to, from, next) {
-    console.log('loading projects');
-    next((vm) =>
-      vm
-        .loadProjects()
-        .then(function (response) {
-          vm.setData(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-          vm.$router.push('/error');
-        })
-    );
-  },
 };
+
+onMounted(() => {
+  loadProjects();
+});
 </script>
+<style lang="scss" scoped>
+.project-card {
+  width: 100%;
+  max-width: 250px;
+}
+.search-filter {
+  // min-width: 250px;
+  // max-width: 300px;
+}
+</style>
