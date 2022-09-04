@@ -2,6 +2,7 @@ import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance } from 'axios';
 const { sessionStorage } = window;
 import { SESSION_AUTH_KEY } from '../core/models/constants';
+import { config } from 'process';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -25,6 +26,7 @@ const http = axios.create({
 
 http.interceptors.request.use(
   function (config) {
+    config.baseURL = apiUrl(config.baseURL);
     config.headers.Authorization = sessionStorage.getItem(SESSION_AUTH_KEY);
     return config;
   },
@@ -33,6 +35,10 @@ http.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+const isLoggedIn = () => sessionStorage.getItem(SESSION_AUTH_KEY) !== null;
+const apiUrl = (baseUrl: string | undefined) =>
+  isLoggedIn() ? `${baseUrl}/api/v1` : baseUrl;
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
