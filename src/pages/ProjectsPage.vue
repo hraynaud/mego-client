@@ -1,48 +1,59 @@
 <template>
   <q-page>
-    <div>
-      <h5>Project List</h5>
+    <div class="q-pa-md">
+      <h3>Projects in your circle</h3>
 
-      <div class="main">
-        <q-form @submit.prevent="onSubmit">
-          <div class="row items-center justify-evenly">
-            <h5>Search Projects:</h5>
-            <div style="min-width: 250px; max-width: 300px">
-              <q-select
-                filled
-                v-model="friend"
-                single
-                :options="friends"
-                :option-value="(opt) => opt?.id"
-                :option-label="(opt) => opt?.attributes?.firstName"
-                use-chips
-                label="Friends"
-              />
-            </div>
-            <div style="min-width: 250px; max-width: 300px">
-              <q-select
-                filled
-                v-model="topic"
-                single
-                :options="topics"
-                :option-value="(opt) => opt?.id"
-                :option-label="(opt) => opt?.attributes?.name"
-                use-chips
-                label="Topics"
-              />
-            </div>
-            <q-btn unelevated size="m" class="" label="Search" type="submit" />
+      <q-form @submit.prevent="onSubmit">
+        <div class="row items-baseline justify-start q-gutter-lg">
+          <label>Filter:</label>
+          <div class="col-2 search-filter">
+            <q-select
+              v-model="friend"
+              single
+              :options="friends"
+              :option-value="(opt) => opt?.id"
+              :option-label="(opt) => opt?.attributes?.firstName"
+              use-chips
+              label="Friends"
+            />
           </div>
-        </q-form>
+          <div class="col-4 search-filter">
+            <q-select
+              v-model="topic"
+              single
+              :options="topics"
+              :option-value="(opt) => opt?.id"
+              :option-label="(opt) => opt?.attributes?.name"
+              use-chips
+              label="Topics"
+            />
+          </div>
+          <q-btn round color="primary" icon="search" type="submit" />
+        </div>
+      </q-form>
+    </div>
+    <div class="q-pa-md">
+      <h5>Search Results</h5>
+      <div class="q-gutter-md row items-start">
+        <q-card class="project-card" v-for="p in projects" :key="p.id">
+          <q-item>
+            <q-item-section avatar>
+              <q-avatar>
+                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
+              </q-avatar>
+            </q-item-section>
 
-        <h5>Search Results</h5>
-        <q-list dense bordered padding class="rounded-borders">
-          <q-item clickable v-ripple v-for="p in projects" :key="p.id">
             <q-item-section>
-              {{ p.attributes.name }}
+              <q-item-label>"{{ p.attributes.name }}"</q-item-label>
+              <q-item-label caption>Subhead</q-item-label>
             </q-item-section>
           </q-item>
-        </q-list>
+
+          <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+          <q-card-section>
+            {{ p.attributes.description }}
+          </q-card-section>
+        </q-card>
       </div>
     </div>
   </q-page>
@@ -75,9 +86,9 @@ const loadProjects = (params) => {
   return projectService
     .getProjects(params)
     .then((resp) => setData(resp))
-        .catch(function (error) {
-          console.log(error);
-        });
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
 const setData = (response) => {
@@ -98,9 +109,9 @@ const setTopics = (jsonResponse) => {
   topics.value = getSortedData(jsonResponse, 'topics', 'name');
 };
 const getSortedData = (jsonResponse, data, key) => {
-      if (jsonResponse[data])
-        return jsonResponseHandler.setSortedData(jsonResponse, data, key);
-      else return [];
+  if (jsonResponse[data])
+    return jsonResponseHandler.setSortedData(jsonResponse, data, key);
+  else return [];
 };
 
 onMounted(() => {

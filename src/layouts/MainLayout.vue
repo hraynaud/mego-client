@@ -20,8 +20,8 @@
       >
         <q-scroll-area class="fit">
           <q-list padding>
-            <q-item clickable v-ripple>
-              <q-item-section avatar to="/">
+            <q-item clickable v-ripple to="/">
+              <q-item-section avatar>
                 <q-icon name="home" />
               </q-item-section>
 
@@ -30,7 +30,7 @@
 
             <q-item clickable v-ripple to="/project/new">
               <q-item-section avatar>
-                <q-icon name="add_task" />
+                <q-icon name="construction" />
               </q-item-section>
 
               <q-item-section> Add Project </q-item-section>

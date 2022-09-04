@@ -1,7 +1,7 @@
 <template lang="">
-  <div>
+  <q-page class="window-width row col">
     <ProjectForm />
-  </div>
+  </q-page>
 </template>
 <script setup>
 import ProjectForm from '../components/ProjectForm.vue';
