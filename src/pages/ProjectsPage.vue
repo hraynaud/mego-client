@@ -86,7 +86,7 @@ const onSubmit = (e) => {
 };
 const loadProjects = (params) => {
   return projectService
-    .getProjects(params)
+    .searchProjects(params)
     .then((resp) => setData(resp))
     .catch(function (error) {
       console.log(error);
@@ -94,8 +94,8 @@ const loadProjects = (params) => {
 };
 
 const setData = (response) => {
-  setFriends(response.data);
   setProjects(response.data);
+  setFriends(response.data);
   setTopics(response.data);
 };
 
