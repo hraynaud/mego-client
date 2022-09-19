@@ -4,8 +4,8 @@ interface formProject {
   project: Project;
 }
 
-const getProjects = (params: any | undefined) => {
-  return apiService.post('/projects/search', params);
+const searchProjects = (params: any | undefined) => {
+  return apiService.post('/projects_search', params);
 };
 
 const newProject = (project: formProject) => {
@@ -24,5 +24,5 @@ export const projectService = {
   newProject,
   deleteProject,
   updateProject,
-  getProjects,
+  searchProjects,
 };
