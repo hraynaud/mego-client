@@ -24,7 +24,10 @@
             </q-item-section>
           </q-item>
 
-          <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+          <img
+            :src="`http://localhost:9000/public/images/${e.attributes.topicImage}`"
+          />
+
           <q-card-section>
             {{ e.attributes.description }}
           </q-card-section>
