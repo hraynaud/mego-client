@@ -28,12 +28,12 @@
               <q-item-section> Home </q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple to="/project/new">
+            <q-item clickable v-ripple to="/projects">
               <q-item-section avatar>
                 <q-icon name="construction" />
               </q-item-section>
 
-              <q-item-section> Add Project </q-item-section>
+              <q-item-section> Projects </q-item-section>
             </q-item>
 
             <q-item clickable v-ripple to="/endorsements">

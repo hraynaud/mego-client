@@ -34,34 +34,7 @@
     </div>
     <div class="q-pa-md">
       <h5>Search Results</h5>
-      <div class="q-gutter-md row items-start">
-        <q-card
-          class="endorsement-card"
-          v-for="e in endorsements"
-          :key="e.uuid"
-        >
-          <q-item>
-            <q-item-section avatar>
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
-              </q-avatar>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label>"{{ e.attributes.topic }}"</q-item-label>
-              <q-item-label caption>Subhead</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <img
-            :src="`http://localhost:9000/public/images/${e.attributes.topicImage}`"
-          />
-
-          <q-card-section>
-            {{ e.attributes.description }}
-          </q-card-section>
-        </q-card>
-      </div>
+      <EndorsementList :endorsements="endorsements" />
     </div>
     <q-page-sticky position="bottom-right" :offset="[64, 36]">
       <q-btn fab icon="add" color="accent" to="/endorsements/new" />
@@ -70,19 +43,28 @@
 </template>
 
 <script setup>
-import { endorsementService } from '../core/services';
-import { jsonResponseHandler } from '../core/services';
+import { endorsementService, jsonResponseHandler } from '../core/services';
+import EndorsementList from '../components/EndorsementList.vue';
+import { EndorsementModel } from '../core/models';
 import { ref, onMounted } from 'vue';
 
 const endorsements = ref([]);
 
 const loadEndorsements = () => {
+  console.log('!!!! loading');
   // eslint-disable-next-line quotes
   endorsementService.getEndorsements().then((res) => {
     const data = res.data.data;
-    data.map((endorsement) => {
-      endorsements.value.push(endorsement);
+    data.map((e) => {
+      endorsements.value.push(
+        new EndorsementModel(
+          e.attributes.description,
+          e.attributes.topic,
+          e.attributes.topicImage
+        )
+      );
     });
+    console.log(`!!! -> ${JSON.stringify(endorsements.value)}`);
   });
 };
 
@@ -105,10 +87,6 @@ onMounted(() => {
 });
 </script>
 <style lang="scss" scoped>
-.endorsement-card {
-  width: 100%;
-  max-width: 250px;
-}
 .search-filter {
   // min-width: 250px;
   // max-width: 300px;

@@ -2,10 +2,16 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     meta: { requiresAuth: true },
     children: [
+      {
+        path: '',
+        name: 'home',
+        component: () => import('pages/HomePage.vue'),
+        meta: { requiresAuth: true },
+      },
       {
         path: 'projects',
         name: 'projects',
