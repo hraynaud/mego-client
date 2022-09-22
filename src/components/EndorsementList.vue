@@ -1,14 +1,7 @@
 <template lang="">
   <div>
     <div class="q-gutter-md row items-start">
-      <EndorsementCard
-        v-for="e in endorsements"
-        :e="e"
-        :topic="e.topic"
-        :description="e.description"
-        :imageUrl="e.topicImage"
-        :key="e.uuid"
-      />
+      <EndorsementCard v-for="e in endorsements" :e="e" :key="e.uuid" />
     </div>
   </div>
 </template>
