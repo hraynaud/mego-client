@@ -35,35 +35,18 @@
     <div class="q-pa-md">
       <h5>Search Results</h5>
       <div class="q-gutter-md row items-start">
-        <q-card class="project-card" v-for="p in projects" :key="p.id">
-          <q-item>
-            <q-item-section avatar>
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
-              </q-avatar>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label>"{{ p.attributes.name }}"</q-item-label>
-              <q-item-label caption>Subhead</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <img
-            :src="`http://localhost:9000/public/images/${p.attributes.topicImage}`"
-          />
-          <q-card-section>
-            {{ p.attributes.description }}
-          </q-card-section>
-        </q-card>
+        <project-list :projects="projects"></project-list>
       </div>
     </div>
   </q-page>
 </template>
 
 <script setup>
-import { projectService } from '../core/services';
-import { jsonResponseHandler } from '../core/services';
+import { projectService, jsonResponseHandler } from '../core/services';
+import { ProjectModel } from '../core/models';
+import ProjectCard from '../components/ProjectCard.vue';
+import ProjectList from '../components/ProjectList.vue';
+
 import { ref, onMounted } from 'vue';
 
 const friend = ref();
@@ -100,7 +83,16 @@ const setData = (response) => {
 };
 
 const setProjects = (jsonResponse) => {
-  projects.value = getSortedData(jsonResponse, 'projects', 'name');
+  projects.value = getSortedData(jsonResponse, 'projects', 'name').map((p) => {
+    return new ProjectModel(
+      p.attributes.name,
+      p.attributes.description,
+      p.attributes.startDate,
+      p.attributes.deadline,
+      p.attributes.topic,
+      p.attributes.topicImage
+    );
+  });
 };
 
 const setFriends = (jsonResponse) => {
@@ -121,10 +113,6 @@ onMounted(() => {
 });
 </script>
 <style lang="scss" scoped>
-.project-card {
-  width: 100%;
-  max-width: 250px;
-}
 .search-filter {
   // min-width: 250px;
   // max-width: 300px;
