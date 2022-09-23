@@ -43,48 +43,10 @@
 </template>
 
 <script setup>
-import { endorsementService, jsonResponseHandler } from '../core/services';
 import EndorsementList from '../components/EndorsementList.vue';
-import { EndorsementModel } from '../core/models';
-import { ref, onMounted } from 'vue';
+import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 
-const endorsements = ref([]);
-
-const loadEndorsements = () => {
-  console.log('!!!! loading');
-  // eslint-disable-next-line quotes
-  endorsementService.getEndorsements().then((res) => {
-    const data = res.data.data;
-    data.map((e) => {
-      endorsements.value.push(
-        new EndorsementModel(
-          e.attributes.description,
-          e.attributes.topic,
-          e.attributes.topicImage
-        )
-      );
-    });
-    console.log(`!!! -> ${JSON.stringify(endorsements.value)}`);
-  });
-};
-
-const setData = (response) => {
-  this.setEndorsements(response.data);
-};
-
-const setEndorsements = (jsonResponse) => {
-  this.endorsements = this.getSortedData(jsonResponse, 'projects', 'name');
-};
-
-const getSortedData = (jsonResponse, data, key) => {
-  if (jsonResponse[data])
-    return jsonResponseHandler.setSortedData(jsonResponse, data, key);
-  else return [];
-};
-
-onMounted(() => {
-  loadEndorsements();
-});
+const { endorsements } = useEndorsementsList();
 </script>
 <style lang="scss" scoped>
 .search-filter {
