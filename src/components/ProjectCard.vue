@@ -8,7 +8,7 @@
       </q-item-section>
 
       <q-item-section>
-        <q-item-label>"{{ p.name }}"</q-item-label>
+        <q-item-label>{{ p.name }}</q-item-label>
         <q-item-label caption>Subhead</q-item-label>
       </q-item-section>
     </q-item>

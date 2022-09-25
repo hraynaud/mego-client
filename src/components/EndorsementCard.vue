@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <q-card class="endorsement-card">
     <q-item>
       <q-item-section avatar>
@@ -21,15 +21,9 @@
 
 <script setup>
 import { EndorsementModel } from '../core/models';
-import { onMounted } from 'vue';
-import { defineProps } from 'vue';
 
 defineProps({
   e: EndorsementModel,
-});
-
-onMounted(() => {
-  // console.log(`endorsement mounted ${JSON.stringify(endorse)}`);
 });
 </script>
 

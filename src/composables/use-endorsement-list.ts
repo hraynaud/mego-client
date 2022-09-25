@@ -1,6 +1,7 @@
 import { ref, onMounted } from 'vue';
 import { endorsementService } from '../core/services';
 import { EndorsementModel } from '../core/models';
+
 export function useEndorsementsList() {
   const endorsements = ref(<Array<EndorsementModel>>[]);
 
@@ -28,7 +29,5 @@ export function useEndorsementsList() {
 
   return {
     endorsements,
-    // loadEndorsements,
-    // onMounted,
   };
 }

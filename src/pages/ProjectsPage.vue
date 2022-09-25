@@ -35,82 +35,29 @@
     <div class="q-pa-md">
       <h5>Search Results</h5>
       <div class="q-gutter-md row items-start">
-        <project-list :projects="projects"></project-list>
+        <ProjectList :projects="projects"></ProjectList>
       </div>
     </div>
   </q-page>
 </template>
 
 <script setup>
-import { projectService, jsonResponseHandler } from '../core/services';
-import { ProjectModel } from '../core/models';
-import ProjectCard from '../components/ProjectCard.vue';
 import ProjectList from '../components/ProjectList.vue';
+import { useProjectList } from 'src/composables/use-project-list';
 
-import { ref, onMounted } from 'vue';
+const { projects } = useProjectList();
 
-const friend = ref();
-const topic = ref();
-const friends = ref([]);
-const topics = ref([]);
-const projects = ref([]);
+// let submitted = false;
 
-let submitted = false;
-
-const onSubmit = (e) => {
-  submitted = true;
-  console.log(submitted);
-  const friendId = friend?.value?.id;
-  const topicId = topic?.value?.id;
-  loadProjects({
-    friend: friendId,
-    topic: topicId,
-  });
-};
-const loadProjects = (params) => {
-  return projectService
-    .searchProjects(params)
-    .then((resp) => setData(resp))
-    .catch(function (error) {
-      console.log(error);
-    });
-};
-
-const setData = (response) => {
-  setProjects(response.data);
-  setFriends(response.data);
-  setTopics(response.data);
-};
-
-const setProjects = (jsonResponse) => {
-  projects.value = getSortedData(jsonResponse, 'projects', 'name').map((p) => {
-    return new ProjectModel(
-      p.attributes.name,
-      p.attributes.description,
-      p.attributes.startDate,
-      p.attributes.deadline,
-      p.attributes.topic,
-      p.attributes.topicImage
-    );
-  });
-};
-
-const setFriends = (jsonResponse) => {
-  friends.value = getSortedData(jsonResponse, 'friends', 'firstName');
-};
-
-const setTopics = (jsonResponse) => {
-  topics.value = getSortedData(jsonResponse, 'topics', 'name');
-};
-const getSortedData = (jsonResponse, data, key) => {
-  if (jsonResponse[data])
-    return jsonResponseHandler.setSortedData(jsonResponse, data, key);
-  else return [];
-};
-
-onMounted(() => {
-  loadProjects();
-});
+// const onSubmit = (e) => {
+//   submitted = true;
+//   const friendId = friend?.value?.id;
+//   const topicId = topic?.value?.id;
+//   loadProjects({
+//     friend: friendId,
+//     topic: topicId,
+//   });
+// };
 </script>
 <style lang="scss" scoped>
 .search-filter {

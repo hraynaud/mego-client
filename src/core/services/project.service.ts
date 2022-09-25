@@ -1,10 +1,10 @@
-import { Project } from '../models';
+import { ProjectModel } from '../models';
 import { apiService } from './api.service';
 interface formProject {
-  project: Project;
+  project: ProjectModel;
 }
 
-const searchProjects = (params: any | undefined) => {
+const searchProjects = (params: any | undefined): any => {
   return apiService.post('/projects_search', params);
 };
 
