@@ -1,9 +1,9 @@
 <template lang="">
   <q-page class="window-width row col">
-    <ProjectForm />
+    <EndorsementForm />
   </q-page>
 </template>
 <script setup>
-import ProjectForm from '../components/EndorsementForm.vue';
+import EndorsementForm from '../components/EndorsementForm.vue';
 </script>
 <style lang=""></style>
