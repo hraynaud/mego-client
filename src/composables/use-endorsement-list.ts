@@ -10,16 +10,20 @@ export function useEndorsementsList() {
     endorsementService.getEndorsements().then((res: any) => {
       if (res) {
         const data = res.data.data;
-        data.map((e: any) => {
-          endorsements.value.push(
-            new EndorsementModel(
-              e.attributes.description,
-              e.attributes.topic,
-              e.attributes.topicImage
-            )
-          );
-        });
+        return populateEndorsements(data);
       }
+    });
+  };
+
+  const populateEndorsements = (data: any) => {
+    return data.map((e: any) => {
+      endorsements.value.push(
+        new EndorsementModel(
+          e.attributes.description,
+          e.attributes.topic,
+          e.attributes.topicImage
+        )
+      );
     });
   };
 
