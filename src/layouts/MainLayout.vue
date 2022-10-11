@@ -5,6 +5,11 @@
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
           <q-toolbar-title>Konmego</q-toolbar-title>
+
+          <div class="q-pr-sm">{{ name }}</div>
+          <q-avatar size="36px" class="q-mb-sm q-mr-md">
+            <img src="https://xsgames.co/randomusers/avatar.php?g=female" />
+          </q-avatar>
         </q-toolbar>
       </q-header>
 
@@ -77,12 +82,6 @@
       <q-page-container>
         <q-page class="q-px-lg q-py-md">
           <router-view />
-          <!-- <p v-for="n in 15" :key="n">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil
-            praesentium molestias a adipisci, dolore vitae odit, quidem
-            consequatur optio voluptates asperiores pariatur eos numquam rerum
-            delectus commodi perferendis voluptate?
-          </p> -->
         </q-page>
       </q-page-container>
     </q-layout>
@@ -98,10 +97,13 @@ export default {
   setup() {
     const miniState = ref(false);
     const router = useRouter();
+    const user = authService.currentUser();
+    const name = user.name;
 
     return {
       drawer: ref(false),
       miniState,
+      name,
 
       drawerClick(e) {
         // if in "mini" state and user
