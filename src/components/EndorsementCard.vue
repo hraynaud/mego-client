@@ -3,7 +3,7 @@
     <q-item>
       <q-item-section avatar>
         <q-avatar>
-          <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
+          <img src="https://xsgames.co/randomusers/avatar.php?g=male" />
         </q-avatar>
       </q-item-section>
 

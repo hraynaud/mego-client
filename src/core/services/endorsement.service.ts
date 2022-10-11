@@ -1,14 +1,11 @@
-import { EndorsementModel } from '../models';
+import { EndorsementFormModel } from '../models';
 import { apiService } from './api.service';
-interface formEndorsement {
-  endorsement: EndorsementModel;
-}
 
 const getEndorsements = (): any => {
   return apiService.get('/endorsements');
 };
 
-const newEndorsement = (endorsement: formEndorsement) => {
+const newEndorsement = (endorsement: EndorsementFormModel) => {
   apiService.post('/endorsements', endorsement);
 };
 
