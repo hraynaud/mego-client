@@ -1,7 +1,9 @@
 import { apiService } from './api.service';
+import { TopicModel } from '../models';
 
-const newTopic = () => {
-  console.log('new topic');
+const create = (topic: TopicModel) => {
+  debugger;
+  apiService.post('/topics', topic);
 };
 
 const deleteTopic = () => {
@@ -17,7 +19,7 @@ const getTopics = () => {
 };
 
 export const topicService = {
-  newTopic,
+  create,
   deleteTopic,
   updateTopic,
   getTopics,

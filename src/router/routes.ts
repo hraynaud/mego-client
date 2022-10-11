@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'project/new',
         name: 'project.new',
-        component: () => import('pages/NewProjectPage.vue'),
+        component: () => import('src/pages/ProjectNewPage.vue'),
         meta: { requiresAuth: true },
       },
       {
