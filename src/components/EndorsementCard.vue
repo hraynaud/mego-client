@@ -16,6 +16,15 @@
     <img :src="`http://localhost:9000/public/images/${e.topicImage}`" />
 
     <q-card-section> {{ e.description }} </q-card-section>
+    <q-btn
+      class="gt-xs float-right"
+      size="12px"
+      flat
+      dense
+      round
+      icon="delete"
+      @click="$emit('delete', e, idx)"
+    />
   </q-card>
 </template>
 
@@ -24,6 +33,7 @@ import { EndorsementModel } from '../core/models';
 
 defineProps({
   e: EndorsementModel,
+  idx: Number,
 });
 </script>
 

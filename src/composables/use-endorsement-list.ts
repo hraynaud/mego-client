@@ -21,7 +21,8 @@ export function useEndorsementsList() {
         new EndorsementModel(
           e.attributes.description,
           e.attributes.topic,
-          e.attributes.topicImage
+          e.attributes.topicImage,
+          e.id
         )
       );
     });

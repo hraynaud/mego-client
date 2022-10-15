@@ -1,7 +1,14 @@
 <template lang="">
   <div>
     <div class="q-gutter-md row items-start">
-      <EndorsementCard v-for="e in endorsements" :e="e" :key="e.description" />
+      <EndorsementCard
+        v-for="(e, idx) in endorsements"
+        :e="e"
+        :idx="idx"
+        :eid="e.id"
+        :key="e.id"
+        @delete="deleteEndorsement"
+      />
     </div>
   </div>
 </template>
@@ -13,6 +20,11 @@ import { onMounted } from 'vue';
 defineProps({
   endorsements: [EndorsementModel],
 });
+
+const deleteEndorsement = (e, idx) => {
+  debugger;
+  console.log(e);
+};
 
 onMounted(() => {
   console.log('endorsement list mounted');
