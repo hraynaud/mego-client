@@ -47,19 +47,50 @@ import EndorsementList from '../components/EndorsementList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 import bus from '../core/utils/event-bus';
 import { endorsementService } from 'src/core/services';
+import { useQuasar } from 'quasar';
 
+const $q = useQuasar();
 const { endorsements } = useEndorsementsList();
 
-bus.on('delete-endorsement', (endorsement, index) => {
+const confirm = (doOk, doCancel) => {
+  $q.dialog({
+    title: 'Confirm',
+    message: 'Are you sure you want to delete this endorsement?',
+    cancel: true,
+    persistent: true,
+  })
+    .onOk(() => {
+      doOk();
+      console.log('>>>> OK');
+    })
+    .onOk(() => {
+      console.log('>>>> second OK catcher');
+    })
+    .onCancel(() => {
+      doCancel();
+      console.log('>>>> Cancel');
+    })
+    .onDismiss(() => {
+      console.log('I am triggered on both OK and Cancel');
+    });
+};
+const doDelete = (index) => {
+  const endorsementList = endorsements.value;
   endorsementService
-    .del(endorsement.id)
+    .del(endorsementList[index].id)
     .then(() => {
       endorsements.value.splice(index, 1);
-      debugger;
     })
     .catch((err) => {
       console.error(err);
     });
+};
+
+bus.on('delete-endorsement', (endorsement, index) => {
+  console.log('handling delete');
+  confirm(doDelete(index), () => {
+    console.log('canceled');
+  });
 });
 </script>
 <style lang="scss" scoped>
