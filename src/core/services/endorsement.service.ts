@@ -1,25 +1,25 @@
 import { EndorsementFormModel } from '../models';
 import { apiService } from './api.service';
 
-const getEndorsements = (): any => {
-  return apiService.get('/endorsements');
+const getEndorsements = (params: any): any => {
+  return apiService.get('/endorsements', params);
 };
 
 const newEndorsement = (endorsement: EndorsementFormModel) => {
   apiService.post('/endorsements', endorsement);
 };
 
-const deleteEndorsement = () => {
-  console.log('delete endorsement');
+const del = (id: string | number, params: any) => {
+  return apiService.del(`/endorsements/${id}`, params);
 };
 
-const updateEndorsement = () => {
+const update = () => {
   console.log('update endorsement');
 };
 
 export const endorsementService = {
   newEndorsement,
-  deleteEndorsement,
-  updateEndorsement,
+  del,
+  update,
   getEndorsements,
 };

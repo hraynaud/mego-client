@@ -2,12 +2,12 @@ import { ref, onMounted } from 'vue';
 import { endorsementService } from '../core/services';
 import { EndorsementModel } from '../core/models';
 
-export function useEndorsementsList() {
+export function useEndorsementsList(params = {}) {
   const endorsements = ref(<Array<EndorsementModel>>[]);
 
-  const loadEndorsements = () => {
+  const loadEndorsements = (params) => {
     // eslint-disable-next-line quotes
-    endorsementService.getEndorsements().then((res: any) => {
+    endorsementService.getEndorsements(params).then((res: any) => {
       if (res) {
         const data = res.data.data;
         return populateEndorsements(data);
@@ -29,7 +29,7 @@ export function useEndorsementsList() {
   };
 
   onMounted(() => {
-    loadEndorsements();
+    loadEndorsements(params);
   });
 
   return {

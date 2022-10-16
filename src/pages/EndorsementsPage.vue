@@ -45,8 +45,22 @@
 <script setup>
 import EndorsementList from '../components/EndorsementList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
+import bus from '../core/utils/event-bus';
+import { endorsementService } from 'src/core/services';
 
 const { endorsements } = useEndorsementsList();
+
+bus.on('delete-endorsement', (endorsement, index) => {
+  endorsementService
+    .del(endorsement.id)
+    .then(() => {
+      endorsements.value.splice(index, 1);
+      debugger;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
 </script>
 <style lang="scss" scoped>
 .search-filter {

@@ -23,13 +23,14 @@
       dense
       round
       icon="delete"
-      @click="$emit('delete', e, idx)"
+      @click="bus.emit('delete-endorsement', e, idx)"
     />
   </q-card>
 </template>
 
 <script setup>
 import { EndorsementModel } from '../core/models';
+import bus from '../core/utils/event-bus';
 
 defineProps({
   e: EndorsementModel,

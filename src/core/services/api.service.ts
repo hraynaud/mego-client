@@ -5,11 +5,19 @@ import { Method } from 'axios';
 
 function post(path: string, payload = {}) {
   return execute('POST', path, payload);
-  // return api.post(path, payload);
 }
 
 function get(path: string, params = {}) {
   return execute('GET', path, {}, params);
+}
+
+function put(path: string, payload, params) {
+  return execute('PUT', path, stringify(payload), params);
+}
+
+//the word 'delete 'is a js operator
+function del(path: string, id: number | string, params = {}) {
+  return execute('DELETE', path, id, params);
 }
 
 function execute(method: Method, path: string, payload = {}, params = {}) {
@@ -20,17 +28,6 @@ function execute(method: Method, path: string, payload = {}, params = {}) {
 
 /*
 
-// eslint-disable-next-line no-unused-vars
-function put(path, payload, params) {
-  return execute('PUT', path, stringify(payload), params);
-}
-
-//the word 'delete 'is a js operator
-// eslint-disable-next-line no-unused-vars
-
-function del(path, params) {
-  return execute('DELETE', path, {}, params);
-}
 // eslint-disable-next-line no-unused-vars
 function patch(path, payload, params) {
   return execute('PATCH', path, stringify(payload), params);
@@ -64,6 +61,8 @@ function errHandler(error: any) {
 export const apiService = {
   post,
   get,
+  del,
+  put,
   setHeader,
   getHeader,
 };
