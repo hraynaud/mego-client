@@ -13,7 +13,7 @@
       </q-item-section>
     </q-item>
 
-    <img :src="`http://localhost:9000/public/images/${p.topicImage}`" />
+    <img :src="`/images/${p.topicImage}`" />
     <q-card-section>
       {{ p.description }}
     </q-card-section>
