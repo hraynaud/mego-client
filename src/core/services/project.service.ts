@@ -4,8 +4,8 @@ interface formProject {
   project: ProjectModel;
 }
 
-const searchProjects = (params: any | undefined): any => {
-  return apiService.post('/projects_search', params);
+const searchProjects = (payload = {}): any => {
+  return apiService.post('/projects_search', payload);
 };
 
 const newProject = (project: formProject) => {
