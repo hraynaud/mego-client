@@ -33,7 +33,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'endorsements/new',
         name: 'endorsements.new',
-        component: () => import('src/pages/EndorsementNewPage.vue'),
+        component: () => import('pages/EndorsementNewPage.vue'),
         meta: { requiresAuth: true },
       },
     ],

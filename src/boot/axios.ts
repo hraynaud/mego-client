@@ -17,17 +17,19 @@ declare module '@vue/runtime-core' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 
+const isLoggedIn = () => sessionStorage.getItem(SESSION_AUTH_KEY) !== null;
 const http = axios.create({
   baseURL: process.env.BASE_URL,
+
   headers: {
     'Content-Type': 'application/json',
+    Authorization: sessionStorage.getItem(SESSION_AUTH_KEY),
   },
 });
 
 http.interceptors.request.use(
   function (config) {
-    config.baseURL = apiUrl(config.baseURL);
-    config.headers.Authorization = sessionStorage.getItem(SESSION_AUTH_KEY);
+    config.url = apiUrl(config.url!);
     return config;
   },
   function (error) {
@@ -36,9 +38,7 @@ http.interceptors.request.use(
   }
 );
 
-const isLoggedIn = () => sessionStorage.getItem(SESSION_AUTH_KEY) !== null;
-const apiUrl = (baseUrl: string | undefined) =>
-  isLoggedIn() ? `${baseUrl}/api/v1` : baseUrl;
+const apiUrl = (url: string) => (isLoggedIn() ? `/api/v1/${url}` : url);
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

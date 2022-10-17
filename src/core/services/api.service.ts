@@ -1,5 +1,3 @@
-import { SESSION_AUTH_KEY } from '../models/constants';
-
 import { http } from 'boot/axios';
 import { Method } from 'axios';
 
@@ -11,7 +9,7 @@ function get(path: string, params = {}) {
   return execute('GET', path, {}, params);
 }
 
-function put(path: string, payload, params) {
+function put(path: string, payload = {}, params = {}) {
   return execute('PUT', path, stringify(payload), params);
 }
 
