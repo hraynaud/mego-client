@@ -61,14 +61,10 @@ const confirm = (doOk, doCancel) => {
   })
     .onOk(() => {
       doOk();
-      console.log('>>>> OK');
     })
-    .onOk(() => {
-      console.log('>>>> second OK catcher');
-    })
+
     .onCancel(() => {
       doCancel();
-      console.log('>>>> Cancel');
     })
     .onDismiss(() => {
       console.log('I am triggered on both OK and Cancel');
@@ -88,9 +84,14 @@ const doDelete = (index) => {
 
 bus.on('delete-endorsement', (endorsement, index) => {
   console.log('handling delete');
-  confirm(doDelete(index), () => {
-    console.log('canceled');
-  });
+  confirm(
+    () => {
+      doDelete(index);
+    },
+    () => {
+      console.log('canceled');
+    }
+  );
 });
 </script>
 <style lang="scss" scoped>
