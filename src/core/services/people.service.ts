@@ -4,9 +4,9 @@ interface formPerson {
   person: PersonModel;
 }
 
-const searchPersons = (params: any | undefined): any => {
-  return apiService.post('/persons_search', params);
-};
+// const searchPersons = (params: any | undefined): any => {
+//   return apiService.post('/persons_search', params);
+// };
 
 const getFriends = (params: any | undefined): any => {
   return apiService.get('/persons', params);
@@ -28,5 +28,5 @@ export const peopleService = {
   newPerson,
   deletePerson,
   updatePerson,
-  searchPersons,
+  getFriends,
 };

@@ -30,11 +30,16 @@ function currentUser() {
 }
 
 function isLoggedIn() {
-  return currentUser() !== undefined;
+  return !isLoggedOut();
 }
 
 function isLoggedOut() {
-  return currentUser() === undefined;
+  return !currentUser() || sessionExpired();
+}
+
+function sessionExpired(): boolean {
+  const expTs = currentUser().exp * 1000;
+  return expTs < Date.now();
 }
 
 function handleLogin(response: any) {
@@ -49,7 +54,9 @@ function signIn(jwt: string) {
   sessionStorage.setItem(SESSION_AUTH_KEY, jwt);
 
   //pass the decoded jwt into IIFE then destructue and set user var.
-  const user = (({ email, name }) => ({ email, name }))(jwt_decode(jwt));
+  const user = (({ email, name, exp }) => ({ email, name, exp }))(
+    jwt_decode(jwt)
+  );
 
   localStorage.setItem(SESSION_USER_KEY, JSON.stringify(user));
   apiService.setHeader('Authorization', jwt);

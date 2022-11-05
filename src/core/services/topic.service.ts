@@ -2,7 +2,6 @@ import { apiService } from './api.service';
 import { TopicModel } from '../models';
 
 const create = (topic: TopicModel) => {
-  debugger;
   apiService.post('/topics', topic);
 };
 

@@ -53,6 +53,7 @@ function errHandler(error: any) {
   } else {
     msg = 'Unable to connect to API';
   }
+  console.log('!!!error occurred', msg);
   throw new Error(msg);
 }
 

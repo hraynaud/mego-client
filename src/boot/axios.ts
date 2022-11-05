@@ -2,6 +2,7 @@ import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance } from 'axios';
 const { sessionStorage } = window;
 import { SESSION_AUTH_KEY } from '../core/models/constants';
+import { authService } from '../core/services';
 import { config } from 'process';
 
 declare module '@vue/runtime-core' {
@@ -17,7 +18,6 @@ declare module '@vue/runtime-core' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 
-const isLoggedIn = () => sessionStorage.getItem(SESSION_AUTH_KEY) !== null;
 const http = axios.create({
   baseURL: process.env.BASE_URL,
 
@@ -38,7 +38,8 @@ http.interceptors.request.use(
   }
 );
 
-const apiUrl = (url: string) => (isLoggedIn() ? `/api/v1/${url}` : url);
+const apiUrl = (url: string) =>
+  authService.isLoggedIn() ? `/api/v1${url}` : url;
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

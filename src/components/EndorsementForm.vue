@@ -160,7 +160,6 @@ const newEndorsement: EndorsementFormModel = {};
 
 function onSubmit() {
   if (isValidEndorsement()) {
-    debugger;
     setEndorsee();
     setTopic();
     const endorsement = endorsementService.newEndorsement(newEndorsement);

@@ -17,6 +17,7 @@
 
     <q-card-section> {{ e.description }} </q-card-section>
     <q-btn
+      v-if="deleteable"
       class="gt-xs float-right"
       size="12px"
       flat
@@ -29,8 +30,11 @@
 </template>
 
 <script setup>
+import { inject } from 'vue';
 import { EndorsementModel } from '../core/models';
+
 import bus from '../core/utils/event-bus';
+const deleteable = inject('deleteable', false);
 
 defineProps({
   e: EndorsementModel,

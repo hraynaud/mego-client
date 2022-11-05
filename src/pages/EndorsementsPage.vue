@@ -34,7 +34,7 @@
     </div>
     <div class="q-pa-md">
       <h5>Search Results</h5>
-      <EndorsementList :endorsements="endorsements" />
+      <EndorsementList :endorsements="endorsements" :deleteable="true" />
     </div>
     <q-page-sticky position="bottom-right" :offset="[64, 36]">
       <q-btn fab icon="add" color="accent" to="/endorsements/new" />
@@ -43,14 +43,16 @@
 </template>
 
 <script setup>
+import { provide } from 'vue';
+import { useQuasar } from 'quasar';
+import bus from '../core/utils/event-bus';
 import EndorsementList from '../components/EndorsementList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
-import bus from '../core/utils/event-bus';
 import { endorsementService } from 'src/core/services';
-import { useQuasar } from 'quasar';
 
 const $q = useQuasar();
 const { endorsements } = useEndorsementsList();
+provide('deleteable', true);
 
 const confirm = (doOk, doCancel) => {
   $q.dialog({
