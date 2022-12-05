@@ -2,14 +2,14 @@
   <div>
     <q-page>
       <div class="q-pa-md">
-        <h5>Endorsements</h5>
-        <EndorsementList :endorsements="endorsements" />
-      </div>
-      <div class="q-pa-md">
         <h5>Projects</h5>
         <div class="q-gutter-md row items-start">
           <ProjectList :projects="projects"></ProjectList>
         </div>
+      </div>
+      <div class="q-pa-md">
+        <h5>Endorsements</h5>
+        <EndorsementList :endorsements="endorsements" />
       </div>
       <q-page-sticky position="bottom-right" :offset="[64, 36]">
         <q-btn fab icon="add" color="accent" to="/endorsements/new" />

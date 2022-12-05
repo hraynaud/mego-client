@@ -23,13 +23,13 @@ const http = axios.create({
 
   headers: {
     'Content-Type': 'application/json',
-    Authorization: sessionStorage.getItem(SESSION_AUTH_KEY),
   },
 });
 
 http.interceptors.request.use(
   function (config) {
     config.url = apiUrl(config.url!);
+    config.headers['Authorization'] = sessionStorage.getItem(SESSION_AUTH_KEY);
     return config;
   },
   function (error) {

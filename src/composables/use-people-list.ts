@@ -19,16 +19,17 @@ export function usePeopleList(params: any) {
   };
 
   const setPeople = (resp: any) => {
-    const data = resp.data.people.data;
+    const data = resp.data.data;
 
     data.map((p: any) => {
-      people.value.push(
-        new p(
-          p.attributes.name,
-          p.attributes.description,
-          p.attributes.topicImage
-        ) as PersonModel
+      const pp = new PersonModel(
+        p.attributes.firstName,
+        p.attributes.lasttName,
+        p.attributes.neoId,
+        p.relationships.incomingEndorsements.data,
+        p.relationships.outgoingEndorsements.data
       );
+      people.value.push(pp);
     });
   };
 

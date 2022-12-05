@@ -49,15 +49,15 @@ const { projects } = useProjectList();
 
 // let submitted = false;
 
-// const onSubmit = (e) => {
-//   submitted = true;
-//   const friendId = friend?.value?.id;
-//   const topicId = topic?.value?.id;
-//   loadProjects({
-//     friend: friendId,
-//     topic: topicId,
-//   });
-// };
+const onSubmit = (e) => {
+  // submitted = true;
+  const friendId = friend?.value?.id;
+  const topicId = topic?.value?.id;
+  loadProjects({
+    friend: friendId,
+    topic: topicId,
+  });
+};
 </script>
 <style lang="scss" scoped>
 .search-filter {

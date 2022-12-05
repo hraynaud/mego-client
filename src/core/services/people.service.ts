@@ -9,7 +9,7 @@ interface formPerson {
 // };
 
 const getFriends = (params: any | undefined): any => {
-  return apiService.get('/persons', params);
+  return apiService.get('/people/contacts', params);
 };
 
 const newPerson = (person: formPerson) => {
