@@ -1,9 +1,12 @@
 import { ref, onMounted } from 'vue';
 import { peopleService } from '../core/services';
 import { PersonModel } from '../core/models';
+import { useFriendStore } from 'src/stores/friends-store';
+const userStore = useFriendStore();
 
 export function usePeopleList(params: any) {
-  const people = ref(<Array<PersonModel>>[]);
+  const peopleTemp: PersonModel[] = [];
+  const people = ref(peopleTemp);
 
   const loadPeople = () => {
     peopleService
@@ -31,6 +34,7 @@ export function usePeopleList(params: any) {
       );
       people.value.push(pp);
     });
+    userStore.initFriends(people.value);
   };
 
   // const getSortedData = (jsonResponse: any, data: any, key: string) => {
@@ -42,7 +46,7 @@ export function usePeopleList(params: any) {
   // };
 
   onMounted(() => {
-    loadPeople();
+    if (userStore.friends.length == 0) loadPeople();
   });
 
   return {

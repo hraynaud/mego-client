@@ -46,6 +46,8 @@ import { usePeopleList } from 'src/composables/use-people-list';
 
 const { people } = usePeopleList();
 
+// userStore.initFriends(people);
+
 // let submitted = false;
 
 // const onSubmit = (e) => {
