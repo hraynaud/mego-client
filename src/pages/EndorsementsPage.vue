@@ -49,14 +49,10 @@ import bus from '../core/utils/event-bus';
 import EndorsementList from '../components/EndorsementList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 import { endorsementService } from 'src/core/services';
-import { computed } from 'vue';
 
-const { getEndorsements } = useEndorsementsList();
 const $q = useQuasar();
 
-const endorsements = computed(() => {
-  return getEndorsements();
-});
+const { endorsements } = useEndorsementsList();
 
 const confirm = (doOk, doCancel) => {
   $q.dialog({

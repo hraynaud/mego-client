@@ -44,25 +44,8 @@
 <script setup>
 import ProjectList from '../components/ProjectList.vue';
 import { useProjectList } from 'src/composables/use-project-list';
-import { computed } from 'vue';
 
-const { getProjects } = useProjectList();
-
-const projects = computed(() => {
-  return getProjects();
-});
-
-// let submitted = false;
-
-const onSubmit = (e) => {
-  // submitted = true;
-  const friendId = friend?.value?.id;
-  const topicId = topic?.value?.id;
-  loadProjects({
-    friend: friendId,
-    topic: topicId,
-  });
-};
+const { projects } = useProjectList();
 </script>
 <style lang="scss" scoped>
 .search-filter {

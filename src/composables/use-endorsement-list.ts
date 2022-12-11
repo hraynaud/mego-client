@@ -1,12 +1,10 @@
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { endorsementService } from '../core/services';
 import { EndorsementModel } from '../core/models';
 import { useEndorsementStore } from 'src/stores/endorsements-store';
 const endorsementStore = useEndorsementStore();
 
 export function useEndorsementsList(params = {}) {
-  const endorsements = ref(<Array<EndorsementModel>>[]);
-
   const loadEndorsements = () => {
     // eslint-disable-next-line quotes
     endorsementService.getEndorsements(params).then((res: any) => {
@@ -34,14 +32,14 @@ export function useEndorsementsList(params = {}) {
     endorsementStore.initEndorsements(endorsements.value);
   };
 
-  const getEndorsements = () => {
+  const endorsements = computed(() => {
     if (endorsementStore.endorsements.length == 0) {
       loadEndorsements();
     }
     return endorsementStore.endorsements;
-  };
+  });
 
   return {
-    getEndorsements,
+    endorsements,
   };
 }

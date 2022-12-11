@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { peopleService } from '../core/services';
 import { PersonModel } from '../core/models';
 import { useFriendStore } from 'src/stores/friends-store';
@@ -6,7 +6,7 @@ const userStore = useFriendStore();
 
 export function usePeopleList(params: any) {
   const peopleTemp: PersonModel[] = [];
-  const people = ref(peopleTemp);
+  // const people = ref(peopleTemp);
 
   const loadPeople = () => {
     peopleService
@@ -37,12 +37,12 @@ export function usePeopleList(params: any) {
     userStore.initFriends(people.value);
   };
 
-  const getPeople = () => {
+  const people = computed(() => {
     if (userStore.friends.length == 0) {
       loadPeople();
     }
     return userStore.friends;
-  };
+  });
 
   // const getSortedData = (jsonResponse: any, data: any, key: string) => {
   //   if (jsonResponse[data])
@@ -53,6 +53,6 @@ export function usePeopleList(params: any) {
   // };
 
   return {
-    getPeople,
+    people,
   };
 }

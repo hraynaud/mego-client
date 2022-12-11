@@ -43,13 +43,8 @@
 <script setup>
 import PeopleList from '../components/PeopleList.vue';
 import { usePeopleList } from 'src/composables/use-people-list';
-import { computed } from 'vue';
 
-const { getPeople } = usePeopleList(null);
-
-const people = computed(() => {
-  return getPeople();
-});
+const { people } = usePeopleList(null);
 </script>
 <style lang="scss" scoped>
 .search-filter {
