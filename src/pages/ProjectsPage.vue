@@ -44,8 +44,13 @@
 <script setup>
 import ProjectList from '../components/ProjectList.vue';
 import { useProjectList } from 'src/composables/use-project-list';
+import { computed } from 'vue';
 
-const { projects } = useProjectList();
+const { getProjects } = useProjectList();
+
+const projects = computed(() => {
+  return getProjects();
+});
 
 // let submitted = false;
 

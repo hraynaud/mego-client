@@ -43,22 +43,13 @@
 <script setup>
 import PeopleList from '../components/PeopleList.vue';
 import { usePeopleList } from 'src/composables/use-people-list';
+import { computed } from 'vue';
 
-const { people } = usePeopleList();
+const { getPeople } = usePeopleList(null);
 
-// userStore.initFriends(people);
-
-// let submitted = false;
-
-// const onSubmit = (e) => {
-//   submitted = true;
-//   const friendId = friend?.value?.id;
-//   const topicId = topic?.value?.id;
-//   loadProjects({
-//     friend: friendId,
-//     topic: topicId,
-//   });
-// };
+const people = computed(() => {
+  return getPeople();
+});
 </script>
 <style lang="scss" scoped>
 .search-filter {

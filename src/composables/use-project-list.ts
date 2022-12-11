@@ -1,7 +1,8 @@
 import { ref, onMounted } from 'vue';
 import { projectService } from '../core/services';
 import { ProjectModel } from '../core/models';
-
+import { useProjectStore } from 'src/stores/projects-store';
+const projectStore = useProjectStore();
 export function useProjectList(params: any) {
   const projects = ref(<Array<ProjectModel>>[]);
 
@@ -30,6 +31,14 @@ export function useProjectList(params: any) {
         )
       );
     });
+    projectStore.initProjects(projects.value);
+  };
+
+  const getProjects = () => {
+    if (projectStore.projects.length == 0) {
+      loadProjects();
+    }
+    return projectStore.projects;
   };
 
   // const getSortedData = (jsonResponse: any, data: any, key: string) => {
@@ -40,11 +49,7 @@ export function useProjectList(params: any) {
   //   }
   // };
 
-  onMounted(() => {
-    loadProjects();
-  });
-
   return {
-    projects,
+    getProjects,
   };
 }

@@ -1,22 +1,27 @@
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { endorsementService } from '../core/services';
 import { EndorsementModel } from '../core/models';
+import { useEndorsementStore } from 'src/stores/endorsements-store';
+const endorsementStore = useEndorsementStore();
 
 export function useEndorsementsList(params = {}) {
   const endorsements = ref(<Array<EndorsementModel>>[]);
 
-  const loadEndorsements = (params) => {
+  const loadEndorsements = () => {
     // eslint-disable-next-line quotes
     endorsementService.getEndorsements(params).then((res: any) => {
       if (res) {
-        const data = res.data.data;
-        return populateEndorsements(data);
+        return setEndorsements(res);
       }
     });
   };
 
-  const populateEndorsements = (data: any) => {
-    return data.map((e: any) => {
+  const setEndorsements = (resp: any) => {
+    console.log('endorsement response', resp);
+    //TODO why is the response object different from projects and endorsement?
+    const data = resp.data.data;
+
+    data.map((e: any) => {
       endorsements.value.push(
         new EndorsementModel(
           e.attributes.description,
@@ -26,13 +31,17 @@ export function useEndorsementsList(params = {}) {
         )
       );
     });
+    endorsementStore.initEndorsements(endorsements.value);
   };
 
-  onMounted(() => {
-    loadEndorsements(params);
-  });
+  const getEndorsements = () => {
+    if (endorsementStore.endorsements.length == 0) {
+      loadEndorsements();
+    }
+    return endorsementStore.endorsements;
+  };
 
   return {
-    endorsements,
+    getEndorsements,
   };
 }

@@ -49,10 +49,14 @@ import bus from '../core/utils/event-bus';
 import EndorsementList from '../components/EndorsementList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 import { endorsementService } from 'src/core/services';
+import { computed } from 'vue';
 
+const { getEndorsements } = useEndorsementsList();
 const $q = useQuasar();
-const { endorsements } = useEndorsementsList();
-provide('deleteable', true);
+
+const endorsements = computed(() => {
+  return getEndorsements();
+});
 
 const confirm = (doOk, doCancel) => {
   $q.dialog({
@@ -84,6 +88,7 @@ const doDelete = (index) => {
     });
 };
 
+provide('deleteable', true); //make prop available to all descendants
 bus.on('delete-endorsement', (endorsement, index) => {
   console.log('handling delete');
   confirm(

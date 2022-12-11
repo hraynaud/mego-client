@@ -37,6 +37,13 @@ export function usePeopleList(params: any) {
     userStore.initFriends(people.value);
   };
 
+  const getPeople = () => {
+    if (userStore.friends.length == 0) {
+      loadPeople();
+    }
+    return userStore.friends;
+  };
+
   // const getSortedData = (jsonResponse: any, data: any, key: string) => {
   //   if (jsonResponse[data])
   //     return jsonResponseHandler.setSortedData(jsonResponse, data, key);
@@ -45,11 +52,7 @@ export function usePeopleList(params: any) {
   //   }
   // };
 
-  onMounted(() => {
-    if (userStore.friends.length == 0) loadPeople();
-  });
-
   return {
-    people,
+    getPeople,
   };
 }

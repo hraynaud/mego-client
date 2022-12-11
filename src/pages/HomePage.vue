@@ -23,7 +23,16 @@ import EndorsementList from '../components/EndorsementList.vue';
 import ProjectList from '../components/ProjectList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 import { useProjectList } from 'src/composables/use-project-list';
+import { computed } from 'vue';
 
-const { endorsements } = useEndorsementsList();
-const { projects } = useProjectList();
+const { getEndorsements } = useEndorsementsList();
+const { getProjects } = useProjectList();
+
+const projects = computed(() => {
+  return getProjects();
+});
+
+const endorsements = computed(() => {
+  return getEndorsements();
+});
 </script>
