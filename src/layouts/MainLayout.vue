@@ -33,9 +33,17 @@
               <q-item-section> Home </q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple to="/people">
+            <q-item clickable v-ripple to="/me">
               <q-item-section avatar>
                 <q-icon name="person" />
+              </q-item-section>
+
+              <q-item-section> Me </q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple to="/people">
+              <q-item-section avatar>
+                <q-icon name="group" />
               </q-item-section>
 
               <q-item-section> People </q-item-section>

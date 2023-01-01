@@ -3,7 +3,7 @@
     <div class="q-gutter-md row items-start">
       <EndorsementCard
         v-for="(e, idx) in endorsements"
-        :e="e"
+        :e="e.attributes"
         :idx="idx"
         :eid="e.id"
         :key="e.id"
@@ -21,7 +21,7 @@ defineProps({
 });
 
 onMounted(() => {
-  console.log('endorsement list mounted');
+  // console.log('endorsement list mounted', this.endorsements);
 });
 </script>
 <style lang="scss"></style>

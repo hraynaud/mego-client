@@ -7,7 +7,7 @@
 </template>
 <script setup lang="ts">
 import { PersonModel } from '../core/models';
-import PersonCard from './PersonCard.vue';
+import PersonCard from '../components/PersonCard.vue';
 import { PropType } from 'vue';
 
 defineProps({

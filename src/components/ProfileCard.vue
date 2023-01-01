@@ -10,26 +10,11 @@
         </div>
       </div>
     </q-card-section>
-
-    <q-separator />
-    <q-card-section>
-      <div class="row mini-profile">
-        <div class="col">
-          <div class="item-count">
-            {{ p.incomingEndorsementsCount() }}<br />Endorsers
-          </div>
-        </div>
-        <div class="col">
-          {{ p.outgoingEndorsementsCount() }}<br />Endorsees
-        </div>
-      </div>
-    </q-card-section>
   </q-card>
 </template>
-<script setup>
+<script setup lang="ts" allowjs: true>
 import { PersonModel } from '../core/models';
 import { defineProps } from 'vue';
-
 defineProps({
   p: PersonModel,
 });

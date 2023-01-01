@@ -3,17 +3,17 @@
     <q-item>
       <q-item-section avatar>
         <q-avatar>
-          <img src="https://xsgames.co/randomusers/avatar.php?g=male" />
+          <img :src="e.endorserAvatarUrl" />
         </q-avatar>
       </q-item-section>
 
       <q-item-section>
         <q-item-label>{{ e.topic }}</q-item-label>
-        <q-item-label caption>Subhead</q-item-label>
+        <!-- <q-item-label caption>Subhead</q-item-label> -->
       </q-item-section>
     </q-item>
 
-    <img :src="`/images/${e.topicImage}`" />
+    <!-- <img :src="`/images/${e.topicImage}`" /> -->
 
     <q-card-section> {{ e.description }} </q-card-section>
     <q-btn

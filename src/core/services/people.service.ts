@@ -1,32 +1,18 @@
 import { PersonModel } from '../models';
-import { apiService } from './api.service';
-interface formPerson {
-  person: PersonModel;
-}
 
-// const searchPersons = (params: any | undefined): any => {
-//   return apiService.post('/persons_search', params);
-// };
-
-const getFriends = (params: any | undefined): any => {
-  return apiService.get('/people/contacts', params);
-};
-
-const newPerson = (person: formPerson) => {
-  apiService.post('/persons', person);
-};
-
-const deletePerson = () => {
-  console.log('delete person');
-};
-
-const updatePerson = () => {
-  console.log('update person');
+const buildPerson = (p: any) => {
+  return new PersonModel(
+    p.attributes.firstName,
+    p.attributes.lasttName,
+    p.attributes.neoId,
+    p.attributes.incomingEndorsements,
+    p.attributes.outgoingEndorsements,
+    p.attributes.bio,
+    p.attributes.profileImageUrl,
+    p.attributes.avatarUrl
+  );
 };
 
 export const peopleService = {
-  newPerson,
-  deletePerson,
-  updatePerson,
-  getFriends,
+  buildPerson,
 };

@@ -54,7 +54,7 @@ function signIn(jwt: string) {
   sessionStorage.setItem(SESSION_AUTH_KEY, jwt);
 
   //pass the decoded jwt into IIFE then destructue and set user var.
-  const user = (({ email, name, exp }) => ({ email, name, exp }))(
+  const user = (({ email, name, exp, uid }) => ({ email, name, exp, uid }))(
     jwt_decode(jwt)
   );
 

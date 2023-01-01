@@ -44,7 +44,7 @@
 import PeopleList from '../components/PeopleList.vue';
 import { usePeopleList } from 'src/composables/use-people-list';
 
-const { people } = usePeopleList(null);
+const { people } = usePeopleList({ group: 'contacts' });
 </script>
 <style lang="scss" scoped>
 .search-filter {

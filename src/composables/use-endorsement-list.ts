@@ -25,7 +25,11 @@ export function useEndorsementsList(params = {}) {
           e.attributes.description,
           e.attributes.topic,
           e.attributes.topicImage,
-          e.id
+          e.id,
+          e.attributes.endorseeId,
+          e.attributes.endorserId,
+          e.attributes.endorserAvatarUrl,
+          e.attributes.endorseeAvatarUrl
         )
       );
     });
