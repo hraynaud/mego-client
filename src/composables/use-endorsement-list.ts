@@ -7,11 +7,16 @@ const endorsementStore = useEndorsementStore();
 export function useEndorsementsList(params = {}) {
   const loadEndorsements = () => {
     // eslint-disable-next-line quotes
-    endorsementService.getEndorsements(params).then((res: any) => {
-      if (res) {
-        return setEndorsements(res);
-      }
-    });
+    endorsementService
+      .getEndorsements(params)
+      .then((res: any) => {
+        if (res) {
+          return setEndorsements(res);
+        }
+      })
+      .catch((error: any): void => {
+        console.log(error);
+      });
   };
 
   const setEndorsements = (resp: any) => {

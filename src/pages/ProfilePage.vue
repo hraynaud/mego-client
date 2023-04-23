@@ -44,8 +44,6 @@ onMounted(() => {
     .then(function (resp: {data: any}) {
       profile.value = peopleService.buildPerson(resp.data.data);
       groupEndorsementByDirection(resp.data.included);
-      debugger
-
     });
 
 });
