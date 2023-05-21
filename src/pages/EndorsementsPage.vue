@@ -6,7 +6,7 @@
       <q-form @submit.prevent="onSubmit">
         <div class="row items-baseline justify-start q-gutter-lg">
           <label>Filter:</label>
-          <div class="col-2 search-filter">
+          <!-- <div class="col-2 search-filter">
             <q-select
               v-model="friend"
               single
@@ -17,9 +17,10 @@
               label="Friends"
             />
           </div>
+        -->
           <div class="col-4 search-filter">
             <q-select
-              v-model="topic"
+              v-model="selectedTopic"
               single
               :options="topics"
               :option-value="(opt) => opt?.id"
@@ -43,16 +44,18 @@
 </template>
 
 <script setup>
-import { provide } from 'vue';
+import { provide, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import bus from '../core/utils/event-bus';
 import EndorsementList from '../components/EndorsementList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 import { endorsementService } from 'src/core/services';
+import { useTopicList } from 'src/composables/use-topic-list';
 
 const $q = useQuasar();
-
+const topics = useTopicList();
 const { endorsements } = useEndorsementsList();
+const selectedTopic = ref(null);
 
 const confirm = (doOk, doCancel) => {
   $q.dialog({

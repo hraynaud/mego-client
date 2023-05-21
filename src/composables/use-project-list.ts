@@ -25,7 +25,9 @@ export function useProjectList(params: any) {
         new ProjectModel(
           p.attributes.name,
           p.attributes.description,
-          p.attributes.topicImage
+          p.attributes.topicImage,
+          p.attributes.ownerAvatarUrl,
+          p.topicName
         )
       );
     });

@@ -3,17 +3,20 @@
     <q-item>
       <q-item-section avatar>
         <q-avatar>
-          <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
+          <img :src="p.ownerAvatarUrl" />
         </q-avatar>
       </q-item-section>
 
       <q-item-section>
-        <q-item-label>{{ p.name }}</q-item-label>
-        <q-item-label caption>Subhead</q-item-label>
+        <q-item-label
+          ><p>{{ p.name }}</p></q-item-label
+        >
+
+        <q-item-label caption>{{ p.topicName }}</q-item-label>
       </q-item-section>
     </q-item>
 
-    <img :src="`/images/${p.topicImage}`" />
+    <!-- <img :src="`/images/${p.topicImage}`" /> -->
     <q-card-section>
       {{ p.description }}
     </q-card-section>

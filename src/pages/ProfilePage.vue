@@ -31,9 +31,9 @@ const groupEndorsementByDirection = (data: [])=>{
  return data.forEach((d: any) => {
 
     if (d.attributes.direction =='incoming'){
-      incomingEndorsements.value.push(d)
+      incomingEndorsements.value.push(d.attributes)
     }else{
-      outgoingEndorsements.value.push(d)
+      outgoingEndorsements.value.push(d.attributes)
     }
   })
 }

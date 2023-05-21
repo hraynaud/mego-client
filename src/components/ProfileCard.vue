@@ -10,6 +10,14 @@
         </div>
       </div>
     </q-card-section>
+    <q-card-section class="">
+      <div class="">
+        <div class="name">
+          {{ p.bio }}
+        </div>
+      </div>
+    </q-card-section>
+
   </q-card>
 </template>
 <script setup lang="ts" allowjs: true>
