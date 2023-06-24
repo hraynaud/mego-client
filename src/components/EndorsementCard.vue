@@ -3,19 +3,19 @@
     <q-item>
       <q-item-section avatar>
         <q-avatar>
-          <img :src="e.endorserAvatarUrl" />
+          <img :src="avatar()" />
         </q-avatar>
       </q-item-section>
 
       <q-item-section>
-        <q-item-label>{{ e.topic }}</q-item-label>
+        <q-item-label>{{ e?.topic }}</q-item-label>
         <!-- <q-item-label caption>Subhead</q-item-label> -->
       </q-item-section>
     </q-item>
 
     <!-- <img :src="`/images/${e.topicImage}`" /> -->
 
-    <q-card-section> {{ e.description }} </q-card-section>
+    <q-card-section> {{ e?.description }} </q-card-section>
     <q-btn
       v-if="deleteable"
       class="gt-xs float-right"
@@ -29,17 +29,25 @@
   </q-card>
 </template>
 
-<script setup>
-import { inject } from 'vue';
+<script setup lang="ts">
+import { inject, toRefs } from 'vue';
 import { EndorsementModel } from '../core/models';
-
 import bus from '../core/utils/event-bus';
 const deleteable = inject('deleteable', false);
 
-defineProps({
+const props = defineProps({
   e: EndorsementModel,
   idx: Number,
+  displayType: String,
 });
+// const { e, displayType } = toRefs(props);
+
+const avatar = () => {
+  debugger;
+  return props.displayType == 'endorser'
+    ? props.e?.endorseeAvatarUrl
+    : props.e?.endorserAvatarUrl;
+};
 </script>
 
 <style lang="scss">

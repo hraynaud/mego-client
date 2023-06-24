@@ -7,6 +7,7 @@
         :idx="idx"
         :eid="e.id"
         :key="e.id"
+        :displayType="props.displayType"
       />
     </div>
   </div>
@@ -15,8 +16,10 @@
 import { EndorsementModel } from '../core/models';
 import EndorsementCard from '../components/EndorsementCard.vue';
 
-defineProps({
+const props = defineProps({
   endorsements: [EndorsementModel],
+  currentUserContext: String,
+  displayType: String,
 });
 </script>
 <style lang="scss"></style>

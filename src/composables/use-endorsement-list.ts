@@ -8,7 +8,7 @@ export function useEndorsementsList(params = {}) {
   const loadEndorsements = () => {
     // eslint-disable-next-line quotes
     endorsementService
-      .getEndorsements(params)
+      .search(params)
       .then((res: any) => {
         if (res) {
           return setEndorsements(res);

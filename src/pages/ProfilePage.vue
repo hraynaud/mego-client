@@ -1,49 +1,43 @@
 <template lang="">
+  <div><H3>Profile</H3></div>
   <div>
     <ProfileCard :p="profile" />
   </div>
   <q-separator />
+  <q-card>
   <div>
-    <div class="col">Incoming</div>
+
+    <div class="col">Endorsers</div>
     <div class="q-pa-md">
-      <EndorsementList :endorsements="incomingEndorsements" :deleteable="false" />
+      <EndorsementList :endorsements="profile.endorsers" :deleteable="false" displayType="endorser"/>
     </div>
   </div>
   <q-separator />
   <div>
-    <div class="col">Outgoing</div>
+    <div class="col">Endorsees</div>
     <div class="q-pa-md">
-      <EndorsementList :endorsements="outgoingEndorsements" :deleteable="false" />
+      <EndorsementList :endorsements="profile.endorsees" :deleteable="false" displayType="endorsee"/>
     </div>
+
   </div>
+</q-card>
 </template>
 <script setup lang="ts" allowJs: true>
 import { EndorsementModel, PersonModel } from 'src/core/models';
 import { authService, peopleApi, peopleService } from 'src/core/services';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref,provide } from 'vue';
 import ProfileCard from '../components/ProfileCard.vue';
 import EndorsementList from '../components/EndorsementList.vue';
 const profile = ref({} as PersonModel);
-const incomingEndorsements = ref([] as EndorsementModel[])
-const outgoingEndorsements = ref([] as EndorsementModel[])
 
-const groupEndorsementByDirection = (data: [])=>{
- return data.forEach((d: any) => {
 
-    if (d.attributes.direction =='incoming'){
-      incomingEndorsements.value.push(d.attributes)
-    }else{
-      outgoingEndorsements.value.push(d.attributes)
-    }
-  })
-}
+
 
 onMounted(() => {
   peopleApi
     .findPerson(authService.currentUser()['uid'])
     .then(function (resp: {data: any}) {
       profile.value = peopleService.buildPerson(resp.data.data);
-      groupEndorsementByDirection(resp.data.included);
     });
 
 });

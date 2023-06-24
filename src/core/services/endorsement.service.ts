@@ -5,6 +5,10 @@ const getEndorsements = (params: any): any => {
   return apiService.get('/endorsements', params);
 };
 
+const search = (params: any): any => {
+  return apiService.get('/endorsements', params);
+};
+
 const newEndorsement = (endorsement: EndorsementFormModel) => {
   apiService.post('/endorsements', endorsement);
 };
@@ -22,4 +26,5 @@ export const endorsementService = {
   del,
   update,
   getEndorsements,
+  search,
 };

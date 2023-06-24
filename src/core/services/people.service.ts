@@ -5,8 +5,8 @@ const buildPerson = (p: any) => {
     p.attributes.firstName,
     p.attributes.lasttName,
     p.attributes.neoId,
-    p.attributes.incomingEndorsements,
-    p.attributes.outgoingEndorsements,
+    p.attributes.endorsers,
+    p.attributes.endorsees,
     p.attributes.bio,
     p.attributes.profileImageUrl,
     p.attributes.avatarUrl
