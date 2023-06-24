@@ -1,14 +1,15 @@
 <template>
+  <div><H3>Recent Activity</H3></div>
   <div>
     <q-page>
       <div class="q-pa-md">
-        <h5>Projects</h5>
+        <h5>New Projects</h5>
         <div class="q-gutter-md row items-start">
           <ProjectList :projects="projects"></ProjectList>
         </div>
       </div>
       <div class="q-pa-md">
-        <h5>Endorsements</h5>
+        <h5>New Endorsements</h5>
         <EndorsementList :endorsements="endorsements" />
       </div>
       <q-page-sticky position="bottom-right" :offset="[64, 36]">

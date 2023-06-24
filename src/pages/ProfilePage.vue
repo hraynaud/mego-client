@@ -23,9 +23,9 @@
 </q-card>
 </template>
 <script setup lang="ts" allowJs: true>
-import { EndorsementModel, PersonModel } from 'src/core/models';
+import {PersonModel } from 'src/core/models';
 import { authService, peopleApi, peopleService } from 'src/core/services';
-import { onMounted, ref,provide } from 'vue';
+import { onMounted, ref } from 'vue';
 import ProfileCard from '../components/ProfileCard.vue';
 import EndorsementList from '../components/EndorsementList.vue';
 const profile = ref({} as PersonModel);

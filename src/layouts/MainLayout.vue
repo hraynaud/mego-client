@@ -8,7 +8,7 @@
 
           <div class="q-pr-sm">{{ name }}</div>
           <q-avatar size="36px" class="q-mb-sm q-mr-md">
-            <img src="https://xsgames.co/randomusers/avatar.php?g=female" />
+            <img :src="avatar" />
           </q-avatar>
         </q-toolbar>
       </q-header>
@@ -115,11 +115,13 @@ export default {
     const router = useRouter();
     const user = authService.currentUser();
     const name = user.name;
+    const avatar = user.avatar;
 
     return {
       drawer: ref(false),
       miniState,
       name,
+      avatar,
 
       drawerClick(e) {
         // if in "mini" state and user
