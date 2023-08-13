@@ -2,7 +2,7 @@
   <q-card class="person-card">
     <q-card-section class="" horizontal>
       <div class="avatar-wrapper">
-        <q-avatar size="150px">
+        <q-avatar size="100px">
           <img :src="p.profileImageUrl" />
         </q-avatar>
         <div class="name">
@@ -15,13 +15,9 @@
     <q-card-section horizontal>
       <div class="row mini-profile">
         <div class="col">
-          <div class="item-count">
-            {{ p.incomingEndorsementsCount() }}<br />Endorsers
-          </div>
+          <div class="item-count">{{ p.endorsers.length }}<br />Endorsers</div>
         </div>
-        <div class="col">
-          {{ p.outgoingEndorsementsCount() }}<br />Endorsees
-        </div>
+        <div class="col">{{ p.endorsees.length }}<br />Endorsees</div>
       </div>
     </q-card-section>
   </q-card>
@@ -34,12 +30,11 @@ defineProps({
   p: PersonModel,
 });
 </script>
+
 <style lang="scss">
 .person-card {
-  width: 100%;
   max-width: 215px;
   .name {
-    padding-top: 15px;
     font-weight: bold;
   }
 }

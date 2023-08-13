@@ -7,3 +7,4 @@ export * from './project.service';
 export * from './api/people.api';
 export * from './contact.service';
 export * from './jsonResponse.service';
+export * from './invite.service';

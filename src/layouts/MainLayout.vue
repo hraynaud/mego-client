@@ -41,14 +41,6 @@
               <q-item-section> Me </q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple to="/people">
-              <q-item-section avatar>
-                <q-icon name="group" />
-              </q-item-section>
-
-              <q-item-section> People </q-item-section>
-            </q-item>
-
             <q-item clickable v-ripple to="/projects">
               <q-item-section avatar>
                 <q-icon name="construction" />
@@ -63,6 +55,14 @@
               </q-item-section>
 
               <q-item-section> Endorsements </q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple to="/people">
+              <q-item-section avatar>
+                <q-icon name="group" />
+              </q-item-section>
+
+              <q-item-section> People </q-item-section>
             </q-item>
 
             <q-item clickable v-ripple @click.prevent="logout">

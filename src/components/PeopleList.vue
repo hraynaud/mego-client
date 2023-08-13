@@ -1,8 +1,6 @@
-<template lang="">
+<template>
   <div>
-    <div class="q-gutter-md row items-start">
-      <PersonCard v-for="p in people" :p="p" :key="p.name" />
-    </div>
+    <PersonCard v-for="p in people" :p="p" :key="p.name" />
   </div>
 </template>
 <script setup lang="ts">

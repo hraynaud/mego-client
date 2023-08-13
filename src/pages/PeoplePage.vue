@@ -32,10 +32,8 @@
       </q-form>
     </div>
     <div class="q-pa-md">
-      <h3>Friends</h3>
-      <div class="q-gutter-md row items-start">
-        <PeopleList :people="people"></PeopleList>
-      </div>
+      <h6>Friends</h6>
+      <PeopleList :people="people"></PeopleList>
     </div>
   </q-page>
 </template>

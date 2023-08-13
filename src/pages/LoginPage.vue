@@ -1,13 +1,13 @@
 <template>
   <q-page class="window-height window-width row justify-center items-center">
-    <q-card square class="shadow-24" style="width: 300px; height: 485px">
+    <q-card square class="shadow-24">
       <q-card-section class="bg-deep-purple-7">
         <h4 class="text-h5 text-white q-my-md">Login</h4>
       </q-card-section>
       <q-form
         @submit="onSubmit"
         @reset="onReset"
-        class="q-px-sm q-pt-xl q-pb-lg"
+        class="q-px-sm q-pt-m q-pb-lg"
       >
         <q-card-section>
           <q-input square clearable v-model="email" type="email" label="Email">
@@ -35,11 +35,16 @@
             label="Login"
             type="submit"
           />
+          <q-card-section class="text-center q-pa-sm">
+            <router-link class="text-grey-6" to="signup">Sign Up</router-link>
+          </q-card-section>
+          <q-card-section class="text-center q-pa-sm">
+            <router-link class="text-grey-6" to="signup"
+              >Forgot Password?</router-link
+            >
+          </q-card-section>
         </q-card-actions>
       </q-form>
-      <q-card-section class="text-center q-pa-sm">
-        <p class="text-grey-6">Forgot Password?</p>
-      </q-card-section>
     </q-card>
   </q-page>
 </template>

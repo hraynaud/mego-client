@@ -7,13 +7,15 @@ const { localStorage, sessionStorage } = window;
 export const authService = {
   login,
   logout,
+  signup,
   currentUser,
   isLoggedIn,
   isLoggedOut,
 };
 
-function login(email: string, password: string) {
-  return apiService.post('/login', { email, password }).then(handleLogin);
+async function login(email: string, password: string) {
+  const response = await apiService.post('/login', { email, password });
+  return handleLogin(response);
 }
 
 function logout() {
@@ -21,6 +23,23 @@ function logout() {
   localStorage.removeItem(SESSION_USER_KEY);
   sessionStorage.removeItem(SESSION_AUTH_KEY);
   // store.dispatch('logout');
+}
+
+async function signup(
+  email: string,
+  password: string,
+  firstName: string,
+  lastName: string,
+  inviteCode: string | undefined
+) {
+  const response = await apiService.post('/register', {
+    email,
+    password,
+    firstName,
+    lastName,
+    inviteCode,
+  });
+  return handleSignup(response);
 }
 
 function currentUser() {
@@ -43,6 +62,14 @@ function sessionExpired(): boolean {
 }
 
 function handleLogin(response: any) {
+  if (response.headers.jwt) {
+    return signIn(response.headers.jwt);
+  } else {
+    return Promise.reject(response.error);
+  }
+}
+
+function handleSignup(response: any) {
   if (response.headers.jwt) {
     return signIn(response.headers.jwt);
   } else {

@@ -31,8 +31,8 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
       },
       {
-        path: 'project/new',
-        name: 'project.new',
+        path: 'projects/new',
+        name: 'projects.new',
         component: () => import('pages/ProjectNewPage.vue'),
         meta: { requiresAuth: true },
       },
@@ -46,6 +46,12 @@ const routes: RouteRecordRaw[] = [
         path: 'endorsements/new',
         name: 'endorsements.new',
         component: () => import('pages/EndorsementNewPage.vue'),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: 'invites/new',
+        name: 'invite.new',
+        component: () => import('pages/InviteNewPage.vue'),
         meta: { requiresAuth: true },
       },
     ],
@@ -69,6 +75,11 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'signup',
         name: 'signup',
+        component: () => import('pages/SignupPage.vue'),
+      },
+      {
+        path: 'accept_invite',
+        name: 'accept_invite',
         component: () => import('pages/SignupPage.vue'),
       },
     ],

@@ -1,12 +1,8 @@
 import { EndorsementFormModel } from '../models';
 import { apiService } from './api.service';
 
-const getEndorsements = (params: any): any => {
-  return apiService.get('/endorsements', params);
-};
-
 const search = (params: any): any => {
-  return apiService.get('/endorsements', params);
+  return apiService.get('/endorsements_search', params);
 };
 
 const newEndorsement = (endorsement: EndorsementFormModel) => {
@@ -25,6 +21,5 @@ export const endorsementService = {
   newEndorsement,
   del,
   update,
-  getEndorsements,
   search,
 };

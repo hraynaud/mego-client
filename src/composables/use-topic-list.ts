@@ -1,16 +1,17 @@
 import { ref, onMounted } from 'vue';
-import { projectService } from '../core/services';
-import { ProjectModel } from '../core/models';
+import { topicService } from '../core/services';
+import { TopicModel } from '../core/models';
 
-export function useProjectList(params: any) {
-  const projects = ref(<Array<ProjectModel>>[]);
+export function useTopicList() {
+  const topics = ref(<Array<TopicModel>>[]);
 
-  const loadProjects = () => {
-    projectService
-      .searchProjects(params)
+  const loadTopics = () => {
+    topicService
+      .getTopics()
       .then((resp: any) => {
         if (resp) {
-          setProjects(resp);
+          setTopics(resp);
+          console.log('Topics loaded');
         }
       })
       .catch((error: any): void => {
@@ -18,12 +19,12 @@ export function useProjectList(params: any) {
       });
   };
 
-  const setProjects = (resp: any) => {
-    const data = resp.data.projects.data;
+  const setTopics = (resp: any) => {
+    const data = resp.data.topics.data;
 
     data.map((p: any) => {
-      projects.value.push(
-        new ProjectModel(
+      topics.value.push(
+        new TopicModel(
           p.attributes.name,
           p.attributes.description,
           p.attributes.topicImage
@@ -41,10 +42,10 @@ export function useProjectList(params: any) {
   // };
 
   onMounted(() => {
-    loadProjects();
+    loadTopics();
   });
 
   return {
-    projects,
+    topics,
   };
 }

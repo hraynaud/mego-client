@@ -46,7 +46,7 @@
             />
           </div>
         </div>
-        <div class="row row q-py-md">
+        <div class="row q-py-md">
           <div class="col-5">
             <q-select
               class=""
@@ -138,6 +138,5 @@ onMounted(() => {
 </script>
 <style scoped lang="scss">
 .project-form {
-  width: 500px;
 }
 </style>
