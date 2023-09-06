@@ -1,18 +1,13 @@
 <template>
   <q-card>
     <q-card-section class="bg-deep-purple-7">
-      <h4 class="text-h5 text-white q-my-md">Create a New Endorsement</h4>
+      <h5 class="text-white q-my-md">Create a New Endorsement</h5>
     </q-card-section>
     <div class="q-pa-md project-form">
-      <q-form
-        @submit="onSubmit"
-        @reset="onReset"
-        class="q-px-sm q-pt-md q-pb-lg"
-        name="endorsement"
-      >
-        <h5 class="q-mb-sm">Who do you want to endorse?</h5>
-        <div class="row q-py-md" v-if="!newContactVisible">
-          <div class="col-7">
+      <q-form @submit="onSubmit" @reset="onReset" class="" name="endorsement">
+        <h5 class="q-mb-sm">Endorse Whom?</h5>
+        <div class="row justify-between" v-if="!newContactVisible">
+          <div class="col-md-7 col-xs-10">
             <q-select
               class=""
               v-model="endorseeId"
@@ -22,13 +17,14 @@
               use-input
             />
           </div>
-          <div class="col-4 q-ml-md self-end">
+          <div class="col-md-4 col-xs-1 self-end">
             <q-btn
               dense
               round
               unelevated
               color="accent"
               icon="person_add"
+              class=""
               @click="showNewContactForm"
             />
           </div>
@@ -62,8 +58,8 @@
         </div>
 
         <h5 class="q-mb-sm">What for?</h5>
-        <div class="row q-py-md" v-if="!newTopicVisible">
-          <div class="col-7">
+        <div class="row justify-between" v-if="!newTopicVisible">
+          <div class="col-7 col-md-7 col-xs-11">
             <q-select
               class=""
               v-model="topicId"
@@ -73,13 +69,14 @@
               use-input
             />
           </div>
-          <div class="col-3 q-ml-md self-end">
+          <div class="col-md-4 col-xs-1 self-end">
             <q-btn
               dense
               round
               unelevated
               color="accent"
               icon="new_label"
+              class=""
               @click="showNewTopicForm"
             />
           </div>
@@ -163,7 +160,7 @@ function onSubmit() {
     setEndorsee();
     setTopic();
     const endorsement = endorsementService.newEndorsement(newEndorsement);
-    console.log(JSON.stringify(endorsement));
+    clearall();
   } else {
     console.error(JSON.stringify(newEndorsement));
     // handle error
@@ -197,6 +194,10 @@ onMounted(() => {
 });
 
 function onReset() {
+  clearall();
+}
+
+function clearall() {
   endorseeId.value = null;
   topicId.value = null;
   clearNewTopic();
@@ -276,6 +277,5 @@ const isValidNewTopic = (): boolean => {
 </script>
 <style scoped lang="scss">
 .project-form {
-  width: 500px;
 }
 </style>

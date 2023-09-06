@@ -43,7 +43,7 @@ const props = defineProps({
 // const { e, displayType } = toRefs(props);
 
 const avatar = () => {
-  return props.displayType == 'endorser'
+  return props.displayType == 'endorsee'
     ? props.e?.endorseeAvatarUrl
     : props.e?.endorserAvatarUrl;
 };

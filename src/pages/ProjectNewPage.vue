@@ -1,6 +1,10 @@
 <template lang="">
-  <q-page class="window-width row items-center justify-center">
-    <ProjectForm />
+  <q-page>
+    <div class="row">
+      <div class="offset-xs-1 col-xs-10 col-sm-6 col-md-4">
+        <ProjectForm />
+      </div>
+    </div>
   </q-page>
 </template>
 <script setup>

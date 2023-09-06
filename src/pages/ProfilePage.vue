@@ -1,28 +1,27 @@
 <template lang="">
-  <q-page>
+  <q-page style="max-height: 90vh; overflow-y: scroll">
    <h4>{{profile.firstName}}</h4>
     <ProfileCard :p="profile" />
 
-    <q-card class="q-my-sm">
-
+    <q-card class="q-my1-sm">
       <q-card-section>
-        <p class="text-h6">Endorsees</p>
-          <EndorsementList :endorsements="profile.endorsees" :deleteable="false" displayType="endorsee"/>
+        <p class="text-h6">Endorsers</p>
+          <EndorsementList :endorsements="profile.endorsers" :deleteable="false" displayType="endorser"/>
       </q-card-section>
     </q-card>
 
-    <q-card class="q-my-sm">
+    <q-card class="q-my-1sm">
 
         <q-card-section>
-          <p class="text-h6">Endorsers</p>
-          <EndorsementList :endorsements="profile.endorsers" :deleteable="false" displayType="endorser"/>
+          <p class="text-h6">Endorsees</p>
+          <EndorsementList :endorsements="profile.endorsees" :deleteable="false" displayType="endorsee"/>
         </q-card-section>
     </q-card>
 
 
 
 
-    <q-page-sticky position="bottom-right" :offset="[64, 36]">
+    <!-- <q-page-sticky position="bottom-right" :offset="[64, 36]">
       <q-fab
         v-model="fabCenter"
         vertical-actions-align="center"
@@ -35,7 +34,7 @@
         <q-fab-action color="secondary" @click="onClick" icon="build_circle" label="Create a Project" to="/projects/new" />
         <q-fab-action color="orange" @click="onClick" icon="person_add" label="Invite a Friend" to="/invites/new" />
       </q-fab>
-    </q-page-sticky>
+    </q-page-sticky> -->
   </q-page>
 </template>
 <script setup lang="ts" allowJs: true>

@@ -1,6 +1,4 @@
 <template>
-  <div class="">
-
     <q-card class="person-card">
       <q-card-section horizontal>
         <q-card-section class="profile-img q-pa-sm">
@@ -38,7 +36,6 @@
         </q-card-section-item>
       </q-card-section>
     </q-card>
-</div>
 </template>
 <script setup lang="ts" allowjs: true>
 import { PersonModel } from '../core/models';

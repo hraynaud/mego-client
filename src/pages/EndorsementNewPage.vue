@@ -1,6 +1,10 @@
 <template lang="">
-  <q-page class="window-width row col">
-    <EndorsementForm />
+  <q-page>
+    <div class="row">
+      <div class="col-xs-10 col-sm-10 col-md-6 offset-xs-1">
+        <EndorsementForm />
+      </div>
+    </div>
   </q-page>
 </template>
 <script setup>

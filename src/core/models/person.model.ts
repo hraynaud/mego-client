@@ -4,8 +4,8 @@ export class PersonModel {
   firstName: string;
   lastName: string;
   id: number | string;
-  endorsers?: [EndorsementModel];
   endorsees?: [EndorsementModel];
+  endorsers?: [EndorsementModel];
   profileImageUrl?: string;
   avatarUrl?: string;
   bio?: string;
@@ -33,8 +33,9 @@ export class PersonModel {
     this.id = id;
     this.bio =
       'Culpa labore aliquip ut ex nisi nostrud. Occaecat fugiat fugiat ut velit consequat ullamco elit laborum quis aute eu ipsum duis sunt. Quis eu deserunt proident ut laboris irure aliqua commodo. Pariatur dolor deserunt in culpa amet irure deserunt. Officia sint Lorem esse ex adipisicing veniam in laborum veniam ea fugiat ad qui.';
-    this.endorsers = endorsers;
     this.endorsees = endorsees;
+    this.endorsers = endorsers;
+
     this.profileImageUrl = profileImageUrl;
     this.avatarUrl = avatarUrl;
   }

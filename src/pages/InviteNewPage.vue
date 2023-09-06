@@ -1,7 +1,11 @@
 <template lang="">
-  <q-page class="">
-    <div class="row">
-      <div class="col-xs-12 col-md-4"><InviteForm /></div>
+  <q-page>
+    <div class="row justify-center">
+      <div
+        class="col-offset-md-2 col-xs-10 col-sm-6 col-md-4 col-lg-4 items-center"
+      >
+        <InviteForm />
+      </div>
     </div>
   </q-page>
 </template>
