@@ -1,7 +1,7 @@
 <template lang="">
   <q-page>
     <div class="row">
-      <div class="offset-xs-1 col-xs-10 col-sm-6 col-md-4">
+      <div class="offset-xs-1 col-xs-10 col-md-8">
         <ProjectForm />
       </div>
     </div>
