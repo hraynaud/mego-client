@@ -122,6 +122,13 @@
             flat
             class="q-ml-sm"
           />
+          <q-btn
+            label="Exit"
+            to="/endorsements"
+            color="black"
+            flat
+            class="q-ml-sm"
+          />
         </div>
       </q-form>
     </div>
@@ -130,6 +137,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useQuasar } from 'quasar';
 import {
   topicService,
   contactService,
@@ -142,6 +150,7 @@ interface FormSelectOption {
   label: string;
 }
 
+const $q = useQuasar();
 const topics = ref<FormSelectOption[]>([]);
 const contacts = ref<FormSelectOption[]>([]);
 const topicId = ref();
@@ -160,6 +169,12 @@ function onSubmit() {
     setEndorsee();
     setTopic();
     const endorsement = endorsementService.newEndorsement(newEndorsement);
+    $q.notify({
+      color: 'green-5',
+      textColor: 'white',
+      icon: 'success',
+      message: `your endorsement: ${endorsement}`,
+    });
     clearall();
   } else {
     console.error(JSON.stringify(newEndorsement));
