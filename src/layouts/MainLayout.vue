@@ -32,6 +32,29 @@
             <q-item-section> Home </q-item-section>
           </q-item>
 
+          <q-expansion-item
+            dense
+            dense-toggle=""
+            clickable
+            v-ripple
+            :content-inset-level="0.25"
+            to="/projects"
+          >
+            <template v-slot:header>
+              <q-item-section avatar>
+                <q-icon name="construction" />
+              </q-item-section>
+              <q-item-section> Projects </q-item-section>
+            </template>
+            <q-item clickable v-ripple to="/projects/new">
+              <q-item-section avatar>
+                <q-icon name="add_circle" />
+              </q-item-section>
+
+              <q-item-section>New</q-item-section>
+            </q-item>
+          </q-expansion-item>
+
           <q-item clickable v-ripple to="/me">
             <q-item-section avatar>
               <q-icon name="person" />
@@ -40,12 +63,12 @@
             <q-item-section> Me </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple to="/projects">
+          <q-item clickable v-ripple to="/people">
             <q-item-section avatar>
-              <q-icon name="construction" />
+              <q-icon name="group" />
             </q-item-section>
 
-            <q-item-section> Projects </q-item-section>
+            <q-item-section> People </q-item-section>
           </q-item>
 
           <q-expansion-item
@@ -71,14 +94,6 @@
               <q-item-section> Create New</q-item-section>
             </q-item>
           </q-expansion-item>
-
-          <q-item clickable v-ripple to="/people">
-            <q-item-section avatar>
-              <q-icon name="group" />
-            </q-item-section>
-
-            <q-item-section> People </q-item-section>
-          </q-item>
 
           <q-item clickable v-ripple @click.prevent="logout">
             <q-item-section avatar>
