@@ -31,8 +31,8 @@
         </div>
       </q-form>
     </div>
-    <div class="q-pa-md">
-      <h6>Friends</h6>
+    <div class="q-pa-md text-h6">Friends</div>
+    <div class="">
       <PeopleList :people="people"></PeopleList>
     </div>
   </q-page>

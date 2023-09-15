@@ -1,41 +1,37 @@
 <template>
-    <q-card class="person-card">
-      <q-card-section horizontal>
-        <q-card-section class="profile-img q-pa-sm">
-          <div class="profile-img-wrapper">
-            <q-avatar size="150px">
-              <q-img :src="p.profileImageUrl" />
-            </q-avatar>
-            <!-- <div class="name">
-              {{ p.firstName }}
-            </div> -->
-          </div>
-        </q-card-section>
-        <q-card-section class="" >
-          <div class="">
-            <div class="">
-              {{ p.bio }}
+      <q-card class="person-card">
+        <q-card-section horizontal>
+          <q-card-section class="profile-img q-pa-sm">
+            <div class="profile-img-wrapper">
+              <q-avatar size="150px">
+                <q-img :src="p.profileImageUrl" />
+              </q-avatar>
             </div>
-          </div>
+          </q-card-section>
+          <q-card-section>
+            <div >
+              <div>
+                {{ p.bio }}
+              </div>
+            </div>
+          </q-card-section>
         </q-card-section>
-      </q-card-section>
-    </q-card>
-    <q-card class="person-card q-my-sm">
-
-      <q-card-section>
-        <q-card-section-item >
-          <p class="text-h6 ">Ask me about</p>
-        </q-card-section-item>
-        <q-card-section-item  >
-          <q-chip color="teal" text-color="white" icon="bookmark">fencing</q-chip>
-          <q-chip color="teal" text-color="white" icon="bookmark">Art</q-chip>
-          <q-chip text-color="black">
-            <q-avatar icon="bookmark" color="red" text-color="white" />
-            Bookmark
-          </q-chip>
-        </q-card-section-item>
-      </q-card-section>
-    </q-card>
+      </q-card>
+      <q-card>
+        <q-card-section>
+          <q-card-section-item >
+            <p class="text-h6 ">Ask me about</p>
+          </q-card-section-item>
+          <q-card-section-item  >
+            <q-chip color="teal" text-color="white" icon="bookmark">fencing</q-chip>
+            <q-chip color="teal" text-color="white" icon="bookmark">Art</q-chip>
+            <q-chip text-color="black">
+              <q-avatar icon="bookmark" color="red" text-color="white" />
+              Bookmark
+            </q-chip>
+          </q-card-section-item>
+        </q-card-section>
+      </q-card>
 </template>
 <script setup lang="ts" allowjs: true>
 import { PersonModel } from '../core/models';

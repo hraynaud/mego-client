@@ -1,8 +1,8 @@
 <template lang="">
   <q-card class="person-card">
-    <q-card-section class="" horizontal>
+    <q-card-section class="q-pa-sm" horizontal>
       <div class="avatar-wrapper">
-        <q-avatar size="100px">
+        <q-avatar size="75px">
           <img :src="p.profileImageUrl" />
         </q-avatar>
         <div class="name">
@@ -14,10 +14,15 @@
     <q-separator />
     <q-card-section horizontal>
       <div class="row mini-profile">
-        <div class="col">
-          <div class="item-count">{{ p.endorsers.length }}<br />Endorsers</div>
+        <div class="col-4">
+          {{ p.endorsers.length }}
         </div>
-        <div class="col">{{ p.endorsees.length }}<br />Endorsees</div>
+        <div class="col-8 item-count">Endorsers</div>
+
+        <div class="col-4">
+          {{ p.endorsees.length }}
+        </div>
+        <div class="col-8 item-count">Endorsees</div>
       </div>
     </q-card-section>
   </q-card>
@@ -33,7 +38,7 @@ defineProps({
 
 <style lang="scss">
 .person-card {
-  max-width: 215px;
+  // max-width: 215px;
   .name {
     font-weight: bold;
   }
@@ -45,7 +50,7 @@ defineProps({
 .mini-profile {
   text-align: center;
   .item-count {
-    color: $pink-12;
+    color: $blue-12;
     $h-tags: ('h1');
   }
 }

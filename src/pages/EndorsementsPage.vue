@@ -35,7 +35,7 @@
     </div>
     <div class="q-pa-md">
       <h5>Search Results</h5>
-      <EndorsementList :endorsements="endorsements" :deleteable="true" />
+      <EndorsementList :endorsements="endorsements" deleteable="false" />
     </div>
     <q-page-sticky position="bottom-right" :offset="[64, 36]">
       <q-btn fab icon="add" color="accent" to="/endorsements/new" />
@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { provide, ref } from 'vue';
+import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 import bus from '../core/utils/event-bus';
 import EndorsementList from '../components/EndorsementList.vue';
@@ -56,49 +56,6 @@ const $q = useQuasar();
 const topics = []; //useTopicList();
 const { endorsements } = useEndorsementsList();
 const selectedTopic = ref(null);
-
-const confirm = (doOk, doCancel) => {
-  $q.dialog({
-    title: 'Confirm',
-    message: 'Are you sure you want to delete this endorsement?',
-    cancel: true,
-    persistent: true,
-  })
-    .onOk(() => {
-      doOk();
-    })
-
-    .onCancel(() => {
-      doCancel();
-    })
-    .onDismiss(() => {
-      console.log('I am triggered on both OK and Cancel');
-    });
-};
-const doDelete = (index) => {
-  const endorsementList = endorsements.value;
-  endorsementService
-    .del(endorsementList[index].id)
-    .then(() => {
-      endorsements.value.splice(index, 1);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
-provide('deleteable', true); //make prop available to all descendants
-bus.on('delete-endorsement', (endorsement, index) => {
-  console.log('handling delete');
-  confirm(
-    () => {
-      doDelete(index);
-    },
-    () => {
-      console.log('canceled');
-    }
-  );
-});
 </script>
 <style lang="scss" scoped>
 .search-filter {

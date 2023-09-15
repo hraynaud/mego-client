@@ -16,6 +16,7 @@
     <!-- <img :src="`/images/${e.topicImage}`" /> -->
 
     <q-card-section> {{ e?.description }} </q-card-section>
+
     <q-btn
       v-if="deleteable"
       class="gt-xs float-right"
@@ -30,19 +31,18 @@
 </template>
 
 <script setup lang="ts">
-import { inject, toRefs } from 'vue';
 import { EndorsementModel } from '../core/models';
 import bus from '../core/utils/event-bus';
-const deleteable = inject('deleteable', false);
 
 const props = defineProps({
   e: EndorsementModel,
   idx: Number,
   displayType: String,
+  deleteable: Boolean,
 });
-// const { e, displayType } = toRefs(props);
 
 const avatar = () => {
+  console.log(`props deleteable: ${props.displayType}`);
   return props.displayType == 'endorsee'
     ? props.e?.endorseeAvatarUrl
     : props.e?.endorserAvatarUrl;
@@ -51,7 +51,7 @@ const avatar = () => {
 
 <style lang="scss">
 .endorsement-card {
-  width: 100%;
-  max-width: 250px;
+  width: 30%;
+  // max-width: 250px;
 }
 </style>

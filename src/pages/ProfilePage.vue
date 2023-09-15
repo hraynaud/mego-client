@@ -1,23 +1,25 @@
 <template lang="">
   <q-page style="max-height: 90vh; overflow-y: scroll">
+    <div class="row">
+    <div class="offset-xs-1 col-sm-8 col-md-6">
    <h4>{{profile.firstName}}</h4>
     <ProfileCard :p="profile" />
 
-    <q-card class="q-my1-sm">
+    <q-card class="q-my-xs">
       <q-card-section>
         <p class="text-h6">Endorsers</p>
-          <EndorsementList :endorsements="profile.endorsers" :deleteable="false" displayType="endorser"/>
+          <EndorsementList :endorsements="profile.endorsers" :deleteable=false displayType="endorser"/>
       </q-card-section>
     </q-card>
 
-    <q-card class="q-my-1sm">
-
+    <q-card class="q-my-xs">
         <q-card-section>
           <p class="text-h6">Endorsees</p>
-          <EndorsementList :endorsements="profile.endorsees" :deleteable="false" displayType="endorsee"/>
+          <EndorsementList :endorsements="profile.endorsees" :deleteable=true displayType="endorsee"/>
         </q-card-section>
     </q-card>
-
+  </div>
+</div>
 
 
 
@@ -40,12 +42,12 @@
 <script setup lang="ts" allowJs: true>
 import {PersonModel } from 'src/core/models';
 import { authService, peopleApi, peopleService } from 'src/core/services';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, provide, } from 'vue';
 import ProfileCard from '../components/ProfileCard.vue';
 import EndorsementList from '../components/EndorsementList.vue';
 const profile = ref({} as PersonModel);
 
-
+// provide('deleteable', true); //make prop available to all descendants
 fabCenter: ref(true),
 
 onMounted(() => {

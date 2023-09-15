@@ -6,7 +6,7 @@ const search = (params: any): any => {
 };
 
 const newEndorsement = (endorsement: EndorsementFormModel) => {
-  apiService.post('/endorsements', endorsement);
+  return apiService.post('/endorsements', endorsement);
 };
 
 const del = (id: string | number, params: any) => {

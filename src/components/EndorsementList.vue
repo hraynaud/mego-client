@@ -1,15 +1,14 @@
 <template lang="">
-  <div>
-    <div class="q-gutter-md row items-start">
-      <EndorsementCard
-        v-for="(e, idx) in endorsements"
-        :e="e"
-        :idx="idx"
-        :eid="e.id"
-        :key="e.id"
-        :displayType="props.displayType"
-      />
-    </div>
+  <div class="q-gutter-md row">
+    <EndorsementCard
+      v-for="(e, idx) in endorsements"
+      :e="e"
+      :idx="idx"
+      :eid="e.id"
+      :key="e.id"
+      :displayType="displayType"
+      :deleteable="deleteable"
+    />
   </div>
 </template>
 <script setup>
@@ -20,6 +19,7 @@ const props = defineProps({
   endorsements: [EndorsementModel],
   currentUserContext: String,
   displayType: String,
+  deleteable: Boolean,
 });
 </script>
 <style lang="scss"></style>
