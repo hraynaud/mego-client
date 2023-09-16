@@ -9,7 +9,6 @@
 
       <q-item-section>
         <q-item-label>{{ e?.topic }}</q-item-label>
-        <!-- <q-item-label caption>Subhead</q-item-label> -->
       </q-item-section>
     </q-item>
 
@@ -25,15 +24,17 @@
       dense
       round
       icon="delete"
-      @click="bus.emit('delete-endorsement', e, idx)"
+      @click="deleteMe(e!, idx!)"
     />
+    <!-- @click.prevent.once="bus.emit('delete-endorsement', e, idx)" -->
   </q-card>
 </template>
 
 <script setup lang="ts">
+// import bus from '../core/utils/event-bus';
+import { inject } from 'vue';
 import { EndorsementModel } from '../core/models';
-import bus from '../core/utils/event-bus';
-
+const bus = inject('bus');
 const props = defineProps({
   e: EndorsementModel,
   idx: Number,
@@ -42,10 +43,14 @@ const props = defineProps({
 });
 
 const avatar = () => {
-  console.log(`props deleteable: ${props.displayType}`);
   return props.displayType == 'endorsee'
     ? props.e?.endorseeAvatarUrl
     : props.e?.endorserAvatarUrl;
+};
+
+const deleteMe = (e: EndorsementModel, i: number) => {
+  console.log(`deleting ${e} with index ${i}`);
+  bus.emit('delete-endorsement', e, i);
 };
 </script>
 

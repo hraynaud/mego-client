@@ -45,14 +45,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useQuasar } from 'quasar';
-import bus from '../core/utils/event-bus';
 import EndorsementList from '../components/EndorsementList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 // import { useTopicList } from 'src/composables/use-topic-list';
-import { endorsementService } from 'src/core/services';
 
-const $q = useQuasar();
 const topics = []; //useTopicList();
 const { endorsements } = useEndorsementsList();
 const selectedTopic = ref(null);

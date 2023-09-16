@@ -1,3 +1,3 @@
-import { EventBus } from 'quasar';
-const bus = new EventBus();
-export default bus;
+// import { EventBus } from 'quasar';
+// const bus = new EventBus();
+// export default bus;
