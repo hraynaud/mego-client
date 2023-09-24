@@ -59,7 +59,7 @@ function errHandler(error: any) {
     msg = 'Unable to connect to API';
   }
   console.log('!!!error occurred', msg);
-  throw new Error(msg);
+  return Promise.reject(msg);
 }
 
 export const apiService = {

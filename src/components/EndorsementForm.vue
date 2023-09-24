@@ -168,17 +168,15 @@ function onSubmit() {
   if (isValidEndorsement()) {
     setEndorsee();
     setTopic();
-    const endorsement = endorsementService.newEndorsement(newEndorsement);
-    $q.notify({
-      color: 'green-5',
-      textColor: 'white',
-      icon: 'success',
-      message: `your endorsement: ${endorsement}`,
-    });
-    clearall();
+    endorsementService
+      .newEndorsement(newEndorsement)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => alert(error))
+      .finally(() => clearall());
   } else {
-    console.error(JSON.stringify(newEndorsement));
-    // handle error
+    alert('Invalid');
   }
 }
 

@@ -8,7 +8,14 @@ const search = (params: any): any => {
 };
 
 const newEndorsement = (endorsement: EndorsementFormModel) => {
-  return apiService.post('/endorsements', endorsement);
+  return apiService
+    .post('/endorsements', endorsement)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
 };
 
 const del = (id: string) => {
