@@ -2,9 +2,11 @@ import { EndorsementModel } from '../core/models';
 import { inject } from 'vue';
 import { useQuasar } from 'quasar';
 import { endorsementService } from 'src/core/services';
+import { useProfileStore } from 'src/stores/profile-store';
 
 export function useEndorsementEvent(params = {}) {
   const $q = useQuasar();
+  const profileStore = useProfileStore();
 
   const bus = inject('bus');
   bus.on(
@@ -18,6 +20,7 @@ export function useEndorsementEvent(params = {}) {
       })
         .onOk(() => {
           endorsementService.del(endorsement.id);
+          profileStore.removeEndorsee(endorsement);
         })
         .onCancel(() => {
           console.log('cancel called');

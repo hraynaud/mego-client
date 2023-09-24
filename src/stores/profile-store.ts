@@ -35,7 +35,7 @@ export const useProfileStore = defineStore('profile', {
     },
     removeEndorsee(endorsee: EndorsementModel) {
       if (!endorsee) return;
-      this.endorsees.filter((e) => e.id == endorsee.id);
+      this.endorseeList = this.endorseeList.filter((e) => e.id != endorsee.id);
     },
     removeEndorser(endorser: EndorsementModel) {
       if (!endorser) return;
