@@ -1,16 +1,25 @@
 import { defineStore } from 'pinia';
 import { EndorsementModel } from 'src/core/models';
 
-interface UserState {
+interface EndorsementState {
   endorsementList: Array<EndorsementModel>;
+  endorsees: Array<EndorsementModel>;
+  endorsers: Array<EndorsementModel>;
 }
 
 export const useEndorsementStore = defineStore('endorsements', {
-  state: (): UserState => ({
+  state: (): EndorsementState => ({
     endorsementList: [],
+    endorsees: [],
+    endorsers: [],
   }),
   getters: {
     endorsements: (state) => state.endorsementList,
+    findById: (state) => {
+      return (id: string) => {
+        state.endorsementList.find((endorsement) => endorsement.id == id);
+      };
+    },
   },
   actions: {
     initEndorsements(endorsements: Array<EndorsementModel>) {

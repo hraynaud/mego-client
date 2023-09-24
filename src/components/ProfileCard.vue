@@ -36,9 +36,15 @@
 <script setup lang="ts" allowjs: true>
 import { PersonModel } from '../core/models';
 import { defineProps } from 'vue';
+
+
 defineProps({
   p: PersonModel,
 });
+
+
+
+
 </script>
 <style lang="scss">
 .person-card {

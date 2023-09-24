@@ -20,10 +20,8 @@ export function useEndorsementsList(params = {}) {
   };
 
   const setEndorsements = (resp: any) => {
-    console.log('endorsement response', resp);
     //TODO why is the response object different from projects and endorsement?
     const data = resp.data.data;
-
     data.map((e: any) => {
       endorsements.value.push(
         new EndorsementModel(

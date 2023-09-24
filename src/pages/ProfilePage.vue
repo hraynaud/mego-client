@@ -8,14 +8,14 @@
     <q-card class="q-my-xs">
       <q-card-section>
         <p class="text-h6">Endorsers</p>
-          <EndorsementList :endorsements="profile.endorsers" :deleteable=false displayType="endorser"/>
+          <EndorsementList :endorsements="endorsers" :deleteable=false displayType="endorser"/>
       </q-card-section>
     </q-card>
 
     <q-card class="q-my-xs">
         <q-card-section>
           <p class="text-h6">Endorsees</p>
-          <EndorsementList :endorsements="profile.endorsees" :deleteable=true displayType="endorsee"/>
+          <EndorsementList :endorsements="endorsees" :deleteable=true displayType="endorsee"/>
         </q-card-section>
     </q-card>
   </div>
@@ -40,24 +40,37 @@
   </q-page>
 </template>
 <script setup lang="ts" allowJs: true>
-import {PersonModel } from 'src/core/models';
+import {EndorsementModel, PersonModel } from 'src/core/models';
 import { authService, peopleApi, peopleService } from 'src/core/services';
-import { onMounted, ref, provide, } from 'vue';
+import { onMounted, ref,computed} from 'vue';
 import ProfileCard from '../components/ProfileCard.vue';
 import EndorsementList from '../components/EndorsementList.vue';
-const profile = ref({} as PersonModel);
+import { useProfileStore } from 'src/stores/profile-store';
+import { useEndorsementEvent } from 'src/composables/use-endorsement-event';
+const profileStore = useProfileStore();
 
-// provide('deleteable', true); //make prop available to all descendants
-fabCenter: ref(true),
+defineProps({
+  p: PersonModel,
+});
+
+
+useEndorsementEvent();
+
+const profile = ref({} as PersonModel);
+const endorsees = computed(() => profileStore.endorsees)
+const endorsers = computed(() => profileStore.endorsers)
+
 
 onMounted(() => {
   peopleApi
     .findPerson(authService.currentUser()['uid'])
     .then(function (resp: {data: any}) {
       profile.value = peopleService.buildPerson(resp.data.data);
+      profileStore.initEndorsements(profile.value.endorsers as [EndorsementModel], profile.value.endorsees as [EndorsementModel],)
     });
 
 });
+
 
 </script>
 <style lang=""></style>

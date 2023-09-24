@@ -49,7 +49,6 @@ const avatar = () => {
 };
 
 const deleteMe = (e: EndorsementModel, i: number) => {
-  console.log(`deleting ${e} with index ${i}`);
   bus.emit('delete-endorsement', e, i);
 };
 </script>

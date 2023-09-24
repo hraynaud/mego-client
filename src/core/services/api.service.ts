@@ -1,24 +1,29 @@
 import { http } from 'boot/axios';
 import { Method } from 'axios';
 
-function post(path: string, payload = {}) {
-  return execute('POST', path, payload);
+function post(path: string, payload: Record<string, unknown>) {
+  return execute('POST', path, payload, {});
 }
 
 function get(path: string, params = {}) {
   return execute('GET', path, {}, params);
 }
 
-function put(path: string, payload = {}, params = {}) {
+function put(path: string, payload: Record<string, unknown>, params: unknown) {
   return execute('PUT', path, stringify(payload), params);
 }
 
 //the word 'delete 'is a js operator
-function del(path: string, id: number | string, params = {}) {
-  return execute('DELETE', path, id, params);
+function del(path: string, id: number | string) {
+  return execute('DELETE', `${path}/${id}`, null, null);
 }
 
-function execute(method: Method, path: string, payload = {}, params = {}) {
+function execute(
+  method: Method,
+  path: string,
+  payload: Record<string, unknown> | null,
+  params: unknown
+) {
   return http
     .request({ method: method, data: payload, params: params, url: path })
     .catch(errHandler);
