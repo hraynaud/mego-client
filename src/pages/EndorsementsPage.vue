@@ -35,17 +35,14 @@
     </div>
     <div class="q-pa-md">
       <h5>Search Results</h5>
-      <EndorsementList :endorsements="endorsements" deleteable="false" />
+      <EndorsementPathList :endorsements="endorsements" />
     </div>
-    <q-page-sticky position="bottom-right" :offset="[64, 36]">
-      <q-btn fab icon="add" color="accent" to="/endorsements/new" />
-    </q-page-sticky>
   </q-page>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import EndorsementList from '../components/EndorsementList.vue';
+import EndorsementPathList from '../components/EndorsementPathList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 // import { useTopicList } from 'src/composables/use-topic-list';
 

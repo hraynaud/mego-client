@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import { endorsementService } from '../core/services';
-import { EndorsementModel } from '../core/models';
+import { EndorsementPathModel } from '../core/models';
 import { useEndorsementStore } from 'src/stores/endorsements-store';
 const endorsementStore = useEndorsementStore();
 
@@ -24,15 +24,11 @@ export function useEndorsementsList(params = {}) {
     const data = resp.data.data;
     data.map((e: any) => {
       endorsements.value.push(
-        new EndorsementModel(
-          e.attributes.description,
-          e.attributes.topic,
-          e.attributes.topicImage,
+        new EndorsementPathModel(
           e.id,
-          e.attributes.endorseeId,
-          e.attributes.endorserId,
-          e.attributes.endorserAvatarUrl,
-          e.attributes.endorseeAvatarUrl
+          e.attributes.topic,
+          e.attributes.path,
+          e.attributes.description
         )
       );
     });

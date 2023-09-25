@@ -22,7 +22,6 @@
 </div>
 
 
-
     <!-- <q-page-sticky position="bottom-right" :offset="[64, 36]">
       <q-fab
         v-model="fabCenter"

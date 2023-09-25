@@ -1,17 +1,13 @@
 import { defineStore } from 'pinia';
-import { EndorsementModel } from 'src/core/models';
+import { EndorsementPathModel } from 'src/core/models';
 
 interface EndorsementState {
-  endorsementList: Array<EndorsementModel>;
-  endorsees: Array<EndorsementModel>;
-  endorsers: Array<EndorsementModel>;
+  endorsementList: Array<EndorsementPathModel>;
 }
 
 export const useEndorsementStore = defineStore('endorsements', {
   state: (): EndorsementState => ({
     endorsementList: [],
-    endorsees: [],
-    endorsers: [],
   }),
   getters: {
     endorsements: (state) => state.endorsementList,
@@ -22,11 +18,11 @@ export const useEndorsementStore = defineStore('endorsements', {
     },
   },
   actions: {
-    initEndorsements(endorsements: Array<EndorsementModel>) {
+    initEndorsements(endorsements: Array<EndorsementPathModel>) {
       if (endorsements.length == 0) return;
       this.endorsementList = endorsements;
     },
-    addEndorsement(endorsement: EndorsementModel) {
+    addEndorsement(endorsement: EndorsementPathModel) {
       if (!endorsement) return;
       this.endorsementList.push(endorsement);
     },
