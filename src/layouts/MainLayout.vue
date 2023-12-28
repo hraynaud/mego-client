@@ -3,8 +3,27 @@
     <q-header elevated class="bg-black">
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        <q-toolbar-title>Konmego</q-toolbar-title>
+        <q-toolbar-title v-if="$q.screen.gt.sm" shrink="true"
+          >Konmego</q-toolbar-title
+        >
 
+        <q-input
+          class="GPL__toolbar-input q-px-sm"
+          dense
+          standout="bg-primary"
+          v-model="search"
+          placeholder="Search"
+        >
+          <template v-slot:prepend>
+            <q-icon v-if="search === ''" name="search" />
+            <q-icon
+              v-else
+              name="clear"
+              class="cursor-pointer"
+              @click="search = ''"
+            />
+          </template>
+        </q-input>
         <div class="q-pr-sm">{{ name }}</div>
         <q-avatar size="36px" class="q-mb-sm q-mr-md">
           <img :src="avatar" />
@@ -166,3 +185,13 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.GPL {
+  &__toolbar {
+    height: 64px;
+  }
+  &__toolbar-input {
+    width: 70%;
+  }
+}
+</style>
