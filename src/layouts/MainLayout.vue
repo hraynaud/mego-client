@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh Lpr lff" container="true">
-    <q-header elevated class="bg-black">
+    <q-header elevated class="bg-gray">
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
         <q-toolbar-title v-if="$q.screen.gt.sm" shrink="true"
@@ -158,12 +158,14 @@ export default {
     const user = authService.currentUser();
     const name = user.name;
     const avatar = user.avatar;
+    const search = ref();
 
     return {
       drawer: ref(false),
       miniState,
       name,
       avatar,
+      search,
 
       drawerClick(e) {
         // if in "mini" state and user

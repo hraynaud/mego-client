@@ -17,7 +17,7 @@
               label="Friends"
             />
           </div>
-        -->
+
           <div class="col-4 search-filter">
             <q-select
               v-model="selectedTopic"
@@ -28,31 +28,30 @@
               use-chips
               label="Topics"
             />
-          </div>
+          </div> -->
           <q-btn round color="primary" icon="search" type="submit" />
         </div>
       </q-form>
     </div>
     <div class="q-pa-md">
-      <h5>Search Results</h5>
       <EndorsementPathList :endorsements="endorsements" />
     </div>
   </q-page>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import EndorsementPathList from '../components/EndorsementPathList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 // import { useTopicList } from 'src/composables/use-topic-list';
 
-const topics = []; //useTopicList();
+// const topics = []; //useTopicList();
 const { endorsements } = useEndorsementsList();
-const selectedTopic = ref(null);
+// const selectedTopic = ref(null);
 </script>
 <style lang="scss" scoped>
-.search-filter {
-  // min-width: 250px;
-  // max-width: 300px;
-}
+// .search-filter {
+//   // min-width: 250px;
+//   // max-width: 300px;
+// }
 </style>

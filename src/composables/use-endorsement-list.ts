@@ -28,7 +28,8 @@ export function useEndorsementsList(params = {}) {
           e.id,
           e.attributes.topic,
           e.attributes.path,
-          e.attributes.description
+          e.attributes.description,
+          e.attributes.endorseeProfileImageUrl
         )
       );
     });
