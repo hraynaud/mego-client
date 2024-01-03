@@ -39,17 +39,18 @@
   </q-page>
 </template>
 <script setup lang="ts" allowJs: true>
-import {EndorsementModel, PersonModel } from 'src/core/models';
+import { EndorsementModel, PersonModel } from 'src/core/models';
 import { authService, peopleApi, peopleService } from 'src/core/services';
-import { onMounted, ref,computed} from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import ProfileCard from '../components/ProfileCard.vue';
 import EndorsementList from '../components/EndorsementList.vue';
 import { useProfileStore } from 'src/stores/profile-store';
 import { useEndorsementEvent } from 'src/composables/use-endorsement-event';
-const profileStore = useProfileStore();
+import { useRoute } from 'vue-router';
 
-defineProps({
-  p: PersonModel,
+const profileStore = useProfileStore();
+const props = defineProps({
+  userId: String
 });
 
 
@@ -58,18 +59,28 @@ useEndorsementEvent();
 const profile = ref({} as PersonModel);
 const endorsees = computed(() => profileStore.endorsees)
 const endorsers = computed(() => profileStore.endorsers)
+const route = useRoute();
 
+watch(
+  () => route.params.userId,
+  async () => {
+    loadUser()
+  }
+)
 
-onMounted(() => {
+const loadUser = () => {
+  const id = route.params.userId == 'me' ? authService.currentUser()['uid'] : route.params.userId;
   peopleApi
-    .findPerson(authService.currentUser()['uid'])
-    .then(function (resp: {data: any}) {
+    .findPerson(id)
+    .then(function (resp: { data: any }) {
       profile.value = peopleService.buildPerson(resp.data.data);
       profileStore.initEndorsements(profile.value.endorsers as [EndorsementModel], profile.value.endorsees as [EndorsementModel],)
-    });
 
+    })
+}
+
+onMounted(() => {
+  loadUser()
 });
 
-
 </script>
-<style lang=""></style>

@@ -5,10 +5,7 @@
         {{ e?.topic }}
       </div>
       <div class="text-center endorsee-hdr">
-        <q-avatar
-          class="avatar"
-          v-if="e?.endorseeProfileImageUrl != 'anonymous.png'"
-        >
+        <q-avatar class="avatar" v-if="e?.endorseeProfileImageUrl != 'anonymous.png'">
           <img :src="e?.endorseeProfileImageUrl" />
         </q-avatar>
         <q-avatar v-else icon="psychology" class="avatar anon profile">
@@ -22,23 +19,14 @@
     <q-separator />
     <q-card-section class="row items-center">
       <div class="q-py-md path">
-        <span class="path-el" v-for="p in path" :key="p.id">
-          <q-avatar
-            class="endorsement-avatar"
-            :class="p.role"
-            v-if="p.avatar_url != 'anonymous.png'"
-          >
+        <router-link v-for="p in path" :key="p.id" :to="profilePath(p.id)" class="path-el">
+          <q-avatar class="endorsement-avatar" :class="p.role" v-if="p.avatar_url != 'anonymous.png'">
             <img :src="p.avatar_url" />
           </q-avatar>
-          <q-avatar
-            v-else
-            size="70px"
-            :icon="icon(p.role)"
-            :class="p.role"
-            class="endorsement-avatar anon"
-          >
+          <q-avatar v-else size="70px" :icon="icon(p.role)" :class="p.role" class="endorsement-avatar anon">
           </q-avatar>
-        </span>
+
+        </router-link>
       </div>
     </q-card-section>
   </q-card>
@@ -47,13 +35,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { EndorsementPathModel } from '../core/models';
-
+import { RouterLink } from 'vue-router'
 const props = defineProps({
   e: EndorsementPathModel,
   idx: Number,
 });
 
 const path = computed(() => props.e?.path);
+const profilePath = (id: string) => `/person/${id}`;
 const icon = (role: string) =>
   role == 'endorsee' ? 'psychology' : 'psychology_alt';
 </script>
@@ -65,6 +54,7 @@ const icon = (role: string) =>
   padding: 0px;
   border-radius: 8px;
 }
+
 .endorsement-card .q-card__section--vert {
   padding: 0px;
 }
@@ -82,6 +72,7 @@ const icon = (role: string) =>
 
 .endorsee-hdr {
   margin-top: -6.75rem;
+
   .avatar {
     height: 125px;
     width: 125px;
@@ -89,6 +80,7 @@ const icon = (role: string) =>
     margin-top: 1%;
   }
 }
+
 .endorsement-description {
   height: 175px;
 }
@@ -130,6 +122,7 @@ const icon = (role: string) =>
   font-weight: bold;
   font-size: 3em;
 }
+
 .anon.profile {
   font-size: 242px;
   border: 1px solid;
