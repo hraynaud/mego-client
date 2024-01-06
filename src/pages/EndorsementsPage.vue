@@ -1,12 +1,13 @@
 <template>
   <q-page>
-    <div class="q-pa-md">
-      <h3>Endorsements</h3>
-
+    <div class="q-py-lg q-mt-xs page-banner">
+      <h3 class="text-center q-ma-xs">Endorsements</h3>
+    </div>
+    <!-- <div class="q-pa-md">
       <q-form @submit.prevent="onSubmit">
         <div class="row items-baseline justify-start q-gutter-lg">
           <label>Filter:</label>
-          <!-- <div class="col-2 search-filter">
+          <div class="col-2 search-filter">
             <q-select
               v-model="friend"
               single
@@ -28,11 +29,11 @@
               use-chips
               label="Topics"
             />
-          </div> -->
+          </div>
           <q-btn round color="primary" icon="search" type="submit" />
         </div>
       </q-form>
-    </div>
+    </div> -->
     <div class="q-pa-md">
       <EndorsementPathList :endorsements="endorsements" />
     </div>
@@ -50,8 +51,10 @@ const { endorsements } = useEndorsementsList();
 // const selectedTopic = ref(null);
 </script>
 <style lang="scss" scoped>
-// .search-filter {
-//   // min-width: 250px;
-//   // max-width: 300px;
-// }
+.page-banner {
+  background-color: $tertiary;
+  h3 {
+    font-weight: 200;
+  }
+}
 </style>
