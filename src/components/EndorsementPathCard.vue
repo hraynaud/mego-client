@@ -5,7 +5,10 @@
         {{ e?.topic }}
       </div>
       <div class="text-center endorsee-hdr">
-        <q-avatar class="avatar" v-if="e?.endorseeProfileImageUrl != 'anonymous.png'">
+        <q-avatar
+          class="avatar"
+          v-if="e?.endorseeProfileImageUrl != 'anonymous.png'"
+        >
           <img :src="e?.endorseeProfileImageUrl" />
         </q-avatar>
         <q-avatar v-else icon="psychology" class="avatar anon profile">
@@ -19,13 +22,13 @@
     <q-separator />
     <q-card-section class="row items-center">
       <div class="q-py-md path">
-        <router-link v-for="p in path" :key="p.id" :to="profilePath(p.id)" class="path-el">
-          <q-avatar class="endorsement-avatar" :class="p.role" v-if="p.avatar_url != 'anonymous.png'">
-            <img :src="p.avatar_url" />
-          </q-avatar>
-          <q-avatar v-else size="70px" :icon="icon(p.role)" :class="p.role" class="endorsement-avatar anon">
-          </q-avatar>
-
+        <router-link
+          v-for="p in path"
+          :key="p.id"
+          :to="profilePath(p.id)"
+          class="path-el"
+        >
+          <user-avatar :p="p" :style="'visible:true'"></user-avatar>
         </router-link>
       </div>
     </q-card-section>
@@ -35,7 +38,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { EndorsementPathModel } from '../core/models';
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router';
+import UserAvatar from '../components/UserAvatar.vue';
 const props = defineProps({
   e: EndorsementPathModel,
   idx: Number,
@@ -43,8 +47,6 @@ const props = defineProps({
 
 const path = computed(() => props.e?.path);
 const profilePath = (id: string) => `/person/${id}`;
-const icon = (role: string) =>
-  role == 'endorsee' ? 'psychology' : 'psychology_alt';
 </script>
 
 <style lang="scss" scoped>
@@ -81,6 +83,19 @@ const icon = (role: string) =>
   }
 }
 
+.anon {
+  background-color: $tertiary;
+  color: darkslategrey;
+  font-weight: bold;
+  font-size: 3em;
+}
+
+.anon.profile {
+  font-size: 242px;
+  border: 1px solid;
+  border-radius: 50%;
+}
+
 .endorsement-description {
   height: 175px;
 }
@@ -90,6 +105,9 @@ const icon = (role: string) =>
   min-width: 160px;
   position: relative;
   padding: 15px;
+  .user-avatar {
+    display: inline;
+  }
 }
 
 .path-el:not(:last-child) {
@@ -105,27 +123,5 @@ const icon = (role: string) =>
   width: 25px;
   height: 11px;
   border-bottom: 2px solid black;
-}
-
-.endorsement-avatar {
-  width: 60px;
-  height: 60px;
-
-  .endorsee {
-    border-color: $accent;
-  }
-}
-
-.anon {
-  background-color: $tertiary;
-  color: darkslategrey;
-  font-weight: bold;
-  font-size: 3em;
-}
-
-.anon.profile {
-  font-size: 242px;
-  border: 1px solid;
-  border-radius: 50%;
 }
 </style>
