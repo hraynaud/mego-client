@@ -4,13 +4,8 @@
       <div class="endorsement-topic text-h6 text-center q-mb-xs">
         {{ e?.topic }}
       </div>
-      <div class="text-center endorsee-hdr">
-        <q-avatar class="avatar" v-if="e?.endorseeAvatarUrl != 'anonymous.png'">
-          <img :src="avatar()" />
-        </q-avatar>
-        <q-avatar v-else icon="psychology" class="avatar anon profile">
-        </q-avatar>
-      </div>
+
+      <UserAvatar :e="e" :displayType="displayType" />
 
       <div class="q-pa-sm endorsement-description">
         {{ e?.description }}
@@ -36,8 +31,10 @@
 
 <script setup lang="ts">
 // import bus from '../core/utils/event-bus';
-import { inject } from 'vue';
+import { inject, computed } from 'vue';
 import { EndorsementModel } from '../core/models';
+import UserAvatar from '../components/UserAvatar.vue';
+
 const bus = inject('bus');
 const props = defineProps({
   e: EndorsementModel,
@@ -45,12 +42,6 @@ const props = defineProps({
   displayType: String,
   deleteable: Boolean,
 });
-
-const avatar = () => {
-  return props.displayType == 'endorsee'
-    ? props.e?.endorseeAvatarUrl
-    : props.e?.endorserAvatarUrl;
-};
 
 const deleteMe = (e: EndorsementModel, i: number) => {
   bus.emit('delete-endorsement', e, i);
@@ -80,28 +71,8 @@ const deleteMe = (e: EndorsementModel, i: number) => {
   height: 65px;
 }
 
-.endorsee-hdr {
-  margin-top: -1.95rem;
-
-  .avatar {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 2%;
-    margin-top: 1%;
-  }
-}
-
 .endorsement-description {
   height: 85px;
-}
-
-.endorsement-avatar {
-  width: 60px;
-  height: 60px;
-
-  .endorsee {
-    border-color: $accent;
-  }
 }
 
 .anon {
