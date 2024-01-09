@@ -62,6 +62,6 @@ const icon = (role: string) =>
   background-color: $tertiary;
   color: darkslategrey;
   font-weight: bold;
-  font-size: 70px;
+  font-size: 120px;
 }
 </style>
