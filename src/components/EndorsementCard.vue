@@ -5,7 +5,7 @@
         {{ e?.topic }}
       </div>
 
-      <UserAvatar :e="e" :displayType="displayType" />
+      <UserAvatar :e="e" :displayType="displayType" class="small" />
 
       <div class="q-pa-sm endorsement-description">
         {{ e?.description }}

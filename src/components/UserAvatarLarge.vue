@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center large">
+  <div class="text-center">
     <q-avatar class="avatar" v-if="isVisible">
       <img :src="avatar" />
     </q-avatar>

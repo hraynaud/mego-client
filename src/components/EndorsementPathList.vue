@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="q-gutter-md row">
     <EndorsementPathCard
       v-for="(e, idx) in endorsements"
@@ -17,4 +17,3 @@ defineProps({
   endorsements: [EndorsementPathModel],
 });
 </script>
-<style lang="scss"></style>

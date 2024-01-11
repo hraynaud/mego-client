@@ -4,17 +4,8 @@
       <div class="endorsement-topic text-h3 text-center q-mb-sm">
         {{ e?.topic }}
       </div>
-      <!-- <div class="text-center endorsee-hdr"> -->
-      <!-- <q-avatar
-          class="avatar"
-          v-if="e?.endorseeProfileImageUrl != 'anonymous.png'"
-        >
-          <img :src="e?.endorseeProfileImageUrl" />
-        </q-avatar>
-        <q-avatar v-else icon="psychology" class="avatar anon profile">
-        </q-avatar> -->
-      <user-avatar-large :e="e" class="endorsee-hdr" />
-      <!-- </div> -->
+
+      <user-avatar-large :e="e" class="large" />
 
       <div class="q-pa-md endorsement-description">
         {{ e?.description }}
@@ -29,7 +20,7 @@
           :to="profilePath(p.id)"
           class="path-el"
         >
-          <user-avatar :p="p" class="path-el-content" />
+          <user-avatar :p="p" class="path-el-content small" />
         </router-link>
       </div>
     </q-card-section>
