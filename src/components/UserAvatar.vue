@@ -1,9 +1,9 @@
 <template>
-  <div class="text-center user-avatar">
+  <div class="text-center small">
     <q-avatar class="avatar" v-if="isVisible">
       <img :src="avatar" />
     </q-avatar>
-    <q-avatar v-else icon="psychology" class="avatar anon profile"> </q-avatar>
+    <q-avatar v-else icon="psychology" class="avatar anon icon"> </q-avatar>
   </div>
 </template>
 
@@ -47,7 +47,7 @@ const icon = (role: string) =>
 </script>
 
 <style lang="scss" scoped>
-.user-avatar {
+.small {
   margin-top: -1.95rem;
 
   .avatar {
@@ -55,13 +55,16 @@ const icon = (role: string) =>
     height: 60px;
     margin-bottom: 2%;
     margin-top: 1%;
+    font-size: 120px;
   }
 }
-
 .anon {
   background-color: $tertiary;
   color: darkslategrey;
   font-weight: bold;
-  font-size: 120px;
+}
+.icon {
+  border: 1px solid;
+  border-radius: 50%;
 }
 </style>

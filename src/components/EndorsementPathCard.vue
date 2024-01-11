@@ -4,16 +4,17 @@
       <div class="endorsement-topic text-h3 text-center q-mb-sm">
         {{ e?.topic }}
       </div>
-      <div class="text-center endorsee-hdr">
-        <q-avatar
+      <!-- <div class="text-center endorsee-hdr"> -->
+      <!-- <q-avatar
           class="avatar"
           v-if="e?.endorseeProfileImageUrl != 'anonymous.png'"
         >
           <img :src="e?.endorseeProfileImageUrl" />
         </q-avatar>
         <q-avatar v-else icon="psychology" class="avatar anon profile">
-        </q-avatar>
-      </div>
+        </q-avatar> -->
+      <user-avatar-large :e="e" class="endorsee-hdr" />
+      <!-- </div> -->
 
       <div class="q-pa-md endorsement-description">
         {{ e?.description }}
@@ -28,7 +29,7 @@
           :to="profilePath(p.id)"
           class="path-el"
         >
-          <user-avatar :p="p" :style="'visible:true'"></user-avatar>
+          <user-avatar :p="p" class="path-el-content" />
         </router-link>
       </div>
     </q-card-section>
@@ -40,6 +41,7 @@ import { computed } from 'vue';
 import { EndorsementPathModel } from '../core/models';
 import { RouterLink } from 'vue-router';
 import UserAvatar from '../components/UserAvatar.vue';
+import UserAvatarLarge from '../components/UserAvatarLarge.vue';
 const props = defineProps({
   e: EndorsementPathModel,
   idx: Number,
@@ -72,30 +74,6 @@ const profilePath = (id: string) => `/person/${id}`;
   height: 175px;
 }
 
-.endorsee-hdr {
-  margin-top: -6.75rem;
-
-  .avatar {
-    height: 125px;
-    width: 125px;
-    margin-bottom: 2%;
-    margin-top: 1%;
-  }
-}
-
-.anon {
-  background-color: $tertiary;
-  color: darkslategrey;
-  font-weight: bold;
-  font-size: 3em;
-}
-
-.anon.profile {
-  font-size: 242px;
-  border: 1px solid;
-  border-radius: 50%;
-}
-
 .endorsement-description {
   height: 175px;
 }
@@ -105,23 +83,23 @@ const profilePath = (id: string) => `/person/${id}`;
   min-width: 160px;
   position: relative;
   padding: 15px;
-  .user-avatar {
+  .path-el-content {
     display: inline;
   }
-}
 
-.path-el:not(:last-child) {
-  margin-right: 27px;
-  position: relative;
-}
+  .path-el:not(:last-child) {
+    margin-right: 27px;
+    position: relative;
+  }
 
-.path-el:not(:last-child):after {
-  position: absolute;
-  content: '';
-  left: 61px;
-  top: 0%;
-  width: 25px;
-  height: 11px;
-  border-bottom: 2px solid black;
+  .path-el:not(:last-child):after {
+    position: absolute;
+    content: '';
+    left: 61px;
+    top: 0%;
+    width: 25px;
+    height: 11px;
+    border-bottom: 2px solid black;
+  }
 }
 </style>
