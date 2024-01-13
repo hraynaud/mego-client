@@ -1,28 +1,24 @@
 <template>
   <div class="text-center">
-    <q-avatar class="avatar" v-if="isVisible">
-      <img :src="avatar" />
+    <q-avatar class="avatar" v-if="data.isVisible">
+      <img :src="data.imgUrl" />
     </q-avatar>
-    <q-avatar v-else icon="psychology" class="avatar anon icon"> </q-avatar>
+    <q-avatar v-else :icon="data.icon" class="avatar anon icon"> </q-avatar>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { EndorsementPathModel } from '../core/models';
-
+export interface AvatarData {
+  imgUrl: string;
+  isVisible: boolean;
+  icon: string;
+  role: string;
+}
 const props = defineProps<{
   e: EndorsementPathModel;
-  displayType: string;
+  data: AvatarData;
 }>();
-
-const avatar = computed(() => {
-  return props.e?.endorseeProfileImageUrl;
-});
-
-const isVisible = computed(() => {
-  return props.e?.endorseeProfileImageUrl == 'anonymous.png' ? false : true;
-});
 </script>
 
 <style lang="scss" scoped>
