@@ -27,9 +27,9 @@ export function useEndorsementsList(params = {}) {
         new EndorsementPathModel(
           e.id,
           e.attributes.topic,
-          e.attributes.path,
           e.attributes.description,
-          e.attributes.endorseeProfileImageUrl
+          e.attributes.endorseeProfileImageUrl,
+          e.attributes.path
         )
       );
     });
