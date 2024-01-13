@@ -3,9 +3,7 @@
         <q-card-section horizontal>
           <q-card-section class="profile-img q-pa-sm">
             <div class="profile-img-wrapper">
-              <q-avatar size="150px">
-                <q-img :src="p.profileImageUrl" />
-              </q-avatar>
+              <user-avatar :data="avatarLargeData" class="large profile"/>
             </div>
           </q-card-section>
           <q-card-section>
@@ -35,15 +33,21 @@
 </template>
 <script setup lang="ts" allowjs: true>
 import { PersonModel } from '../core/models';
-import { defineProps } from 'vue';
+import { AvatarData } from '../components/UserAvatar.vue';
+import UserAvatar from '../components/UserAvatar.vue';
+import { defineProps, computed } from 'vue';
 
 
-defineProps({
+const props = defineProps({
   p: PersonModel,
 });
 
-
-
+const avatarLargeData = computed<AvatarData>(()=>{ return {
+  imgUrl: props.p?.profileImageUrl,
+  isVisible:  props.p?.profileImageUrl == 'anonymous.png' ? false : true,
+  icon: 'psychology',
+  role: 'endorsee',
+} as AvatarData})
 
 </script>
 <style lang="scss">

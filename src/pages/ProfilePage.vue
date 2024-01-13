@@ -3,7 +3,7 @@
     <div class="row">
     <div class="offset-xs-1 col-sm-8 col-md-6">
    <h4>{{profile.firstName}}</h4>
-    <ProfileCard :p="profile" />
+    <profile-card :p="profile" />
 
     <q-card class="q-my-xs">
       <q-card-section>
@@ -49,9 +49,6 @@ import { useEndorsementEvent } from 'src/composables/use-endorsement-event';
 import { useRoute } from 'vue-router';
 
 const profileStore = useProfileStore();
-const props = defineProps({
-  userId: String
-});
 
 
 useEndorsementEvent();

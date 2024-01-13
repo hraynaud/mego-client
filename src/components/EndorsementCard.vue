@@ -5,7 +5,7 @@
         {{ e?.topic }}
       </div>
 
-      <UserAvatar :e="e" :displayType="displayType" class="small" />
+      <UserAvatar :e="e" :displayType="role" :data="avatarData" class="small" />
 
       <div class="q-pa-sm endorsement-description">
         {{ e?.description }}
@@ -30,22 +30,39 @@
 </template>
 
 <script setup lang="ts">
-// import bus from '../core/utils/event-bus';
+//  import bus from '../core/utils/event-bus';
 import { inject, computed } from 'vue';
 import { EndorsementModel } from '../core/models';
 import UserAvatar from '../components/UserAvatar.vue';
-
 const bus = inject('bus');
 const props = defineProps({
   e: EndorsementModel,
   idx: Number,
-  displayType: String,
+  role: String,
   deleteable: Boolean,
 });
 
 const deleteMe = (e: EndorsementModel, i: number) => {
   bus.emit('delete-endorsement', e, i);
 };
+
+const avatarData = computed(() => {
+  if (props.role == 'endorsee') {
+    debugger;
+  }
+  return {
+    imgUrl:
+      props.role == 'endorsee'
+        ? props.e?.endorseeAvatarUrl
+        : props.e?.endorserAvatarUrl,
+    isVisible:
+      (props.e?.endorseeAvatarUrl || props.e?.endorserAvatarUrl) ==
+      'anonymous.png'
+        ? false
+        : true,
+    icon: props.role == 'endorsee' ? 'psychology' : 'psychology_alt',
+  };
+});
 </script>
 
 <style lang="scss" scoped>

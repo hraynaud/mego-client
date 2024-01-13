@@ -6,7 +6,7 @@
       :idx="idx"
       :eid="e.id"
       :key="e.id"
-      :displayType="displayType"
+      :role="role"
       :deleteable="deleteable"
     />
   </div>
@@ -18,7 +18,7 @@ import EndorsementCard from '../components/EndorsementCard.vue';
 defineProps({
   endorsements: [EndorsementModel],
   currentUserContext: String,
-  displayType: String,
+  role: String,
   deleteable: Boolean,
 });
 </script>

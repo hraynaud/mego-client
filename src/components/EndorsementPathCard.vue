@@ -5,7 +5,7 @@
         {{ e?.topic }}
       </div>
 
-      <user-avatar-large :e="e" :data="avatarLargeData" class="large" />
+      <user-avatar :data="avatarLargeData" class="large" />
 
       <div class="q-pa-md endorsement-description">
         {{ e?.description }}
@@ -21,7 +21,7 @@
           class="path-el"
         >
           <user-avatar
-            :data="getAvatarData(p as PathAvatar)"
+            :data="getPathElementAvatarData(p as PathAvatar)"
             class="path-el-content small"
           />
         </router-link>
@@ -35,8 +35,7 @@ import { computed } from 'vue';
 import { EndorsementPathModel, PathAvatar } from '../core/models';
 import { RouterLink } from 'vue-router';
 import UserAvatar from '../components/UserAvatar.vue';
-import UserAvatarLarge from '../components/UserAvatarLarge.vue';
-import { AvatarData } from '../components/UserAvatarLarge.vue';
+import { AvatarData } from '../components/UserAvatar.vue';
 
 const profilePath = (id: string) => `/person/${id}`;
 
@@ -54,11 +53,12 @@ const avatarLargeData = <AvatarData>{
 
 const path = computed(() => props.e?.path);
 
-const getAvatarData = (p: PathAvatar) => {
+const getPathElementAvatarData = (p: PathAvatar) => {
   return {
     imgUrl: p.avatar_url,
     isVisible: p.is_visible,
     icon: p.role == 'endorsee' ? 'psychology' : 'psychology_alt',
+    role: p.role,
   };
 };
 </script>
