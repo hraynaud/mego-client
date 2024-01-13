@@ -5,7 +5,7 @@
         {{ e?.topic }}
       </div>
 
-      <UserAvatar :e="e" :displayType="role" :data="avatarData" class="small" />
+      <user-avatar :data="avatarData" class="small" />
 
       <div class="q-pa-sm endorsement-description">
         {{ e?.description }}
@@ -47,9 +47,6 @@ const deleteMe = (e: EndorsementModel, i: number) => {
 };
 
 const avatarData = computed(() => {
-  if (props.role == 'endorsee') {
-    debugger;
-  }
   return {
     imgUrl:
       props.role == 'endorsee'
@@ -90,12 +87,5 @@ const avatarData = computed(() => {
 
 .endorsement-description {
   height: 85px;
-}
-
-.anon {
-  background-color: $tertiary;
-  color: darkslategrey;
-  font-weight: bold;
-  font-size: 3em;
 }
 </style>

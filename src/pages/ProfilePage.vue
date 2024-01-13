@@ -8,14 +8,14 @@
     <q-card class="q-my-xs">
       <q-card-section>
         <p class="text-h6">Endorsers</p>
-          <EndorsementList :endorsements="endorsers" :deleteable=false displayType="endorser"/>
+          <EndorsementList :endorsements="endorsers" :deleteable=false role="endorser"/>
       </q-card-section>
     </q-card>
 
     <q-card class="q-my-xs">
         <q-card-section>
           <p class="text-h6">Endorsees</p>
-          <EndorsementList :endorsements="endorsees" :deleteable=true displayType="endorsee"/>
+          <EndorsementList :endorsements="endorsees" :deleteable=true role="endorsee"/>
         </q-card-section>
     </q-card>
   </div>
