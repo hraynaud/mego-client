@@ -1,21 +1,22 @@
+import { PathAvatar } from 'src/core/models';
 export class EndorsementPathModel {
   id: string;
   topic!: string;
-  path!: unknown[];
   description: string;
   endorseeProfileImageUrl: string;
+  path!: PathAvatar[];
 
   constructor(
     id: string,
     topic: string,
-    path: unknown[],
     description: string,
-    endorseeProfileImageUrl: string
+    endorseeProfileImageUrl: string,
+    path: PathAvatar[]
   ) {
     this.description = description;
     this.topic = topic;
     this.id = id;
-    this.path = path;
     this.endorseeProfileImageUrl = endorseeProfileImageUrl;
+    this.path = path;
   }
 }

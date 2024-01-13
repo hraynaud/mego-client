@@ -20,7 +20,10 @@
           :to="profilePath(p.id)"
           class="path-el"
         >
-          <user-avatar :p="p" class="path-el-content small" />
+          <user-avatar
+            :data="getAvatarData(p as PathAvatar)"
+            class="path-el-content small"
+          />
         </router-link>
       </div>
     </q-card-section>
@@ -29,7 +32,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { EndorsementPathModel } from '../core/models';
+import { EndorsementPathModel, PathAvatar } from '../core/models';
 import { RouterLink } from 'vue-router';
 import UserAvatar from '../components/UserAvatar.vue';
 import UserAvatarLarge from '../components/UserAvatarLarge.vue';
@@ -50,6 +53,14 @@ const avatarLargeData = <AvatarData>{
 };
 
 const path = computed(() => props.e?.path);
+
+const getAvatarData = (p: PathAvatar) => {
+  return {
+    imgUrl: p.avatar_url,
+    isVisible: p.is_visible,
+    icon: p.role == 'endorsee' ? 'psychology' : 'psychology_alt',
+  };
+};
 </script>
 
 <style lang="scss" scoped>

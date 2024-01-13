@@ -13,9 +13,8 @@ export interface AvatarData {
   imgUrl: string;
   isVisible: boolean;
   icon: string;
-  role: string;
 }
-const props = defineProps<{
+defineProps<{
   e: EndorsementPathModel;
   data: AvatarData;
 }>();
