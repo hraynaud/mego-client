@@ -2,7 +2,7 @@
   <q-page style="max-height: 90vh; overflow-y: scroll">
     <div class="row">
     <div class="offset-xs-1 col-sm-8 col-md-6">
-   <h4>{{profile.firstName}}</h4>
+   <h4>{{fullName}}</h4>
     <profile-card :p="profile" />
 
     <q-card class="q-my-xs">
@@ -56,7 +56,10 @@ useEndorsementEvent();
 const profile = ref({} as PersonModel);
 const endorsees = computed(() => profileStore.endorsees)
 const endorsers = computed(() => profileStore.endorsers)
+const fullName = computed(() => `${profile.value.firstName} ${profile.value.lastName}`)
 const route = useRoute();
+
+
 
 watch(
   () => route.params.userId,

@@ -7,6 +7,8 @@ export class EndorsementModel {
   endorseeId: string;
   endorserAvatarUrl: string;
   endorseeAvatarUrl: string;
+  endorserName: string;
+  endorseeName: string;
 
   constructor(
     description: string,
@@ -16,7 +18,9 @@ export class EndorsementModel {
     endorserId: string,
     endorseeId: string,
     endorserAvatarUrl: string,
-    endorseeAvatarUrl: string
+    endorseeAvatarUrl: string,
+    endorserName: string,
+    endorseeName: string
   ) {
     this.description = description;
     this.topic = topic;
@@ -26,5 +30,7 @@ export class EndorsementModel {
     this.endorseeId = endorseeId;
     this.endorserAvatarUrl = endorserAvatarUrl;
     this.endorseeAvatarUrl = endorseeAvatarUrl;
+    this.endorserName = endorserName;
+    this.endorseeName = endorseeName;
   }
 }

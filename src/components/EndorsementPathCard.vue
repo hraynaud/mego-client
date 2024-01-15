@@ -50,6 +50,7 @@ const avatarLargeData = <AvatarData>{
   icon: 'psychology',
   role: 'endorsee',
   tooltip: false,
+  name: props.e?.endorseeName,
 };
 
 const path = computed(() => props.e?.path);

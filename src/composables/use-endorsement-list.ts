@@ -29,6 +29,7 @@ export function useEndorsementsList(params = {}) {
           e.attributes.topic,
           e.attributes.description,
           e.attributes.endorseeProfileImageUrl,
+          e.attributes.endorseeName,
           e.attributes.path
         )
       );

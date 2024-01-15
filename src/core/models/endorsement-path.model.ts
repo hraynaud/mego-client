@@ -4,6 +4,7 @@ export class EndorsementPathModel {
   topic!: string;
   description: string;
   endorseeProfileImageUrl: string;
+  endorseeName: string;
   path!: PathAvatar[];
 
   constructor(
@@ -11,12 +12,14 @@ export class EndorsementPathModel {
     topic: string,
     description: string,
     endorseeProfileImageUrl: string,
+    endorseeName: string,
     path: PathAvatar[]
   ) {
     this.description = description;
     this.topic = topic;
     this.id = id;
     this.endorseeProfileImageUrl = endorseeProfileImageUrl;
+    this.endorseeName = endorseeName;
     this.path = path;
   }
 }

@@ -33,7 +33,7 @@
 //  import bus from '../core/utils/event-bus';
 import { inject, computed } from 'vue';
 import { EndorsementModel } from '../core/models';
-import UserAvatar from '../components/UserAvatar.vue';
+import UserAvatar, { AvatarData } from '../components/UserAvatar.vue';
 const bus = inject('bus');
 const props = defineProps({
   e: EndorsementModel,
@@ -47,7 +47,7 @@ const deleteMe = (e: EndorsementModel, i: number) => {
 };
 
 const avatarData = computed(() => {
-  return {
+  return <AvatarData>{
     imgUrl:
       props.role == 'endorsee'
         ? props.e?.endorseeAvatarUrl
@@ -59,6 +59,8 @@ const avatarData = computed(() => {
         : true,
     icon: props.role == 'endorsee' ? 'psychology' : 'psychology_alt',
     tooltip: false,
+    name:
+      props.role == 'endorsee' ? props.e?.endorseeName : props.e?.endorserName,
   };
 });
 </script>

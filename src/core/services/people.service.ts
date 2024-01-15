@@ -3,7 +3,7 @@ import { PersonModel } from '../models';
 const buildPerson = (p: any) => {
   return new PersonModel(
     p.attributes.firstName,
-    p.attributes.lasttName,
+    p.attributes.lastName,
     p.attributes.neoId,
     p.attributes.endorsees,
     p.attributes.endorsers,

@@ -11,8 +11,8 @@
     >
       {{ data.name }}
     </q-tooltip>
-    <div v-if="!data.tooltip" style="font-size: 10px; color: $primary">
-      Herby
+    <div v-if="data.tooltip == false" style="font-size: 10px; color: $primary">
+      {{ data.name }}
     </div>
   </div>
 </template>
