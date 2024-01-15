@@ -49,16 +49,19 @@ const avatarLargeData = <AvatarData>{
   isVisible: props.e?.endorseeProfileImageUrl == 'anonymous.png' ? false : true,
   icon: 'psychology',
   role: 'endorsee',
+  tooltip: false,
 };
 
 const path = computed(() => props.e?.path);
 
 const getPathElementAvatarData = (p: PathAvatar) => {
-  return {
+  return <AvatarData>{
     imgUrl: p.avatar_url,
     isVisible: p.is_visible,
     icon: p.role == 'endorsee' ? 'psychology' : 'psychology_alt',
     role: p.role,
+    tooltip: true,
+    name: p.name,
   };
 };
 </script>

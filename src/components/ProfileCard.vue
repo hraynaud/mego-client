@@ -47,6 +47,7 @@ const avatarLargeData = computed<AvatarData>(()=>{ return {
   isVisible:  props.p?.profileImageUrl == 'anonymous.png' ? false : true,
   icon: 'psychology',
   role: 'endorsee',
+  tooltip: false
 } as AvatarData})
 
 </script>

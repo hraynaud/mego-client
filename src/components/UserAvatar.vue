@@ -4,14 +4,27 @@
       <img :src="data.imgUrl" />
     </q-avatar>
     <q-avatar v-else :icon="data.icon" class="avatar anon icon"> </q-avatar>
+
+    <q-tooltip
+      v-if="data.tooltip"
+      class="text-primary transparent text-weight-bold text-subtitle2"
+    >
+      {{ data.name }}
+    </q-tooltip>
+    <div v-if="!data.tooltip" style="font-size: 10px; color: $primary">
+      Herby
+    </div>
   </div>
 </template>
+z
 
 <script setup lang="ts">
 export interface AvatarData {
   imgUrl: string | undefined;
   isVisible: boolean;
   icon: string;
+  tooltip: boolean;
+  name?: string;
 }
 
 defineProps<{
@@ -20,6 +33,10 @@ defineProps<{
 </script>
 
 <style lang="scss" scoped>
+.tip {
+  background-color: aqua;
+  padding: 0px;
+}
 .anon {
   background-color: $tertiary;
   color: darkslategrey;
@@ -54,16 +71,8 @@ defineProps<{
     margin-top: 1%;
   }
 
-  // .anon {
-  //   background-color: $tertiary;
-  //   color: darkslategrey;
-  //   font-weight: bold;
-  // }
-
   .icon {
     font-size: 242px;
-    // border: 1px solid;
-    // border-radius: 50%;
   }
 }
 </style>

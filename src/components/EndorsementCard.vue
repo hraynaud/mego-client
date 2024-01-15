@@ -58,6 +58,7 @@ const avatarData = computed(() => {
         ? false
         : true,
     icon: props.role == 'endorsee' ? 'psychology' : 'psychology_alt',
+    tooltip: false,
   };
 });
 </script>
