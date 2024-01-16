@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="q-pa-md">
-      <h3>Projects in your circle</h3>
+      <page-header>Projects</page-header>
 
       <q-form @submit.prevent="onSubmit">
         <div class="row items-baseline justify-start q-gutter-lg">
@@ -41,11 +41,13 @@
   </q-page>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ProjectList from '../components/ProjectList.vue';
+import PageHeader from 'components/PageHeader.vue';
 import { useProjectList } from 'src/composables/use-project-list';
+import { ProjectModel } from 'src/core/models';
 
-const { projects } = useProjectList();
+const projects = useProjectList({}) as unknown as [ProjectModel];
 </script>
 <style lang="scss" scoped>
 .search-filter {

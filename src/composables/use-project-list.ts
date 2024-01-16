@@ -26,8 +26,9 @@ export function useProjectList(params: any) {
           p.attributes.name,
           p.attributes.description,
           p.attributes.topicImage,
+          p.attributes.startDate,
           p.attributes.ownerAvatarUrl,
-          p.topicName
+          p.attributes.topicName
         )
       );
     });
@@ -49,7 +50,5 @@ export function useProjectList(params: any) {
   //   }
   // };
 
-  return {
-    projects,
-  };
+  return projects;
 }

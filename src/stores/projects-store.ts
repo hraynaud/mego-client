@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ProjectModel } from 'src/core/models';
 
 interface UserState {
-  projectList: Array<ProjectModel>;
+  projectList: ProjectModel[];
 }
 
 export const useProjectStore = defineStore('projects', {
