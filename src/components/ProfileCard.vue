@@ -38,9 +38,9 @@ import UserAvatar from '../components/UserAvatar.vue';
 import { defineProps, computed } from 'vue';
 
 
-const props = defineProps({
+const props = defineProps<{
   p: PersonModel,
-});
+}>();
 
 const avatarLargeData = computed<AvatarData>(()=>{ return {
   imgUrl: props.p?.profileImageUrl,

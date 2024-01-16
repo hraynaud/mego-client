@@ -27,13 +27,13 @@
     </q-card-section>
   </q-card>
 </template>
-<script setup>
+<script setup lang="ts">
 import { PersonModel } from '../core/models';
 import { defineProps } from 'vue';
 
-defineProps({
-  p: PersonModel,
-});
+defineProps<{
+  p: PersonModel;
+}>();
 </script>
 
 <style lang="scss">

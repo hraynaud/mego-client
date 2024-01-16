@@ -15,11 +15,10 @@
 import { EndorsementModel } from '../core/models';
 import EndorsementCard from '../components/EndorsementCard.vue';
 
-defineProps({
-  endorsements: [EndorsementModel],
-  currentUserContext: String,
-  role: String,
-  deleteable: Boolean,
-});
+defineProps<{
+  endorsements: EndorsementModel[];
+  currentUserContext: string;
+  role: string;
+  deleteable: boolean;
+}>();
 </script>
-<style lang="scss"></style>

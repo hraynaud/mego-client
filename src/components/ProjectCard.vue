@@ -40,9 +40,9 @@ import { ProjectModel } from '../core/models';
 import UserAvatar, { AvatarData } from './UserAvatar.vue';
 import { defineProps, computed } from 'vue';
 
-const props = defineProps({
-  p: ProjectModel,
-});
+const props = defineProps<{
+  p: ProjectModel;
+}>();
 
 const avatarData = computed<AvatarData>(() => {
   return {

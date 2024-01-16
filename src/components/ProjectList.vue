@@ -5,12 +5,10 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ProjectModel } from '../core/models';
 import ProjectCard from './ProjectCard.vue';
 
-defineProps({
-  projects: [ProjectModel],
-});
+defineProps<{ projects: ProjectModel }>();
 </script>
 <style lang="scss"></style>

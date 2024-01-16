@@ -39,10 +39,10 @@ import { AvatarData } from '../components/UserAvatar.vue';
 
 const profilePath = (id: string) => `/person/${id}`;
 
-const props = defineProps({
-  e: EndorsementPathModel,
-  idx: Number,
-});
+const props = defineProps<{
+  e: EndorsementPathModel;
+  idx: number;
+}>();
 
 const avatarLargeData = <AvatarData>{
   imgUrl: props.e?.endorseeProfileImageUrl,

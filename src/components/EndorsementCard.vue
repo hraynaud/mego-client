@@ -35,12 +35,12 @@ import { inject, computed } from 'vue';
 import { EndorsementModel } from '../core/models';
 import UserAvatar, { AvatarData } from '../components/UserAvatar.vue';
 const bus = inject('bus');
-const props = defineProps({
-  e: EndorsementModel,
-  idx: Number,
-  role: String,
-  deleteable: Boolean,
-});
+const props = defineProps<{
+  e: EndorsementModel;
+  idx: number;
+  role: string;
+  deleteable: boolean;
+}>();
 
 const deleteMe = (e: EndorsementModel, i: number) => {
   bus.emit('delete-endorsement', e, i);

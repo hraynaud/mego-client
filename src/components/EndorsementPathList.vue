@@ -13,7 +13,7 @@
 import { EndorsementPathModel } from '../core/models';
 import EndorsementPathCard from '../components/EndorsementPathCard.vue';
 
-defineProps({
-  endorsements: [EndorsementPathModel],
-});
+defineProps<{
+  endorsements: EndorsementPathModel[];
+}>();
 </script>
