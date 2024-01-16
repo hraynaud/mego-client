@@ -16,7 +16,6 @@
     </div>
   </div>
 </template>
-z
 
 <script setup lang="ts">
 export interface AvatarData {

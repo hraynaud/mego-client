@@ -1,8 +1,6 @@
 <template>
   <q-page>
-    <div class="q-py-lg q-mt-xs page-banner">
-      <h3 class="text-center q-ma-xs">Endorsements</h3>
-    </div>
+    <page-header>Endorsements</page-header>
     <!-- <div class="q-pa-md">
       <q-form @submit.prevent="onSubmit">
         <div class="row items-baseline justify-start q-gutter-lg">
@@ -44,17 +42,10 @@
 // import { ref } from 'vue';
 import EndorsementPathList from '../components/EndorsementPathList.vue';
 import { useEndorsementsList } from 'src/composables/use-endorsement-list';
+import PageHeader from '../components/PageHeader.vue';
 // import { useTopicList } from 'src/composables/use-topic-list';
 
 // const topics = []; //useTopicList();
 const { endorsements } = useEndorsementsList();
 // const selectedTopic = ref(null);
 </script>
-<style lang="scss" scoped>
-.page-banner {
-  background-color: $tertiary;
-  h3 {
-    font-weight: 200;
-  }
-}
-</style>

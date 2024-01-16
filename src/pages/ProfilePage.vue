@@ -1,8 +1,9 @@
 <template lang="">
   <q-page style="max-height: 90vh; overflow-y: scroll">
-    <div class="row">
-    <div class="offset-xs-1 col-sm-8 col-md-6">
-   <h4>{{fullName}}</h4>
+    <page-header>{{fullName}}</page-header>
+    <!-- <div class="row">
+    <div class="offset-xs-1 col-sm-8 col-md-6"> -->
+
     <profile-card :p="profile" />
 
     <q-card class="q-my-xs">
@@ -18,8 +19,8 @@
           <EndorsementList :endorsements="endorsees" :deleteable=true role="endorsee"/>
         </q-card-section>
     </q-card>
-  </div>
-</div>
+  <!-- </div>
+</div> -->
 
 
     <!-- <q-page-sticky position="bottom-right" :offset="[64, 36]">
@@ -42,11 +43,12 @@
 import { EndorsementModel, PersonModel } from 'src/core/models';
 import { authService, peopleApi, peopleService } from 'src/core/services';
 import { ref, computed, watch, onMounted } from 'vue';
-import ProfileCard from '../components/ProfileCard.vue';
-import EndorsementList from '../components/EndorsementList.vue';
 import { useProfileStore } from 'src/stores/profile-store';
 import { useEndorsementEvent } from 'src/composables/use-endorsement-event';
 import { useRoute } from 'vue-router';
+import ProfileCard from '../components/ProfileCard.vue';
+import EndorsementList from '../components/EndorsementList.vue';
+import PageHeader from 'src/components/PageHeader.vue';
 
 const profileStore = useProfileStore();
 

@@ -1,6 +1,9 @@
 <template>
   <q-page>
-    <div class="q-pa-md">
+    <div>
+      <page-header>contacts</page-header>
+    </div>
+    <!-- <div class="q-pa-md">
       <h3>Search Friends</h3>
       <q-form @submit.prevent="onSubmit">
         <div class="row items-baseline justify-start q-gutter-lg">
@@ -30,16 +33,18 @@
           <q-btn round color="primary" icon="search" type="submit" />
         </div>
       </q-form>
-    </div>
-    <div class="q-pa-md text-h6">Friends</div>
+    </div> -->
+
     <div class="">
       <PeopleList :people="people"></PeopleList>
     </div>
   </q-page>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import PageHeader from 'components/PageHeader.vue';
 import PeopleList from '../components/PeopleList.vue';
+
 import { usePeopleList } from 'src/composables/use-people-list';
 
 const { people } = usePeopleList({ group: 'contacts' });
