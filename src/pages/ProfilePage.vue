@@ -54,8 +54,8 @@ const profileStore = useProfileStore();
 
 
 useEndorsementEvent();
-
 const profile = ref({} as PersonModel);
+
 const endorsees = computed(() => profileStore.endorsees)
 const endorsers = computed(() => profileStore.endorsers)
 const fullName = computed(() => `${profile.value.firstName} ${profile.value.lastName}`)

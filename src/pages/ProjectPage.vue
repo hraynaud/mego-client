@@ -1,7 +1,7 @@
 <template lang="">
   <q-page style="max-height: 90vh; overflow-y: scroll">
     <page-header>{{projectName}}</page-header>
-
+    <project-profile-card :p="project" />
     <!-- <q-card class="q-my-xs">
       <q-card-section>
         <p class="text-h6">Followers</p>
@@ -21,7 +21,7 @@
 import { ProjectModel } from 'src/core/models';
 import { projectApi,projecteService } from 'src/core/services';
 import { ref, computed, watch, onMounted } from 'vue';
-
+import ProjectProfileCard from '../components/ProjectProfileCard.vue';
 import { useRoute } from 'vue-router';
 import PageHeader from 'src/components/PageHeader.vue';
 
