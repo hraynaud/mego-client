@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <!-- <q-card class="project-card">
     <q-item>
       <q-item-section avatar>
@@ -21,18 +21,21 @@
     </q-card-section>
   </q-card> -->
 
-  <q-card class="endorsement-card">
+  <q-card class="project-card">
     <q-card-section avatar>
-      <div class="endorsement-topic text-h6 text-center q-mb-xs">
-        {{ p.topicName }}
+      <div class="project-topic text-h6 text-center q-mb-xs">
+        {{ p?.topicName }}
       </div>
 
       <user-avatar :data="avatarData" class="small" />
 
-      <div class="q-pa-sm endorsement-description">
-        {{ p.description }}
+      <div class="q-pa-sm project-description">
+        {{ p?.description }}
       </div>
     </q-card-section>
+    <router-link :to="projectPath(p?.id)">
+      <q-icon name="pageview"></q-icon
+    ></router-link>
   </q-card>
 </template>
 <script setup lang="ts">
@@ -40,6 +43,7 @@ import { ProjectModel } from '../core/models';
 import UserAvatar, { AvatarData } from './UserAvatar.vue';
 import { defineProps, computed } from 'vue';
 
+const projectPath = (id: string) => `/project/${id}`;
 const props = defineProps<{
   p: ProjectModel;
 }>();
@@ -60,18 +64,18 @@ const avatarData = computed<AvatarData>(() => {
 //   max-width: 250px;
 // }
 
-.endorsement-card {
+.project-card {
   width: 200px;
   height: 225px;
   padding: 0px;
   border-radius: 8px;
 }
 
-.endorsement-card .q-card__section--vert {
+.project-card .q-card__section--vert {
   padding: 0px;
 }
 
-.endorsement-topic {
+.project-topic {
   font-weight: 100;
   background-color: $secondary;
   padding-top: 4%;
@@ -82,7 +86,7 @@ const avatarData = computed<AvatarData>(() => {
   height: 65px;
 }
 
-.endorsement-description {
+.project-description {
   height: 85px;
 }
 </style>

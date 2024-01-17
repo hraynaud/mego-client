@@ -5,6 +5,7 @@ export * from './topic.service';
 export * from './endorsement.service';
 export * from './project.service';
 export * from './api/people.api';
+export * from './api/project.api';
 export * from './contact.service';
 export * from './jsonResponse.service';
 export * from './invite.service';

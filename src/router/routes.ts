@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'person/:userId',
-        name: 'person ',
+        name: 'person',
         component: () => import('pages/ProfilePage.vue'),
         props: true,
       },
@@ -31,6 +31,11 @@ const routes: RouteRecordRaw[] = [
         path: 'projects/new',
         name: 'projects.new',
         component: () => import('pages/ProjectNewPage.vue'),
+      },
+      {
+        path: 'project/:projectId',
+        name: 'project',
+        component: () => import('pages/ProjectPage.vue'),
       },
       {
         path: 'endorsements',

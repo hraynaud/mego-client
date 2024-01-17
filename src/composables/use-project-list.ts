@@ -1,11 +1,11 @@
 import { computed } from 'vue';
-import { projectService } from '../core/services';
+import { projectApi } from '../core/services';
 import { ProjectModel } from '../core/models';
 import { useProjectStore } from 'src/stores/projects-store';
 const projectStore = useProjectStore();
 export function useProjectList(params: any) {
   const loadProjects = () => {
-    projectService
+    projectApi
       .searchProjects(params)
       .then((resp: any) => {
         if (resp) {
@@ -23,6 +23,7 @@ export function useProjectList(params: any) {
     data.map((p: any) => {
       projects.value.push(
         new ProjectModel(
+          p.id,
           p.attributes.name,
           p.attributes.description,
           p.attributes.topicImage,

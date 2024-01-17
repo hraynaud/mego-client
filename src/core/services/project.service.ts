@@ -1,28 +1,18 @@
 import { ProjectModel } from '../models';
-import { apiService } from './api.service';
-interface formProject {
-  project: ProjectModel;
-}
 
-const searchProjects = (payload = {}): any => {
-  return apiService.post('/projects_search', payload);
+const buildProject = (p: any) => {
+  console.log('attrs', p);
+  return new ProjectModel(
+    p.id,
+    p.attributes.name,
+    p.attributes.description,
+    p.attributes.topicImage,
+    p.attributes.startDate,
+    p.attributes.ownerAvatarUrl,
+    p.attributes.topicName
+  );
 };
 
-const newProject = (project: formProject) => {
-  apiService.post('/projects', project);
-};
-
-const deleteProject = () => {
-  console.log('delete project');
-};
-
-const updateProject = () => {
-  console.log('update project');
-};
-
-export const projectService = {
-  newProject,
-  deleteProject,
-  updateProject,
-  searchProjects,
+export const projecteService = {
+  buildProject,
 };
