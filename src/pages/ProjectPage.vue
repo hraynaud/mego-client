@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <q-page style="max-height: 90vh; overflow-y: scroll">
     <page-header>{{projectName}}</page-header>
     <project-profile-card :p="project" />
@@ -43,9 +43,9 @@ const loadProject = () => {
   projectApi
     .findProject(id)
     .then(function (resp: { data: any }) {
-        console.log(resp.data)
         project.value = projecteService.buildProject(resp.data.data)
         console.log(project.value)
+
     })
 }
 

@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { projectApi } from '../core/services';
+import { projectApi, projecteService } from '../core/services';
 import { ProjectModel } from '../core/models';
 import { useProjectStore } from 'src/stores/projects-store';
 const projectStore = useProjectStore();
@@ -21,17 +21,7 @@ export function useProjectList(params: any) {
     const data = resp.data.projects.data;
 
     data.map((p: any) => {
-      projects.value.push(
-        new ProjectModel(
-          p.id,
-          p.attributes.name,
-          p.attributes.description,
-          p.attributes.topicImage,
-          p.attributes.startDate,
-          p.attributes.ownerAvatarUrl,
-          p.attributes.topicName
-        )
-      );
+      projects.value.push(projecteService.buildProject(p));
     });
     projectStore.initProjects(projects.value);
   };

@@ -9,6 +9,7 @@ const buildProject = (p: any) => {
     p.attributes.topicImage,
     p.attributes.startDate,
     p.attributes.ownerAvatarUrl,
+    p.attributes.ownerProfileImageUrl,
     p.attributes.topicName
   );
 };

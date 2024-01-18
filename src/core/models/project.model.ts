@@ -5,8 +5,8 @@ export class ProjectModel {
   topicImage: string;
   startDate: Date;
   ownerAvatarUrl: string;
+  ownerProfileImageUrl: string;
   topicName: string;
-  value: any;
 
   constructor(
     id: string,
@@ -15,6 +15,7 @@ export class ProjectModel {
     topicImage: string,
     startDate: Date,
     ownerAvatarUrl: string,
+    ownerProfileImageUrl: string,
     topicName: string
   ) {
     this.id = id;
@@ -23,6 +24,7 @@ export class ProjectModel {
     this.topicImage = topicImage;
     this.startDate = startDate;
     this.ownerAvatarUrl = ownerAvatarUrl;
+    this.ownerProfileImageUrl = ownerProfileImageUrl;
     this.topicName = topicName;
   }
 }

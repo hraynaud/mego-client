@@ -43,7 +43,7 @@ const props = defineProps<{
 }>();
 
 const avatarLargeData = computed<AvatarData>(()=>{ return {
-  imgUrl: props.p?.ownerAvatarUrl,
+  imgUrl: props.p?.ownerProfileImageUrl,
   isVisible:  props.p?.ownerAvatarUrl == 'anonymous.png' ? false : true,
   tooltip: false
 } as AvatarData})
