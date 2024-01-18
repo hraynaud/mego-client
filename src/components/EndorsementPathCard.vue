@@ -91,7 +91,7 @@ const getPathElementAvatarData = (p: PathAvatar) => {
 }
 
 .endorsement-description {
-  height: 175px;
+  height: 150px;
 }
 
 .path {

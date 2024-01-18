@@ -4,7 +4,6 @@
       <page-header>Projects</page-header>
     </div>
     <div class="q-pa-md">
-      <h5>Search Results</h5>
       <div class="q-gutter-md row items-start">
         <ProjectList :projects="projects"></ProjectList>
       </div>

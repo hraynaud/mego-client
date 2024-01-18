@@ -1,41 +1,24 @@
 <template>
-  <!-- <q-card class="project-card">
-    <q-item>
-      <q-item-section avatar>
-        <q-avatar>
-          <img :src="p.ownerAvatarUrl" />
-        </q-avatar>
-      </q-item-section>
-
-      <q-item-section>
-        <q-item-label
-          ><p>{{ p.name }}</p></q-item-label
-        >
-
-        <q-item-label caption>{{ p.topicName }}</q-item-label>
-      </q-item-section>
-    </q-item>
-
-    <q-card-section>
-      {{ p.description }}
-    </q-card-section>
-  </q-card> -->
-
   <q-card class="project-card">
-    <q-card-section avatar>
-      <div class="project-topic text-h6 text-center q-mb-xs">
-        {{ p?.topicName }}
+    <q-card-section>
+      <div class="project-topic text-h4 text-center q-mb-sm">
+        {{ p?.name }}
       </div>
 
-      <user-avatar :data="avatarData" class="small" />
+      <user-avatar :data="avatarData" class="large" />
 
-      <div class="q-pa-sm project-description">
+      <div class="q-pa-md project-description">
         {{ p?.description }}
       </div>
     </q-card-section>
-    <router-link :to="projectPath(p?.id)">
-      <q-icon name="pageview"></q-icon
-    ></router-link>
+    <q-separator />
+    <q-card-section class="row items-center">
+      <div class="q-pa-md path">
+        <q-btn round color="primary" icon="article" :to="projectPath(p?.id)">
+          <!-- <q-icon name="info" size="xl"></q-icon> -->
+        </q-btn>
+      </div>
+    </q-card-section>
   </q-card>
 </template>
 <script setup lang="ts">
@@ -50,7 +33,7 @@ const props = defineProps<{
 
 const avatarData = computed<AvatarData>(() => {
   return {
-    imgUrl: props.p?.ownerAvatarUrl,
+    imgUrl: props.p?.ownerProfileImageUrl,
     isVisible: true,
     icon: '',
     role: '',
@@ -59,20 +42,15 @@ const avatarData = computed<AvatarData>(() => {
 });
 </script>
 <style lang="scss">
-// .project-card {
-//   width: 100%;
-//   max-width: 250px;
-// }
-
-.project-card {
-  width: 200px;
-  height: 225px;
-  padding: 0px;
-  border-radius: 8px;
-}
-
 .project-card .q-card__section--vert {
   padding: 0px;
+}
+
+.project-card {
+  width: 460px;
+  height: 500px;
+  padding: 0px;
+  border-radius: 8px;
 }
 
 .project-topic {
@@ -83,10 +61,10 @@ const avatarData = computed<AvatarData>(() => {
   color: white;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  height: 65px;
+  height: 175px;
 }
 
 .project-description {
-  height: 85px;
+  height: 175px;
 }
 </style>

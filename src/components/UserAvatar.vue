@@ -58,7 +58,7 @@ defineProps<{
 }
 
 .large {
-  margin-top: -6.75rem;
+  margin-top: -4.75rem;
   &.profile {
     margin: 0px;
   }

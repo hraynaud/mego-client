@@ -1,17 +1,15 @@
 <template>
       <q-card class="project-card">
         <q-card-section horizontal>
-          <q-card-section class="profile-img q-pa-sm">
+          <q-card-section class="profile-img q-pa-sm col-auto">
             <div class="profile-img-wrapper">
               <user-avatar :data="avatarLargeData" class="large profile"/>
             </div>
           </q-card-section>
-          <q-card-section>
-            <div >
+          <q-card-section class="col">
               <div>
                 {{ p.description }}
               </div>
-            </div>
           </q-card-section>
         </q-card-section>
       </q-card>
@@ -49,7 +47,7 @@ const avatarLargeData = computed<AvatarData>(()=>{ return {
 } as AvatarData})
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .project-card {
 
   .name {
@@ -62,13 +60,7 @@ const avatarLargeData = computed<AvatarData>(()=>{ return {
 }
 }
 
-.mini-profile {
-  text-align: center;
-  .item-count {
-    color: $pink-12;
-    $h-tags: ('h1');
-  }
-}
+
 .centered {
   text-align: center;
 }
