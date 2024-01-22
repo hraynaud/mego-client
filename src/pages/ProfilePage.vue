@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <q-page style="max-height: 90vh; overflow-y: scroll">
     <page-header>{{fullName}}</page-header>
     <!-- <div class="row">
