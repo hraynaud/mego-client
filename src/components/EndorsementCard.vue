@@ -1,5 +1,5 @@
 <template>
-  <q-card class="endorsement-card">
+  <q-card class="endorsement-card" @click="expando($event)">
     <q-card-section avatar>
       <div class="endorsement-topic text-h6 text-center q-mb-xs">
         {{ e?.topic }}
@@ -10,8 +10,8 @@
       <div class="q-pa-sm endorsement-description">
         {{ e?.description }}
       </div>
-      <q-separator />
-      <q-bar class="row justify-end">
+      <!-- <q-separator /> -->
+      <q-card-actions class="row justify-end">
         <q-btn
           v-if="deleteable"
           class="col-3"
@@ -20,18 +20,10 @@
           dense
           round
           icon="delete"
-          @click="deleteMe(e!, idx!)"
+          @click="deleteMe(e!, idx!, $event)"
         />
-        <q-btn
-          size="12px"
-          flat
-          dense
-          round
-          icon="launch"
-          color="primary"
-          @click="bar2 = true"
-        />
-      </q-bar>
+        <q-btn size="12px" flat dense round icon="launch" color="primary" />
+      </q-card-actions>
     </q-card-section>
 
     <!-- @click.prevent.once="bus.emit('delete-endorsement', e, idx)" -->
@@ -39,24 +31,10 @@
 
   <q-dialog
     v-model="bar2"
-    persistent
     transition-show="flip-down"
     transition-hide="flip-up"
   >
-    <q-card class="bg-primary text-white">
-      <q-bar>
-        <q-icon name="network_wifi" />
-        <q-icon name="network_cell" />
-        <q-icon name="battery_full" />
-        <div>9:34</div>
-
-        <q-space />
-
-        <q-btn dense flat icon="close" v-close-popup>
-          <q-tooltip class="bg-white text-primary">Close</q-tooltip>
-        </q-btn>
-      </q-bar>
-
+    <q-card class="">
       <q-card-section class="q-pt-none">
         {{ e?.description }}
       </q-card-section>
@@ -79,8 +57,17 @@ const props = defineProps<{
 
 const bar2 = ref(false);
 
-const deleteMe = (e: EndorsementModel, i: number) => {
+const deleteMe = (e: EndorsementModel, i: number, event: any) => {
+  event.stopImmediatePropagation();
+
   bus.emit('delete-endorsement', e, i);
+};
+
+const expando = (event: any) => {
+  event.stopImmediatePropagation();
+  const el = event?.currentTarget;
+  el.classList.toggle('expanded');
+  debugger;
 };
 
 const avatarData = computed(() => {
@@ -108,6 +95,16 @@ const avatarData = computed(() => {
   height: 240px;
   padding: 0px;
   border-radius: 8px;
+  &.expanded {
+    height: 100%;
+    .endorsement-description {
+      height: 100%;
+    }
+  }
+  .endorsement-description {
+    height: 85px;
+    overflow-y: scroll;
+  }
 }
 
 .endorsement-card .q-card__section--vert {
@@ -130,10 +127,5 @@ const avatarData = computed(() => {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   height: 65px;
-}
-
-.endorsement-description {
-  height: 85px;
-  overflow-y: scroll;
 }
 </style>
