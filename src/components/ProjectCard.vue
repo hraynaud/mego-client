@@ -14,9 +14,7 @@
     <q-separator />
     <q-card-section class="row items-center">
       <div class="q-pa-md path">
-        <q-btn round color="primary" icon="article" :to="projectPath(p?.id)">
-          <!-- <q-icon name="info" size="xl"></q-icon> -->
-        </q-btn>
+        <q-btn round color="primary" icon="launch" :to="projectPath(p?.id)" />
       </div>
     </q-card-section>
   </q-card>
