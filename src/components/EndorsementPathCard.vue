@@ -11,33 +11,15 @@
         {{ e?.description }}
       </div>
     </q-card-section>
-    <q-separator />
-    <q-card-section class="row items-center">
-      <div class="q-py-md path">
-        <router-link
-          v-for="p in path"
-          :key="p.id"
-          :to="profilePath(p.id)"
-          class="path-el"
-        >
-          <user-avatar
-            :data="getPathElementAvatarData(p as PathAvatar)"
-            class="path-el-content small"
-          />
-        </router-link>
-      </div>
-    </q-card-section>
+    <endorsement-path :path="e?.path" />
   </q-card>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { EndorsementPathModel, PathAvatar } from '../core/models';
-import { RouterLink } from 'vue-router';
+import { EndorsementPathModel } from '../core/models';
 import UserAvatar from '../components/UserAvatar.vue';
+import EndorsementPath from '../components/EndorsementPath.vue';
 import { AvatarData } from '../components/UserAvatar.vue';
-
-const profilePath = (id: string) => `/person/${id}`;
 
 const props = defineProps<{
   e: EndorsementPathModel;
@@ -51,19 +33,6 @@ const avatarLargeData = <AvatarData>{
   role: 'endorsee',
   tooltip: false,
   name: props.e?.endorseeName,
-};
-
-const path = computed(() => props.e?.path);
-
-const getPathElementAvatarData = (p: PathAvatar) => {
-  return <AvatarData>{
-    imgUrl: p.avatar_url,
-    isVisible: p.is_visible,
-    icon: p.role == 'endorsee' ? 'psychology' : 'psychology_alt',
-    role: p.role,
-    tooltip: true,
-    name: p.name,
-  };
 };
 </script>
 
@@ -92,30 +61,5 @@ const getPathElementAvatarData = (p: PathAvatar) => {
 
 .endorsement-description {
   height: 150px;
-}
-
-.path {
-  height: 80px;
-  min-width: 160px;
-  position: relative;
-  padding: 15px;
-  .path-el-content {
-    display: inline;
-  }
-
-  .path-el:not(:last-child) {
-    margin-right: 27px;
-    position: relative;
-  }
-
-  .path-el:not(:last-child):after {
-    position: absolute;
-    content: '';
-    left: 61px;
-    top: 0%;
-    width: 25px;
-    height: 11px;
-    border-bottom: 2px solid black;
-  }
 }
 </style>

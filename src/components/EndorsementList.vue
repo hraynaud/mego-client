@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="q-gutter-md row">
     <EndorsementCard
       v-for="(e, idx) in endorsements"

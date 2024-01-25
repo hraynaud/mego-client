@@ -11,7 +11,7 @@
         {{ e?.description }}
       </div>
       <q-separator />
-      <q-card-section class="row justify-end">
+      <q-bar class="row justify-end">
         <q-btn
           v-if="deleteable"
           class="col-3"
@@ -22,16 +22,51 @@
           icon="delete"
           @click="deleteMe(e!, idx!)"
         />
-      </q-card-section>
+        <q-btn
+          size="12px"
+          flat
+          dense
+          round
+          icon="launch"
+          color="primary"
+          @click="bar2 = true"
+        />
+      </q-bar>
     </q-card-section>
 
     <!-- @click.prevent.once="bus.emit('delete-endorsement', e, idx)" -->
   </q-card>
+
+  <q-dialog
+    v-model="bar2"
+    persistent
+    transition-show="flip-down"
+    transition-hide="flip-up"
+  >
+    <q-card class="bg-primary text-white">
+      <q-bar>
+        <q-icon name="network_wifi" />
+        <q-icon name="network_cell" />
+        <q-icon name="battery_full" />
+        <div>9:34</div>
+
+        <q-space />
+
+        <q-btn dense flat icon="close" v-close-popup>
+          <q-tooltip class="bg-white text-primary">Close</q-tooltip>
+        </q-btn>
+      </q-bar>
+
+      <q-card-section class="q-pt-none">
+        {{ e?.description }}
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script setup lang="ts">
 //  import bus from '../core/utils/event-bus';
-import { inject, computed } from 'vue';
+import { inject, computed, ref } from 'vue';
 import { EndorsementModel } from '../core/models';
 import UserAvatar, { AvatarData } from '../components/UserAvatar.vue';
 const bus = inject('bus');
@@ -41,6 +76,8 @@ const props = defineProps<{
   role: string;
   deleteable: boolean;
 }>();
+
+const bar2 = ref(false);
 
 const deleteMe = (e: EndorsementModel, i: number) => {
   bus.emit('delete-endorsement', e, i);
@@ -68,13 +105,20 @@ const avatarData = computed(() => {
 <style lang="scss" scoped>
 .endorsement-card {
   width: 200px;
-  height: 225px;
+  height: 240px;
   padding: 0px;
   border-radius: 8px;
 }
 
 .endorsement-card .q-card__section--vert {
   padding: 0px;
+}
+.q-separator {
+  margin-top: 5px;
+}
+.qb-bar {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .endorsement-topic {
@@ -90,5 +134,6 @@ const avatarData = computed(() => {
 
 .endorsement-description {
   height: 85px;
+  overflow-y: scroll;
 }
 </style>
