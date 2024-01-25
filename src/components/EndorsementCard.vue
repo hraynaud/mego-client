@@ -22,24 +22,27 @@
           icon="delete"
           @click="deleteMe(e!, idx!, $event)"
         />
-        <q-btn size="12px" flat dense round icon="launch" color="primary" />
+        <q-btn
+          size="12px"
+          flat
+          dense
+          round
+          icon="keyboard_arrow_down"
+          color="primary"
+          class="arrow-down"
+        />
+        <q-btn
+          size="12px"
+          flat
+          dense
+          round
+          icon="keyboard_arrow_up"
+          color="primary"
+          class="arrow-up"
+        />
       </q-card-actions>
     </q-card-section>
-
-    <!-- @click.prevent.once="bus.emit('delete-endorsement', e, idx)" -->
   </q-card>
-
-  <q-dialog
-    v-model="bar2"
-    transition-show="flip-down"
-    transition-hide="flip-up"
-  >
-    <q-card class="">
-      <q-card-section class="q-pt-none">
-        {{ e?.description }}
-      </q-card-section>
-    </q-card>
-  </q-dialog>
 </template>
 
 <script setup lang="ts">
@@ -55,8 +58,6 @@ const props = defineProps<{
   deleteable: boolean;
 }>();
 
-const bar2 = ref(false);
-
 const deleteMe = (e: EndorsementModel, i: number, event: any) => {
   event.stopImmediatePropagation();
 
@@ -67,7 +68,6 @@ const expando = (event: any) => {
   event.stopImmediatePropagation();
   const el = event?.currentTarget;
   el.classList.toggle('expanded');
-  debugger;
 };
 
 const avatarData = computed(() => {
@@ -100,6 +100,19 @@ const avatarData = computed(() => {
     .endorsement-description {
       height: 100%;
     }
+    .arrow-down {
+      display: none;
+    }
+    .arrow-up {
+      display: initial;
+    }
+  }
+
+  .arrow-down {
+    display: initial;
+  }
+  .arrow-up {
+    display: none;
   }
   .endorsement-description {
     height: 85px;
