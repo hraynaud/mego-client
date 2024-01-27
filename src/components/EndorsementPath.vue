@@ -12,6 +12,7 @@
           <user-avatar
             :data="getPathElementAvatarData(p as PathAvatar)"
             class="path-el-content small"
+            :cls="roler(p)"
           />
         </router-link>
       </div>
@@ -35,11 +36,25 @@ const getPathElementAvatarData = (p: PathAvatar) => {
   return <AvatarData>{
     imgUrl: p.avatar_url,
     isVisible: p.is_visible,
-    icon: p.role == 'endorsee' ? 'psychology' : 'psychology_alt',
+    icon: roler(p),
     role: p.role,
     tooltip: true,
     name: p.name,
   };
+};
+
+const roler = (p: PathAvatar) => {
+  const role = p.role;
+
+  if (role == 'endorser') {
+    return 'thumb_up';
+  } else if (role == 'endorsee') {
+    return 'psychology';
+  } else if (role == 'contact') {
+    return 'link';
+  } else if (role == 'me') {
+    return 'me';
+  }
 };
 </script>
 

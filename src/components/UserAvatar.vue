@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center" :class="cls">
     <q-avatar class="avatar" v-if="data.isVisible">
       <img :src="data.imgUrl" />
     </q-avatar>
@@ -28,6 +28,7 @@ export interface AvatarData {
 
 defineProps<{
   data: AvatarData;
+  cls?: string;
 }>();
 </script>
 
@@ -74,4 +75,14 @@ defineProps<{
     font-size: 242px;
   }
 }
+
+.path-el-content.small {
+  &.link,
+  &.thumb_up {
+    .avatar.anon.icon {
+      font-size: 60px;
+    }
+  }
+}
 </style>
+s
