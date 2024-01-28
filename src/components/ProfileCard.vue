@@ -51,7 +51,7 @@ const avatarLargeData = computed<AvatarData>(()=>{ return {
 } as AvatarData})
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .person-card {
 
   .name {

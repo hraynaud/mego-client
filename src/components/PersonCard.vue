@@ -36,7 +36,7 @@ defineProps<{
 }>();
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .person-card {
   // max-width: 215px;
   .name {
