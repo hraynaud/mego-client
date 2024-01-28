@@ -9,14 +9,14 @@
     <q-card class="q-my-xs">
       <q-card-section>
         <p class="text-h6">Endorsers</p>
-          <EndorsementList :endorsements="endorsers" :deleteable=false role="endorser"/>
+          <endorsement-list :endorsements="endorsers" :deleteable=false role="endorser"/>
       </q-card-section>
     </q-card>
 
     <q-card class="q-my-xs">
         <q-card-section>
           <p class="text-h6">Endorsees</p>
-          <EndorsementList :endorsements="endorsees" :deleteable=true role="endorsee"/>
+          <endorsement-list :endorsements="endorsees" :deleteable=true role="endorsee"/>
         </q-card-section>
     </q-card>
   <!-- </div>
@@ -56,8 +56,8 @@ const profileStore = useProfileStore();
 useEndorsementEvent();
 const profile = ref({} as PersonModel);
 
-const endorsees = computed(() => profileStore.endorsees)
-const endorsers = computed(() => profileStore.endorsers)
+const endorsees = computed<EndorsementModel[]>(() => profileStore.endorsees)
+const endorsers = computed<EndorsementModel[]>(() => profileStore.endorsers)
 const fullName = computed(() => `${profile.value.firstName} ${profile.value.lastName}`)
 const route = useRoute();
 

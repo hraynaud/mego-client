@@ -1,6 +1,6 @@
 <template>
   <div class="q-gutter-md row">
-    <EndorsementCard
+    <endorsement-card
       v-for="(e, idx) in endorsements"
       :e="e"
       :idx="idx"
@@ -17,8 +17,8 @@ import EndorsementCard from '../components/EndorsementCard.vue';
 
 defineProps<{
   endorsements: EndorsementModel[];
-  currentUserContext: string;
-  role: string;
+  currentUserContext?: string;
+  role?: string | undefined;
   deleteable: boolean;
 }>();
 </script>

@@ -54,7 +54,7 @@ const bus = inject('bus');
 const props = defineProps<{
   e: EndorsementModel;
   idx: number;
-  role: string;
+  role: string | undefined;
   deleteable: boolean;
 }>();
 

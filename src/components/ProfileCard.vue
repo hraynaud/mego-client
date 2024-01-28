@@ -46,7 +46,7 @@ const avatarLargeData = computed<AvatarData>(()=>{ return {
   imgUrl: props.p?.profileImageUrl,
   isVisible:  props.p?.profileImageUrl == 'anonymous.png' ? false : true,
   icon: 'psychology',
-  role: 'endorsee',
+  role: undefined,
   tooltip: false
 } as AvatarData})
 

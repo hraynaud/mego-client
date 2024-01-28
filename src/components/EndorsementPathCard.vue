@@ -26,14 +26,13 @@ const props = defineProps<{
   idx: number;
 }>();
 
-const avatarLargeData = <AvatarData>{
+const avatarLargeData = <AvatarData>(<unknown>{
   imgUrl: props.e?.endorseeProfileImageUrl,
   isVisible: props.e?.endorseeProfileImageUrl == 'anonymous.png' ? false : true,
   icon: 'psychology',
-  role: 'endorsee',
   tooltip: false,
   name: props.e?.endorseeName,
-};
+});
 </script>
 
 <style lang="scss" scoped>
