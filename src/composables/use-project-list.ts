@@ -1,25 +1,18 @@
 import { computed } from 'vue';
 import { projectApi, projecteService } from '../core/services';
-import { ProjectModel } from '../core/models';
 import { useProjectStore } from 'src/stores/projects-store';
 
-// export interface ProjectSearchParams {
-//   visibililty?: string;
-//   depth?: number;
-//   userScope?: string;
-// }
-
 const projectStore = useProjectStore();
-export function useProjectList(params: any) {
+export function useProjectList(params: unknown) {
   const loadProjects = () => {
     projectApi
       .searchProjects(params)
-      .then((resp: any) => {
+      .then((resp: unknown) => {
         if (resp) {
           setProjects(resp);
         }
       })
-      .catch((error: any): void => {
+      .catch((error: unknown): void => {
         console.log(error);
       });
   };

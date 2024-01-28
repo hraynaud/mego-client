@@ -1,7 +1,7 @@
 import { http } from 'boot/axios';
 import { Method } from 'axios';
 
-function post(path: string, payload: Record<string, unknown>) {
+function post(path: string, payload: unknown) {
   return execute('POST', path, payload, {});
 }
 
@@ -21,7 +21,7 @@ function del(path: string, id: number | string) {
 function execute(
   method: Method,
   path: string,
-  payload: Record<string, unknown> | null,
+  payload: unknown | null,
   params: unknown
 ) {
   return http

@@ -5,15 +5,37 @@ interface formProject {
   project: ProjectModel;
 }
 
-const searchProjects = (payload = {}): any => {
-  return apiService.post('/projects_search', payload);
+export interface RandomProjectsResponses {
+  id?: string;
+  attributes: {
+    created_at?: string;
+    name?: string;
+    description?: string;
+    start_date?: string;
+    deadline?: string;
+    icon?: null;
+    progress?: string[];
+    open_items?: string[];
+    roadblocks?: string[];
+    tags?: string[];
+    comments?: string[];
+    hero_image_url?: string;
+    status?: string;
+    ownerAvatarUrl?: string;
+    ownerProfileImageUrl?: string;
+  };
+}
+
+const searchProjects = (payload: unknown) => {
+  return apiService.post('/projects_search', { payload });
 };
 
-// const randomProjects = (payload = {}): any => {
-//   return apiService.post('/projects_search', payload);
-// };
+const randomProjects = () => {
+  const data = apiService.post('/projects_random', {});
+  return data;
+};
 
-const findProject = (id: string): any => {
+const findProject = (id: string): unknown => {
   return apiService.get(`/projects/${id}`);
 };
 
@@ -35,4 +57,5 @@ export const projectApi = {
   deleteProject,
   updateProject,
   searchProjects,
+  randomProjects,
 };
