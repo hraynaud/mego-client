@@ -2,8 +2,8 @@ import { defineStore } from 'pinia';
 import { EndorsementModel } from 'src/core/models';
 
 interface ProfileState {
-  endorseeList: Array<EndorsementModel>;
-  endorserList: Array<EndorsementModel>;
+  endorseeList: EndorsementModel[];
+  endorserList: EndorsementModel[];
 }
 
 export const useProfileStore = defineStore('profile', {
@@ -19,8 +19,8 @@ export const useProfileStore = defineStore('profile', {
 
   actions: {
     initEndorsements(
-      endorsers: Array<EndorsementModel>,
-      endorsees: Array<EndorsementModel>
+      endorsers: EndorsementModel[],
+      endorsees: EndorsementModel[]
     ) {
       this.endorserList = endorsers;
       this.endorseeList = endorsees;
