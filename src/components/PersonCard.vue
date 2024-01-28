@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <q-card class="person-card">
     <q-card-section class="q-pa-sm" horizontal>
       <div class="avatar-wrapper">

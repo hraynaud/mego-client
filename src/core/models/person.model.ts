@@ -4,8 +4,8 @@ export class PersonModel {
   firstName: string;
   lastName: string;
   id: number | string;
-  endorsees?: [EndorsementModel];
-  endorsers?: [EndorsementModel];
+  endorsees: EndorsementModel[] | undefined;
+  endorsers: EndorsementModel[] | undefined;
   profileImageUrl?: string;
   avatarUrl?: string;
   bio?: string;
@@ -22,8 +22,8 @@ export class PersonModel {
     firstName: string,
     lastName: string,
     id: number | string,
-    endorsees?: [EndorsementModel],
-    endorsers?: [EndorsementModel],
+    endorsees: EndorsementModel[],
+    endorsers: EndorsementModel[],
     bio?: string,
     profileImageUrl?: string,
     avatarUrl?: string
