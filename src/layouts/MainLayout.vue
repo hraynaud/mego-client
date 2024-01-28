@@ -3,12 +3,25 @@
     <q-header elevated class="bg-gray">
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        <q-toolbar-title v-if="$q.screen.gt.sm" shrink="true">Konmego</q-toolbar-title>
+        <q-toolbar-title v-if="$q.screen.gt.sm" shrink="true"
+          >Konmego</q-toolbar-title
+        >
 
-        <q-input class="GPL__toolbar-input q-px-sm" dense standout="bg-primary" v-model="search" placeholder="Search">
+        <q-input
+          class="GPL__toolbar-input q-px-sm"
+          dense
+          standout="bg-primary"
+          v-model="search"
+          placeholder="Search"
+        >
           <template v-slot:prepend>
             <q-icon v-if="search === ''" name="search" />
-            <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
+            <q-icon
+              v-else
+              name="clear"
+              class="cursor-pointer"
+              @click="search = ''"
+            />
           </template>
         </q-input>
         <div class="q-pr-sm">{{ name }}</div>
@@ -18,8 +31,16 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="drawer" show-if-above :mini="!drawer || miniState" @click.capture="drawerClick" :width="200"
-      :breakpoint="500" bordered class="bg-grey-3">
+    <q-drawer
+      v-model="drawer"
+      show-if-above
+      :mini="!drawer || miniState"
+      @click.capture="drawerClick"
+      :width="200"
+      :breakpoint="500"
+      bordered
+      class="bg-grey-3"
+    >
       <q-scroll-area class="fit">
         <q-list padding>
           <q-item clickable v-ripple to="/">
@@ -30,7 +51,14 @@
             <q-item-section> Home </q-item-section>
           </q-item>
 
-          <q-expansion-item dense dense-toggle="" clickable v-ripple :content-inset-level="0.25" to="/projects">
+          <q-expansion-item
+            dense
+            dense-toggle=""
+            clickable
+            v-ripple
+            :content-inset-level="0.25"
+            to="/projects"
+          >
             <template v-slot:header>
               <q-item-section avatar>
                 <q-icon name="construction" />
@@ -54,15 +82,22 @@
             <q-item-section> Me </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple to="/people">
+          <q-item clickable v-ripple to="/contacts">
             <q-item-section avatar>
               <q-icon name="group" />
             </q-item-section>
 
-            <q-item-section> People </q-item-section>
+            <q-item-section> Contacts </q-item-section>
           </q-item>
 
-          <q-expansion-item dense dense-toggle="" clickable v-ripple :content-inset-level="0.25" to="/endorsements">
+          <q-expansion-item
+            dense
+            dense-toggle=""
+            clickable
+            v-ripple
+            :content-inset-level="0.25"
+            to="/endorsements"
+          >
             <template v-slot:header>
               <q-item-section avatar>
                 <q-icon name="approval" />
@@ -95,7 +130,14 @@
           to mini-mode
         -->
       <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
-        <q-btn dense round unelevated color="accent" icon="chevron_left" @click="miniState = true" />
+        <q-btn
+          dense
+          round
+          unelevated
+          color="accent"
+          icon="chevron_left"
+          @click="miniState = true"
+        />
       </div>
     </q-drawer>
     <q-page-container>

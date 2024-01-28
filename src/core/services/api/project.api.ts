@@ -9,6 +9,10 @@ const searchProjects = (payload = {}): any => {
   return apiService.post('/projects_search', payload);
 };
 
+// const randomProjects = (payload = {}): any => {
+//   return apiService.post('/projects_search', payload);
+// };
+
 const findProject = (id: string): any => {
   return apiService.get(`/projects/${id}`);
 };

@@ -2,6 +2,13 @@ import { computed } from 'vue';
 import { projectApi, projecteService } from '../core/services';
 import { ProjectModel } from '../core/models';
 import { useProjectStore } from 'src/stores/projects-store';
+
+// export interface ProjectSearchParams {
+//   visibililty?: string;
+//   depth?: number;
+//   userScope?: string;
+// }
+
 const projectStore = useProjectStore();
 export function useProjectList(params: any) {
   const loadProjects = () => {

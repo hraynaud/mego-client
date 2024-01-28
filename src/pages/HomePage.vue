@@ -1,22 +1,6 @@
 <template>
   <q-page>
     <page-header>Dashboard</page-header>
-
-    <!-- <div class="flex flex-center column">
-      <div class="row" style="min-height: 400px; width: 100%; padding: 16px">
-        <div
-          id="parent"
-          class="fit row wrap justify-around"
-          style="overflow: hidden"
-        >
-          <div class="col-3 bg-grey-6" style="overflow: auto">
-            <div class="q-pa-md">
-              <person-card :p="me" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <div class="flex flex-center column">
       <div
         class="row bg-blue-grey-2"

@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { PersonModel } from 'src/core/models';
 
 interface UserState {
-  friendList: Array<PersonModel>;
+  friendList: PersonModel[];
 }
 
 export const useFriendStore = defineStore('friends', {

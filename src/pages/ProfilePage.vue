@@ -71,7 +71,11 @@ watch(
 )
 
 const loadUser = () => {
+
   const id = route.params.userId == 'me' ? authService.currentUser()['uid'] : route.params.userId;
+  if(id==undefined){
+    return;
+  }
   peopleApi
     .findPerson(id)
     .then(function (resp: { data: any }) {

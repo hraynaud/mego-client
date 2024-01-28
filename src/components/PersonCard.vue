@@ -15,12 +15,12 @@
     <q-card-section horizontal>
       <div class="row mini-profile">
         <div class="col-4">
-          {{ p.endorsers.length }}
+          {{ p.endorsers?.length }}
         </div>
         <div class="col-8 item-count">Endorsers</div>
 
         <div class="col-4">
-          {{ p.endorsees.length }}
+          {{ p.endorsees?.length }}
         </div>
         <div class="col-8 item-count">Endorsees</div>
       </div>
