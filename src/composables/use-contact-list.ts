@@ -4,7 +4,7 @@ import { PersonModel } from '../core/models';
 import { useFriendStore } from 'src/stores/friends-store';
 const userStore = useFriendStore();
 
-export function usePeopleList(params: any) {
+export function useContactList(params: any) {
   const loadPeople = () => {
     peopleApi
       .relationships(params)

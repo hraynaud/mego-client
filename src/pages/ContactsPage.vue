@@ -36,18 +36,18 @@
     </div> -->
 
     <div class="">
-      <PeopleList :people="people"></PeopleList>
+      <ContactList :people="people"></ContactList>
     </div>
   </q-page>
 </template>
 
 <script setup lang="ts">
 import PageHeader from 'components/PageHeader.vue';
-import PeopleList from '../components/PeopleList.vue';
+import ContactList from '../components/ContactList.vue';
 
-import { usePeopleList } from 'src/composables/use-people-list';
+import { useContactList } from 'src/composables/use-contact-list';
 
-const { people } = usePeopleList({ group: 'contacts' });
+const { people } = useContactList({ group: 'contacts' });
 </script>
 <style lang="scss" scoped>
 .search-filter {
@@ -55,3 +55,4 @@ const { people } = usePeopleList({ group: 'contacts' });
   // max-width: 300px;
 }
 </style>
+src/composables/use-contact-list
