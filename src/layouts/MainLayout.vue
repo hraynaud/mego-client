@@ -7,23 +7,6 @@
           >Konmego</q-toolbar-title
         >
 
-        <q-input
-          class="GPL__toolbar-input q-px-sm"
-          dense
-          standout="bg-primary"
-          v-model="search"
-          placeholder="Search"
-        >
-          <template v-slot:prepend>
-            <q-icon v-if="search === ''" name="search" />
-            <q-icon
-              v-else
-              name="clear"
-              class="cursor-pointer"
-              @click="search = ''"
-            />
-          </template>
-        </q-input>
         <div class="q-pr-sm">{{ name }}</div>
         <q-avatar size="36px" class="q-mb-sm q-mr-md">
           <img :src="avatar" />

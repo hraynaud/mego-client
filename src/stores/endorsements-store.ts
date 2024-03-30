@@ -2,7 +2,21 @@ import { defineStore } from 'pinia';
 import { EndorsementPathModel } from 'src/core/models';
 
 interface EndorsementState {
-  endorsementList: Map<number, Array<EndorsementPathModel>>;
+  endorsementList: Map<number, EndorsementPathModel[]>;
+  query?: string;
+  hops?: number;
+  tolerance?: number;
+  topicId?: string;
+  topicName?: string;
+}
+
+export interface SearchParams {
+  page?: number;
+  query?: string;
+  hops?: number;
+  tolerance?: number;
+  topicId?: string;
+  topicName?: string;
 }
 
 export const useEndorsementStore = defineStore('endorsements', {
@@ -22,7 +36,7 @@ export const useEndorsementStore = defineStore('endorsements', {
     },
   },
   actions: {
-    setEndorsements(page: number, endorsements: Array<EndorsementPathModel>) {
+    setEndorsements(page: number, endorsements: EndorsementPathModel[]) {
       if (endorsements.length == 0) return;
       this.endorsementList.set(page, endorsements);
     },

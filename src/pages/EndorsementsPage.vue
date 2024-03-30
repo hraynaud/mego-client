@@ -21,13 +21,23 @@ import { useEndorsementsList } from 'src/composables/use-endorsement-list';
 import EndorsementPathList from '../components/EndorsementPathList.vue';
 
 import PageHeader from '../components/PageHeader.vue';
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { EndorsementPathModel } from 'src/core/models';
 const current = ref(1);
-let endorsements = ref<EndorsementPathModel[]>();
-
+const query = ref('Who do I know that knows haute couture');
+const topicName = ref('Design');
+import { SearchParams } from '../stores/endorsements-store';
+let endorsements: Ref<EndorsementPathModel[]> = ref([]);
+const seachParams = ref<SearchParams>({
+  page: undefined,
+  query: undefined,
+  topicName: undefined,
+});
 const gotopage = () => {
-  endorsements = useEndorsementsList({ page: current.value });
+  seachParams.value.page = current.value;
+  seachParams.value.query = query.value;
+  seachParams.value.topicName = topicName.value;
+  endorsements = useEndorsementsList(seachParams.value);
 };
 gotopage();
 </script>

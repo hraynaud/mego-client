@@ -1,25 +1,29 @@
 import { computed } from 'vue';
 import { endorsementService } from '../core/services';
 import { EndorsementPathModel } from '../core/models';
-import { useEndorsementStore } from 'src/stores/endorsements-store';
-const endorsementStore = useEndorsementStore();
-interface searchParams {
-  page: number;
-}
-export function useEndorsementsList(params: searchParams) {
-  loadEndorsements(params);
+import {
+  SearchParams,
+  useEndorsementStore,
+} from 'src/stores/endorsements-store';
+const eStore = useEndorsementStore();
+
+export function useEndorsementsList(params: SearchParams) {
+  const page = params['page'] || 1;
+  console.log('page is: ', params);
+
   return computed(() => {
-    return endorsementStore.endorsements(params['page']);
+    if (eStore.endorsements(page) == undefined) loadEndorsements(params, page);
+    return eStore.endorsements(page) || [];
   });
 }
 
-const loadEndorsements = (params: searchParams) => {
+const loadEndorsements = (params: SearchParams, page: number) => {
   // eslint-disable-next-line quotes
   endorsementService
     .search(params)
     .then((res: any) => {
       if (res) {
-        return setEndorsements(params['page'], res);
+        return setEndorsements(page, res);
       }
     })
     .catch((error: any): void => {
@@ -28,9 +32,9 @@ const loadEndorsements = (params: searchParams) => {
 
   const setEndorsements = (page: number, resp: any) => {
     //TODO why is the response object different from projects and endorsement?
-    const data = resp.data.data;
+
     const endorsements: EndorsementPathModel[] = [];
-    data.map((e: any) => {
+    resp.data.data.map((e: any) => {
       endorsements.push(
         new EndorsementPathModel(
           e.id,
@@ -42,6 +46,6 @@ const loadEndorsements = (params: searchParams) => {
         )
       );
     });
-    endorsementStore.setEndorsements(page, endorsements);
+    eStore.setEndorsements(page, endorsements);
   };
 };
