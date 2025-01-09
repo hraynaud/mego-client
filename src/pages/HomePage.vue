@@ -72,7 +72,6 @@ const loadProjects = () => {
     .catch((error: unknown): void => {
       console.log(error);
     });
-  debugger;
 };
 
 onBeforeMount(() => {
