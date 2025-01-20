@@ -1,6 +1,5 @@
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { peopleApi, peopleService } from '../core/services';
-import { PersonModel } from '../core/models';
 import { useFriendStore } from 'src/stores/friends-store';
 const userStore = useFriendStore();
 
