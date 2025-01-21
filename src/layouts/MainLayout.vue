@@ -33,6 +33,29 @@
 
             <q-item-section> Home </q-item-section>
           </q-item>
+          <q-expansion-item
+            dense
+            dense-toggle=""
+            clickable
+            v-ripple
+            :content-inset-level="0.25"
+            to="/endorsements"
+          >
+            <template v-slot:header>
+              <q-item-section avatar>
+                <q-icon name="approval" />
+              </q-item-section>
+
+              <q-item-section> Explore </q-item-section>
+            </template>
+            <q-item clickable v-ripple to="/endorsements/new">
+              <q-item-section avatar>
+                <q-icon name="add_circle" />
+              </q-item-section>
+
+              <q-item-section> Create New</q-item-section>
+            </q-item>
+          </q-expansion-item>
 
           <q-expansion-item
             dense
@@ -72,30 +95,6 @@
 
             <q-item-section> Contacts </q-item-section>
           </q-item>
-
-          <q-expansion-item
-            dense
-            dense-toggle=""
-            clickable
-            v-ripple
-            :content-inset-level="0.25"
-            to="/endorsements"
-          >
-            <template v-slot:header>
-              <q-item-section avatar>
-                <q-icon name="approval" />
-              </q-item-section>
-
-              <q-item-section> Endorsements </q-item-section>
-            </template>
-            <q-item clickable v-ripple to="/endorsements/new">
-              <q-item-section avatar>
-                <q-icon name="add_circle" />
-              </q-item-section>
-
-              <q-item-section> Create New</q-item-section>
-            </q-item>
-          </q-expansion-item>
 
           <q-item clickable v-ripple @click.prevent="logout">
             <q-item-section avatar>
