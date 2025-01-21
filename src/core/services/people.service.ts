@@ -4,7 +4,7 @@ const buildPerson = (p: any) => {
   return new PersonModel(
     p.attributes.firstName,
     p.attributes.lastName,
-    p.attributes.neoId,
+    p.id,
     p.attributes.endorsees,
     p.attributes.endorsers,
     p.attributes.bio,
