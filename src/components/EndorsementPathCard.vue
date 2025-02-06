@@ -11,7 +11,7 @@
         {{ e?.description }}
       </div>
     </q-card-section>
-    <q-card-section class="q-pt-xl">
+    <q-card-section>
       <endorsement-path :path="e?.path" />
     </q-card-section>
   </q-card>

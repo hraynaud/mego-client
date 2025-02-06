@@ -2,7 +2,7 @@
   <div class="endorsement-path">
     <q-separator />
     <q-card-section class="row items-center path-wrapper">
-      <div class="q-py-md path">
+      <div class="q-py-sm path">
         <router-link
           v-for="p in path"
           :key="p.id"
@@ -65,7 +65,7 @@ const roler = (p: PathAvatar) => {
   }
 
   .path-wrapper {
-    margin-top: 20px;
+    margin-top: 30px;
   }
   .path {
     height: auto;
