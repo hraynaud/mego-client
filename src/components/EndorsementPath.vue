@@ -1,7 +1,7 @@
 <template>
   <div class="endorsement-path">
     <q-separator />
-    <q-card-section class="row items-center">
+    <q-card-section class="row items-center path-wrapper">
       <div class="q-py-md path">
         <router-link
           v-for="p in path"
@@ -11,7 +11,7 @@
         >
           <user-avatar
             :data="getPathElementAvatarData(p as PathAvatar)"
-            class="path-el-content small"
+            class="path-el-content tiny"
             :cls="roler(p)"
           />
         </router-link>
@@ -59,14 +59,18 @@ const roler = (p: PathAvatar) => {
 </script>
 
 <style lang="scss" scoped>
-.endorsement-card {
+.endorsement-path-card {
   .q-card__section--vert {
     padding: 0px;
   }
+
+  .path-wrapper {
+    margin-top: 20px;
+  }
   .path {
-    height: 80px;
+    height: auto;
     min-width: 160px;
-    position: relative;
+
     padding: 8px;
     .path-el-content {
       display: inline;
@@ -80,10 +84,10 @@ const roler = (p: PathAvatar) => {
     .path-el:not(:last-child):after {
       position: absolute;
       content: '';
-      left: 61px;
+      left: 33px;
       top: 0%;
       width: 25px;
-      height: 11px;
+      // height: 11px;
       border-bottom: 2px solid black;
     }
   }

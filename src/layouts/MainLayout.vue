@@ -39,14 +39,14 @@
             clickable
             v-ripple
             :content-inset-level="0.25"
-            to="/endorsements"
+            to="/chat"
           >
             <template v-slot:header>
               <q-item-section avatar>
                 <q-icon name="approval" />
               </q-item-section>
 
-              <q-item-section> Explore </q-item-section>
+              <q-item-section> Chat </q-item-section>
             </template>
             <q-item clickable v-ripple to="/endorsements/new">
               <q-item-section avatar>

@@ -51,35 +51,60 @@ defineProps<{
   border: 1px solid;
   border-radius: 50%;
 }
-.small {
-  margin-top: -1.95rem;
 
-  .avatar {
+.avatar {
+  margin-bottom: 2%;
+  margin-top: -1.95rem;
+  .tiny & {
+    width: 32px;
+    height: 32px;
+    font-size: 80px;
+  }
+  .mini & {
+    width: 40px;
+    height: 40px;
+    font-size: 80px;
+  }
+  .small & {
+    width: 40px;
+    height: 40px;
+    font-size: 96px;
+  }
+
+  .medium & {
     width: 60px;
     height: 60px;
-    margin-bottom: 2%;
-    margin-top: 1%;
     font-size: 120px;
   }
-}
-
-.large {
-  margin-top: -4.75rem;
-  &.profile {
-    margin: 0px;
-  }
-
-  .avatar {
+  .large & {
     height: 125px;
     width: 125px;
-    margin-bottom: 2%;
-    margin-top: 1%;
-  }
-
-  .icon {
-    font-size: 242px;
+    margin-top: -75px;
+    // margin-bottom: 2%;
+    // margin-top: 1%;
   }
 }
+
+// .mini {
+//   margin-top: -1.95rem;
+
+//   .avatar {
+//     width: 32px;
+//     height: 32px;
+//     font-size: 32px;
+//   }
+// }
+
+// .large {
+//   margin-top: -4.75rem;
+//   &.profile {
+//     margin: 0px;
+//   }
+
+//   .icon {
+//     font-size: 242px;
+//   }
+// }
 
 .path-el-content.small {
   &.link,
@@ -90,4 +115,3 @@ defineProps<{
   }
 }
 </style>
-s
