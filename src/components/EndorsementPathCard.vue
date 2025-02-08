@@ -1,13 +1,13 @@
 <template>
-  <q-card class="endorsement-path-card mini-card">
+  <q-card class="endorsement-path-card">
     <q-card-section>
-      <div class="endorsement-topic text-center q-mb-sm">
+      <div class="endorsement-path-card-topic text-center q-mb-sm">
         {{ e?.topic }}
       </div>
 
       <user-avatar :data="avatarLargeData" class="mini" />
 
-      <div class="q-pa-sm endorsement-description">
+      <div class="q-pa-sm endorsement-path-card-description">
         {{ e?.description }}
       </div>
     </q-card-section>
@@ -37,6 +37,6 @@ const avatarLargeData = <AvatarData>(<unknown>{
 });
 </script>
 
-<style lang="scss" scoped>
-@import '../css/endorsement.scss'; // .endorsement-card {
+<style lang="scss">
+@import '../css/endorsement-path-card.scss';
 </style>
