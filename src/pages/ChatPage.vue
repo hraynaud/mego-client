@@ -5,12 +5,12 @@
       <div v-for="(msg, index) in messages" :key="index" class="chat-message">
         {{ msg }}
       </div>
+      <div class="q-pa-md q-my-lg">
+        <EndorsementPathList :endorsements="endorsements" />
+      </div>
     </div>
 
-    <div class="q-pa-md q-mb-lg">
-      <EndorsementPathList :endorsements="endorsements" />
-    </div>
-    <q-page-sticky position="top" expand>
+    <q-page-sticky position="bottom" class="q-mt-lg" expand>
       <div class="col q-px-xl q-py-lg q-mx-xl">
         <q-input
           rounded
