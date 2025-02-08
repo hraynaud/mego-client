@@ -1,7 +1,7 @@
 <template>
   <q-card class="project-card">
     <q-card-section>
-      <div class="project-topic text-h4 text-center q-mb-sm">
+      <div class="project-topic text-center q-mb-sm">
         {{ p?.name }}
       </div>
 
@@ -60,6 +60,7 @@ const avatarData = computed<AvatarData>(() => {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   height: 175px;
+  font-size: 2.125em;
 }
 
 .project-description {
