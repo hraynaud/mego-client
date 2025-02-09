@@ -1,23 +1,21 @@
 <template>
-  <div class="endorsement-path">
-    <q-separator />
-    <q-card-section class="row items-center path-wrapper">
-      <div class="q-py-sm path">
-        <router-link
-          v-for="p in path"
-          :key="p.id"
-          :to="profilePath(p.id)"
-          class="path-el"
-        >
-          <user-avatar
-            :data="getPathElementAvatarData(p as PathAvatar)"
-            class="path-el-content tiny"
-            :cls="roler(p)"
-          />
-        </router-link>
-      </div>
-    </q-card-section>
-  </div>
+  <q-separator />
+  <q-card-section class="row items-center endorsement-path-wrapper">
+    <div class="q-py-sm path">
+      <router-link
+        v-for="p in path"
+        :key="p.id"
+        :to="profilePath(p.id)"
+        class="path-el"
+      >
+        <user-avatar
+          :data="getPathElementAvatarData(p as PathAvatar)"
+          class="path-el-content tiny"
+          :cls="roler(p)"
+        />
+      </router-link>
+    </div>
+  </q-card-section>
 </template>
 
 <script setup lang="ts">
@@ -57,8 +55,22 @@ const roler = (p: PathAvatar) => {
   }
 };
 </script>
+<style>
+.avatar {
+  .tiny.thumb_up & {
+    .q-avatar__content {
+      font-size: 24px;
+    }
+  }
+  .tiny.psychology & {
+    .q-avatar__content {
+      font-size: 32px;
+    }
+  }
+}
+</style>
 <style lang="scss" scoped>
-.path-wrapper {
+.endorsement-path-wrapper {
   margin-top: 30px;
 }
 
