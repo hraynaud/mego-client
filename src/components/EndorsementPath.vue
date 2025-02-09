@@ -73,7 +73,7 @@ const roler = (p: PathAvatar) => {
 </style>
 <style lang="scss" scoped>
 .endorsement-path-wrapper {
-  margin-top: 30px;
+  margin-top: 12px;
 }
 
 .path {
@@ -92,12 +92,13 @@ const roler = (p: PathAvatar) => {
 
   .path-el:not(:last-child):after {
     position: absolute;
-    content: '';
+    content: '\2945';
     left: 33px;
-    top: -35%;
-    width: 18px;
+    top: -8px;
     margin: 0px 2px;
-    border-bottom: 2px solid black;
+    font-weight: 600;
+    font-size: 24px;
+    color: #666363;
   }
 }
 </style>
