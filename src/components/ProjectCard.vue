@@ -4,8 +4,9 @@
       <div class="project-topic text-center q-mb-sm">
         {{ p?.name }}
       </div>
-
-      <user-avatar :data="avatarData" class="large" />
+      <div class="text-center card-header">
+        <user-avatar :data="avatarData" cls="large" />
+      </div>
 
       <div class="q-pa-md project-description">
         {{ p?.description }}

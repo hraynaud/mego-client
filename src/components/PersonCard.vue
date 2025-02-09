@@ -2,7 +2,7 @@
   <q-card class="person-card">
     <q-card-section class="q-pa-sm" horizontal>
       <div class="avatar-wrapper">
-        <q-avatar size="75px">
+        <q-avatar>
           <img :src="p.profileImageUrl" />
         </q-avatar>
         <div class="name">

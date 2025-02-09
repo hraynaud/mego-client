@@ -4,9 +4,9 @@
       <div class="topic text-h6 text-center q-mb-xs">
         {{ e?.topic }}
       </div>
-
-      <user-avatar :data="avatarData" class="small" />
-
+      <div class="text-center card-header">
+        <user-avatar :data="avatarData" cls="small" />
+      </div>
       <div class="q-pa-sm description">
         {{ e?.description }}
       </div>

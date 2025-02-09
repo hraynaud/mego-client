@@ -1,9 +1,9 @@
 <template>
       <q-card class="person-card">
         <q-card-section horizontal>
-          <q-card-section class="profile-img q-pa-sm">
-            <div class="profile-img-wrapper">
-              <user-avatar :data="avatarLargeData" class="large profile"/>
+          <q-card-section class="q-pa-sm">
+            <div class="text-center card-header">
+              <user-avatar :data="avatarLargeData" cls="large"/>
             </div>
           </q-card-section>
           <q-card-section>
@@ -51,17 +51,15 @@ const avatarLargeData = computed<AvatarData>(()=>{ return {
 } as AvatarData})
 
 </script>
-<style lang="scss" scoped>
-.person-card {
 
+<style lang="scss" scoped>
+
+.person-card {
   .name {
     padding-top: 15px;
     font-weight: bold;
   }
-  .profile-img-wrapper {
-  margin: auto;
-  text-align: center;
-}
+
 }
 
 .mini-profile {
@@ -71,7 +69,5 @@ const avatarLargeData = computed<AvatarData>(()=>{ return {
     $h-tags: ('h1');
   }
 }
-.centered {
-  text-align: center;
-}
+
 </style>

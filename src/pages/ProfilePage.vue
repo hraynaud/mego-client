@@ -1,8 +1,6 @@
 <template>
   <q-page style="max-height: 90vh; overflow-y: scroll">
-    <page-header>{{fullName}}</page-header>
-    <!-- <div class="row">
-    <div class="offset-xs-1 col-sm-8 col-md-6"> -->
+    <page-header cls="avatar-left-large">{{fullName}}</page-header>
 
     <profile-card :p="profile" />
 
@@ -19,8 +17,7 @@
           <endorsement-list :endorsements="endorsees" :deleteable=true role="endorsee"/>
         </q-card-section>
     </q-card>
-  <!-- </div>
-</div> -->
+
 
 
     <!-- <q-page-sticky position="bottom-right" :offset="[64, 36]">

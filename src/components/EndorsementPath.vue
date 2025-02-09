@@ -10,8 +10,8 @@
       >
         <user-avatar
           :data="getPathElementAvatarData(p as PathAvatar)"
-          class="path-el-content tiny"
-          :cls="roler(p)"
+          class="path-el-content"
+          :cls="'tiny' + ' ' + roler(p)"
         />
       </router-link>
     </div>
@@ -56,15 +56,17 @@ const roler = (p: PathAvatar) => {
 };
 </script>
 <style>
-.avatar {
-  .tiny.thumb_up & {
-    .q-avatar__content {
-      font-size: 24px;
+.path-el {
+  .avatar.anon.icon {
+    &.tiny.thumb_up {
+      .q-avatar__content {
+        font-size: 24px;
+      }
     }
-  }
-  .tiny.psychology & {
-    .q-avatar__content {
-      font-size: 32px;
+    &.tiny.psychology {
+      .q-avatar__content {
+        font-size: 32px;
+      }
     }
   }
 }
@@ -92,8 +94,9 @@ const roler = (p: PathAvatar) => {
     position: absolute;
     content: '';
     left: 33px;
-    top: 0%;
-    width: 25px;
+    top: -35%;
+    width: 18px;
+    margin: 0px 2px;
     border-bottom: 2px solid black;
   }
 }
