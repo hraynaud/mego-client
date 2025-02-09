@@ -57,3 +57,32 @@ const roler = (p: PathAvatar) => {
   }
 };
 </script>
+<style lang="scss" scoped>
+.path-wrapper {
+  margin-top: 30px;
+}
+
+.path {
+  height: auto;
+  min-width: 160px;
+
+  padding: 8px;
+  .path-el-content {
+    display: inline;
+  }
+
+  .path-el:not(:last-child) {
+    margin-right: 27px;
+    position: relative;
+  }
+
+  .path-el:not(:last-child):after {
+    position: absolute;
+    content: '';
+    left: 33px;
+    top: 0%;
+    width: 25px;
+    border-bottom: 2px solid black;
+  }
+}
+</style>
