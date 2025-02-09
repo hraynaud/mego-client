@@ -19,4 +19,3 @@ import { ProjectModel } from 'src/core/models';
 
 const projects = useProjectList({}) as unknown as ProjectModel[];
 </script>
-<style lang="scss" scoped></style>

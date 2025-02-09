@@ -13,11 +13,16 @@
       </div>
     </q-card-section>
     <q-separator />
-    <q-card-section class="row items-center">
+    <!-- <q-card-section class="row items-center">
       <div class="q-pa-md path">
         <q-btn round color="primary" icon="launch" :to="projectPath(p?.id)" />
       </div>
-    </q-card-section>
+    </q-card-section> -->
+    <q-card-actions class="row items-center">
+      <div class="q-pa-md path">
+        <q-btn round color="primary" icon="launch" :to="projectPath(p?.id)" />
+      </div>
+    </q-card-actions>
   </q-card>
 </template>
 <script setup lang="ts">
@@ -40,7 +45,8 @@ const avatarData = computed<AvatarData>(() => {
   } as AvatarData;
 });
 </script>
-<style lang="scss">
+
+<style lang="scss" scoped>
 .project-card .q-card__section--vert {
   padding: 0px;
 }

@@ -7,14 +7,14 @@
             </div>
           </q-card-section>
           <q-card-section>
-            <div >
               <div>
                 {{ p.bio }}
               </div>
-            </div>
           </q-card-section>
         </q-card-section>
       </q-card>
+
+
       <q-card>
         <q-card-section>
           <q-card-section-item >

@@ -63,4 +63,12 @@
       }
     }
   }
+
+  &.large.icon.project {
+    .q-avatar__content {
+      font-size: 105px;
+      color: seagreen;
+      background-color: darkslategray;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 <template>
   <q-page style="max-height: 90vh; overflow-y: scroll">
-    <page-header>{{projectName}}</page-header>
+    <page-header cls="avatar-left-large">{{projectName}}</page-header>
+
     <project-profile-card :p="project" />
     <!-- <q-card class="q-my-xs">
       <q-card-section>
