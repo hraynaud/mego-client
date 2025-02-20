@@ -35,7 +35,12 @@
               text-color="black"
               align="center"
             >
-              <q-icon name="email" left size="16px" color="grey-14"></q-icon>
+              <q-icon
+                name="email"
+                left
+                color="grey-14"
+                style="font-size: 20px; margin-left: -8px"
+              ></q-icon>
               <div class="text-weight-light">Log in with Email</div>
             </q-btn>
           </q-card-section>

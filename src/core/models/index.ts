@@ -6,5 +6,6 @@ export * from './topic.model';
 export * from './person.model';
 export * from './path-avatar.model';
 export * from './forms/person-form.model';
+export * from './forms/topic-form.model';
 export * from './forms/endorsement-form.model';
 export * from './forms/invite-form.model';

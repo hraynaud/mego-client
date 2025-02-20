@@ -1,6 +1,6 @@
 import { ProjectModel } from '../models';
-
-const buildProject = (p: any) => {
+import { apiService } from './api.service';
+const build = (p: any) => {
   console.log('attrs', p);
   return new ProjectModel(
     p.id,
@@ -14,6 +14,17 @@ const buildProject = (p: any) => {
   );
 };
 
-export const projecteService = {
-  buildProject,
+const create = (project: ProjectModel) => {
+  return apiService
+    .post('/projects', project)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
+};
+export const projectService = {
+  build,
+  create,
 };

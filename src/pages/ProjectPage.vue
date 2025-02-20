@@ -20,7 +20,7 @@
 </template>
 <script setup lang="ts" allowJs: true>
 import { ProjectModel } from 'src/core/models';
-import { projectApi,projecteService } from 'src/core/services';
+import { projectApi,projectService } from 'src/core/services';
 import { ref, computed, watch, onMounted } from 'vue';
 import ProjectProfileCard from '../components/ProjectProfileCard.vue';
 import { useRoute } from 'vue-router';
@@ -44,7 +44,7 @@ const loadProject = () => {
   projectApi
     .findProject(id)
     .then(function (resp: { data: any }) {
-        project.value = projecteService.buildProject(resp.data.data)
+        project.value = projectService.build(resp.data.data)
         console.log(project.value)
 
     })

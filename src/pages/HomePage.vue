@@ -40,7 +40,7 @@ import {
   peopleService,
   authService,
   projectApi,
-  projecteService,
+  projectService,
 } from '../core/services';
 import { RandomProjectsResponses } from '../core/services/api/project.api';
 import { PersonModel, ProjectModel } from 'src/core/models';
@@ -66,7 +66,7 @@ const loadProjects = () => {
     .randomProjects()
     .then((resp) => {
       resp.data.data.map((p: unknown) => {
-        projects.value.push(projecteService.buildProject(p));
+        projects.value.push(projectService.build(p));
       });
     })
     .catch((error: unknown): void => {

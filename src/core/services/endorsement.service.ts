@@ -7,7 +7,7 @@ const search = (params: any): any => {
   return apiService.get('/endorsements_search', params);
 };
 
-const newEndorsement = (endorsement: EndorsementFormModel) => {
+const create = (endorsement: EndorsementFormModel) => {
   return apiService
     .post('/endorsements', endorsement)
     .then((res) => {
@@ -29,7 +29,7 @@ const update = () => {
 };
 
 export const endorsementService = {
-  newEndorsement,
+  newEndorsement: create,
   del,
   update,
   search,

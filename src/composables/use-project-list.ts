@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { projectApi, projecteService } from '../core/services';
+import { projectApi, projectService } from '../core/services';
 import { useProjectStore } from 'src/stores/projects-store';
 
 const projectStore = useProjectStore();
@@ -21,7 +21,7 @@ export function useProjectList(params: unknown) {
     const data = resp.data.projects.data;
 
     data.map((p: any) => {
-      projects.value.push(projecteService.buildProject(p));
+      projects.value.push(projectService.build(p));
     });
     projectStore.initProjects(projects.value);
   };

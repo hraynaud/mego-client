@@ -48,13 +48,6 @@
 
               <q-item-section> Chat </q-item-section>
             </template>
-            <q-item clickable v-ripple to="/endorsements/new">
-              <q-item-section avatar>
-                <q-icon name="add_circle" />
-              </q-item-section>
-
-              <q-item-section> Create New</q-item-section>
-            </q-item>
           </q-expansion-item>
 
           <q-expansion-item
@@ -94,6 +87,13 @@
             </q-item-section>
 
             <q-item-section> Contacts </q-item-section>
+          </q-item>
+          <q-item clickable v-ripple to="/endorsements/new">
+            <q-item-section avatar>
+              <q-icon name="add_circle" />
+            </q-item-section>
+
+            <q-item-section> Create New</q-item-section>
           </q-item>
 
           <q-item clickable v-ripple @click.prevent="logout">
