@@ -13,7 +13,7 @@
 
       <q-card-section>
         <q-select
-          v-model="endorseeId"
+          v-model="currEndorsee"
           :options="contacts"
           class="q-py-sm"
           label="Current Contacts"
@@ -32,7 +32,7 @@
         </q-select>
 
         <q-select
-          v-model="topicId"
+          v-model="selectedTopic"
           :options="topics"
           class="q-py-sm"
           label="Topic"
@@ -63,7 +63,7 @@
     <ContactForm v-model="newContact" @submit="handleContactSubmit" />
   </q-dialog>
 
-  <q-dialog v-model="newTopicVisible">
+  <q-dialog v-model="newTopicVisible" @before-show="clearNewTopic">
     <TopicForm v-model="newTopic" @submit="handleTopicSubmit" />
   </q-dialog>
 </template>
@@ -89,7 +89,7 @@ import {
 } from '../../core/models';
 
 interface FormSelectOption {
-  id: string;
+  value: string;
   label: string;
 }
 
@@ -97,15 +97,12 @@ const newTopicVisible = ref(false);
 const newContactVisible = ref(false);
 const topics = ref<FormSelectOption[]>([]);
 const contacts = ref<FormSelectOption[]>([]);
-const topicId = ref();
-const endorseeId = ref();
+const selectedTopic = ref();
+const currEndorsee = ref();
 const blurb = ref();
 const newEndorsement: EndorsementFormModel = { description: undefined };
 const newContact = ref<PersonFormModel>({});
-const newTopic = ref<TopicFormModel>({
-  name: '',
-  description: '',
-});
+const newTopic = ref<TopicFormModel>({});
 
 const avatarData: ThingAvatarData = {
   icon: 'thumb_up',
@@ -135,7 +132,7 @@ onMounted(() => {
 
     data.map((topic: any) => {
       const topx: FormSelectOption = {
-        id: topic.id,
+        value: topic.id,
         label: topic.attributes.name,
       };
 
@@ -146,7 +143,7 @@ onMounted(() => {
       const data = res.data.data;
       data.map((contact: any) => {
         contacts.value.push({
-          id: contact.id,
+          value: contact.id,
           label: `${contact.attributes.firstName} ${contact.attributes.lastName}`,
         });
       });
@@ -159,8 +156,8 @@ function onReset() {
 }
 
 function clearall() {
-  endorseeId.value = null;
-  topicId.value = null;
+  currEndorsee.value = null;
+  selectedTopic.value = null;
   // clearNewTopic();
 }
 
@@ -169,8 +166,9 @@ const isValidEndorsement = (): boolean => {
 };
 
 const setEndorsee = () => {
-  if (endorseeId.value) {
-    newEndorsement.endorseeId = endorseeId.value.id;
+  debugger;
+  if (currEndorsee.value && currEndorsee.value.value !== '') {
+    newEndorsement.endorseeId = currEndorsee.value.value;
   } else {
     newEndorsement.newPerson = {
       first: newContact.value.firstName,
@@ -181,8 +179,9 @@ const setEndorsee = () => {
 };
 
 const setTopic = () => {
-  if (topicId.value) {
-    newEndorsement.topicId = topicId.value.id;
+  debugger;
+  if (selectedTopic.value && selectedTopic.value.value !== '') {
+    newEndorsement.topicId = selectedTopic.value.value;
   } else {
     newEndorsement.newTopic = {
       name: newTopic.value.name,
@@ -192,11 +191,11 @@ const setTopic = () => {
 };
 
 const canSetEndorsee = (): boolean => {
-  return isValidNewContact() || endorseeId.value;
+  return isValidNewContact() || currEndorsee.value;
 };
 
 const canSetTopic = (): boolean => {
-  return isValidNewTopic() || topicId.value;
+  return isValidNewTopic() || selectedTopic.value;
 };
 
 const isValidNewContact = (): boolean => {
@@ -204,13 +203,13 @@ const isValidNewContact = (): boolean => {
 };
 
 function showNewContactForm() {
-  endorseeId.value = null;
+  currEndorsee.value = null;
   clearNewContact();
   newContactVisible.value = true;
 }
 
 function showNewTopicForm() {
-  topicId.value = null;
+  selectedTopic.value = null;
   clearNewTopic();
   hideNewTopic();
   newTopicVisible.value = true;
@@ -233,16 +232,22 @@ const hideNewTopic = () => (newTopicVisible.value = false);
 const hideNewContact = () => (newContactVisible.value = false);
 
 const handleTopicSubmit = () => {
+  const addMeTopic = {
+    value: '',
+    label: `${newTopic.value.name}`,
+  };
+  topics.value.push(addMeTopic);
+  selectedTopic.value = addMeTopic;
   hideNewTopic();
 };
 
 const handleContactSubmit = () => {
-  const contact = {
-    id: '999999',
+  const addMeContact = {
+    value: '',
     label: `${newContact.value.firstName} ${newContact.value.lastName}`,
   };
-  contacts.value.push(contact);
-  endorseeId.value = contact.label;
+  contacts.value.push(addMeContact);
+  currEndorsee.value = addMeContact;
   hideNewContact();
 };
 
@@ -253,6 +258,7 @@ const isValidNewTopic = (): boolean => {
 const noNulls = (data: object): boolean =>
   Object.values(data).every((value) => value != null);
 </script>
+
 <style lang="scss" scoped>
 .form-card {
   border-radius: 8px;

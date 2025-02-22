@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { defineModel } from 'vue';
-import { TopicFormModel } from '../core/models';
+import { TopicFormModel } from '../../core/models';
 import CustQInput from 'src/pages/components/custom/CustQInput.vue';
 import PopupForm, { HeaderData } from 'src/pages/components/PopupForm.vue';
 
