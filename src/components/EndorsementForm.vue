@@ -1,9 +1,10 @@
 <template>
-  <div class="q-pa-xl row justify-center">
-    <q-card class="col-5">
-      <q-card-section>
-        <h5 class="q-my-md text-center">Create an Endorsment</h5>
-      </q-card-section>
+  <div class="q-pa-xl row">
+    <q-card class="col-5 form-card offset-md-1">
+      <div class="header text-center q-mb-sm">New Endorsement</div>
+      <div class="text-center card-header">
+        <thing-avatar :data="avatarData" cls="large project" />
+      </div>
 
       <q-card-section>
         <q-form @submit="onSubmit" @reset="onReset" name="endorsement">
@@ -17,7 +18,11 @@
             use-input
           >
             <template v-slot:after>
-              <q-icon name="person_add" @click="showNewContactForm" />
+              <q-icon
+                name="person_add_alt_1"
+                @click="showNewContactForm"
+                size="20px"
+              />
             </template>
           </q-select>
 
@@ -31,7 +36,7 @@
             use-input
           >
             <template v-slot:after>
-              <q-icon name="person_add" @click="showNewTopicForm"></q-icon>
+              <q-icon name="topic" @click="showNewTopicForm"></q-icon>
             </template>
           </q-select>
 
@@ -54,7 +59,7 @@
     </q-card>
   </div>
 
-  <q-dialog v-model="newContactVisible" @before-show="clearContact">
+  <q-dialog v-model="newContactVisible" @before-show="clearNewContact">
     <ContactForm v-model="newContact" @submit="handleContactSubmit" />
   </q-dialog>
 
@@ -65,20 +70,22 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import ContactForm from '../components/ContactForm.vue';
+import TopicForm from '../components/TopicForm.vue';
 import CustQInput from 'src/components/custom/CustQInput.vue';
-
+import ThingAvatar, { ThingAvatarData } from 'src/components/ThingAvatar.vue';
 import {
   topicService,
   contactService,
   endorsementService,
 } from '../core/services';
+
 import {
   EndorsementFormModel,
   PersonFormModel,
   TopicFormModel,
 } from '../core/models';
-import ContactForm from '../components/ContactForm.vue';
-import TopicForm from '../components/TopicForm.vue';
+
 interface FormSelectOption {
   id: string;
   label: string;
@@ -92,14 +99,17 @@ const topicId = ref();
 const endorseeId = ref();
 const blurb = ref();
 const newEndorsement: EndorsementFormModel = {};
-
-const newContact = ref<PersonFormModel | object>({});
-
+const newContact = ref<PersonFormModel>({});
 const newTopic = ref<TopicFormModel>({
   name: '',
   description: '',
 });
 
+const avatarData: ThingAvatarData = {
+  icon: 'thumb_up',
+  imgUrl: undefined,
+  role: undefined,
+};
 function onSubmit() {
   if (isValidEndorsement()) {
     setEndorsee();
@@ -131,7 +141,6 @@ onMounted(() => {
 
     contactService.getContacts().then((res: any) => {
       const data = res.data.data;
-
       data.map((contact: any) => {
         contacts.value.push({
           id: contact.id,
@@ -172,10 +181,10 @@ const setTopic = () => {
   if (topicId.value) {
     newEndorsement.topicId = topicId.value.id;
   } else {
-    // newEndorsement.newTopic = {
-    //   name: topicName.value,
-    //   description: topicDescription.value,
-    // };
+    newEndorsement.newTopic = {
+      name: newTopic.value.name,
+      description: newTopic.value.description,
+    };
   }
 };
 
@@ -188,8 +197,44 @@ const canSetTopic = (): boolean => {
 };
 
 const isValidNewContact = (): boolean => {
-  // return Object.values(newContact.value).every((value) => value != null);
   return noNulls(newContact.value);
+};
+
+function showNewContactForm() {
+  endorseeId.value = null;
+  clearNewContact();
+  newContactVisible.value = true;
+}
+
+function showNewTopicForm() {
+  topicId.value = null;
+  clearNewTopic();
+  hideNewTopic();
+  newTopicVisible.value = true;
+}
+
+const clearNewTopic = () => {
+  newTopic.value = { name: '', description: '' };
+};
+
+const clearNewContact = () => {
+  newContact.value = {
+    firstName: '',
+    lastName: '',
+    email: '',
+  };
+};
+
+const hideNewTopic = () => (newTopicVisible.value = false);
+
+const hideNewContact = () => (newContactVisible.value = false);
+
+const handleTopicSubmit = () => {
+  hideNewTopic();
+};
+
+const handleContactSubmit = () => {
+  hideNewContact();
 };
 
 const isValidNewTopic = (): boolean => {
@@ -198,31 +243,17 @@ const isValidNewTopic = (): boolean => {
 
 const noNulls = (data: object): boolean =>
   Object.values(data).every((value) => value != null);
-
-function showNewContactForm() {
-  endorseeId.value = null;
-  newContactVisible.value = true;
-}
-
-function showNewTopicForm() {
-  topicId.value = null;
-  newTopicVisible.value = true;
-}
-
-const handleTopicSubmit = () => {
-  clearNewTopic();
-  newTopicVisible.value = false;
-};
-const handleContactSubmit = () => {
-  clearContact();
-  newContactVisible.value = false;
-};
-
-const clearNewTopic = () => {
-  newTopic.value = { name: '', description: '' };
-};
-
-const clearContact = () => {
-  newContact.value = {};
-};
 </script>
+<style lang="scss" scoped>
+.form-card {
+  border-radius: 8px;
+}
+.header {
+  font-weight: 300;
+  padding-top: 4%;
+  height: 175px;
+  font-size: 2.125em;
+  color: white;
+  background-color: $secondary;
+}
+</style>
