@@ -13,4 +13,5 @@ export class EndorsementFormModel {
     last: string;
     email: string;
   };
+  description: string | undefined;
 }

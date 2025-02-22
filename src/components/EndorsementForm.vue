@@ -1,5 +1,10 @@
 <template>
-  <div class="q-pa-xl row">
+  <q-form
+    @submit="onSubmit"
+    @reset="onReset"
+    name="endorsement"
+    class="q-pa-xl row"
+  >
     <q-card class="col-5 form-card offset-md-1">
       <div class="header text-center q-mb-sm">New Endorsement</div>
       <div class="text-center card-header">
@@ -7,57 +12,52 @@
       </div>
 
       <q-card-section>
-        <q-form @submit="onSubmit" @reset="onReset" name="endorsement">
-          <q-select
-            v-model="endorseeId"
-            :options="contacts"
-            class="q-py-sm"
-            label="Current Contacts"
-            outlined
-            dense
-            use-input
-          >
-            <template v-slot:after>
-              <q-icon
-                name="person_add_alt_1"
-                @click="showNewContactForm"
-                size="20px"
-              />
-            </template>
-          </q-select>
+        <q-select
+          v-model="endorseeId"
+          :options="contacts"
+          class="q-py-sm"
+          label="Current Contacts"
+          lazy-rules="ondemand"
+          outlined
+          dense
+          use-input
+        >
+          <template v-slot:after>
+            <q-icon
+              name="person_add_alt_1"
+              @click="showNewContactForm"
+              size="20px"
+            />
+          </template>
+        </q-select>
 
-          <q-select
-            v-model="topicId"
-            :options="topics"
-            class="q-py-sm"
-            label="Topic"
-            outlined
-            dense
-            use-input
-          >
-            <template v-slot:after>
-              <q-icon name="topic" @click="showNewTopicForm"></q-icon>
-            </template>
-          </q-select>
+        <q-select
+          v-model="topicId"
+          :options="topics"
+          class="q-py-sm"
+          label="Topic"
+          outlined
+          dense
+          use-input
+        >
+          <template v-slot:after>
+            <q-icon name="topic" @click="showNewTopicForm"></q-icon>
+          </template>
+        </q-select>
 
-          <CustQInput
-            v-model="blurb"
-            type="textarea"
-            label="Description"
-            hint="Say more about why you are making this endorsement"
-            :rules="[
-              (val) => (val && val.length > 0) || 'Please enter an description',
-            ]"
-          />
-        </q-form>
+        <CustQInput
+          v-model="blurb"
+          type="textarea"
+          label="Description"
+          hint="Say more about why you are making this endorsement"
+        />
       </q-card-section>
-
-      <q-card-actions align="right">
+      <q-card-actions align="right" class="q-py-sm">
         <q-btn label="Submit" type="submit" color="primary" flat no-caps />
         <q-btn label="Cancel" color="primary" flat class="q-ml-sm" no-caps />
       </q-card-actions>
     </q-card>
-  </div>
+  </q-form>
 
   <q-dialog v-model="newContactVisible" @before-show="clearNewContact">
     <ContactForm v-model="newContact" @submit="handleContactSubmit" />
@@ -98,7 +98,7 @@ const contacts = ref<FormSelectOption[]>([]);
 const topicId = ref();
 const endorseeId = ref();
 const blurb = ref();
-const newEndorsement: EndorsementFormModel = {};
+const newEndorsement: EndorsementFormModel = { description: undefined };
 const newContact = ref<PersonFormModel>({});
 const newTopic = ref<TopicFormModel>({
   name: '',
@@ -114,6 +114,7 @@ function onSubmit() {
   if (isValidEndorsement()) {
     setEndorsee();
     setTopic();
+    newEndorsement.description = blurb.value;
     endorsementService
       .newEndorsement(newEndorsement)
       .then((res) => {
@@ -234,6 +235,12 @@ const handleTopicSubmit = () => {
 };
 
 const handleContactSubmit = () => {
+  const contact = {
+    id: '999999',
+    label: `${newContact.value.firstName} ${newContact.value.lastName}`,
+  };
+  contacts.value.push(contact);
+  endorseeId.value = contact.label;
   hideNewContact();
 };
 

@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import AvatarBadge from './AvatarBadge.vue';
 export interface ThingAvatarData {
   imgUrl: string | undefined;
   icon: string | undefined;
