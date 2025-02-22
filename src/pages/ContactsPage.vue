@@ -42,8 +42,8 @@
 </template>
 
 <script setup lang="ts">
-import PageHeader from 'components/PageHeader.vue';
-import ContactList from '../components/ContactList.vue';
+import PageHeader from './components/PageHeader.vue';
+import ContactList from './components/ContactList.vue';
 
 import { useContactList } from 'src/composables/use-contact-list';
 

@@ -10,8 +10,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { EndorsementPathModel } from '../core/models';
-import EndorsementPathCard from '../components/EndorsementPathCard.vue';
+import { EndorsementPathModel } from '../../core/models';
+import EndorsementPathCard from './EndorsementPathCard.vue';
 
 defineProps<{
   endorsements: EndorsementPathModel[];

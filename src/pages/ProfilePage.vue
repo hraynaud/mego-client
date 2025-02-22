@@ -43,9 +43,9 @@ import { ref, computed, watch, onMounted } from 'vue';
 import { useProfileStore } from 'src/stores/profile-store';
 import { useEndorsementEvent } from 'src/composables/use-endorsement-event';
 import { useRoute } from 'vue-router';
-import ProfileCard from '../components/ProfileCard.vue';
-import EndorsementList from '../components/EndorsementList.vue';
-import PageHeader from 'src/components/PageHeader.vue';
+import ProfileCard from './components/ProfileCard.vue';
+import EndorsementList from './components/EndorsementList.vue';
+import PageHeader from 'src/pages/components/PageHeader.vue';
 
 const profileStore = useProfileStore();
 

@@ -48,8 +48,8 @@
 <script setup lang="ts">
 //  import bus from '../core/utils/event-bus';
 import { inject, computed, ref } from 'vue';
-import { EndorsementModel } from '../core/models';
-import UserAvatar, { AvatarData } from '../components/UserAvatar.vue';
+import { EndorsementModel } from '../../core/models';
+import UserAvatar, { AvatarData } from './UserAvatar.vue';
 const bus = inject('bus');
 const props = defineProps<{
   e: EndorsementModel;
@@ -90,7 +90,7 @@ const avatarData = computed(() => {
 </script>
 
 <style lang="scss">
-@import '../css/endorsement-card.scss';
+@import '../../css/endorsement-card.scss';
 </style>
 
 <style lang="scss" scoped>

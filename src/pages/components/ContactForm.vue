@@ -26,8 +26,8 @@
 <script setup lang="ts">
 import { PersonFormModel } from 'src/core/models';
 import { defineModel } from 'vue';
-import PopupForm, { HeaderData } from 'src/components/PopupForm.vue';
-import CustQInput from 'src/components/custom/CustQInput.vue';
+import PopupForm, { HeaderData } from 'src/pages/components/PopupForm.vue';
+import CustQInput from 'src/pages/components/custom/CustQInput.vue';
 
 const newContact = defineModel<PersonFormModel>({
   default: () => ({}),

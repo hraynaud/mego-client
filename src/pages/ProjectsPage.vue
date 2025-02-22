@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import ProjectList from '../components/ProjectList.vue';
-import PageHeader from 'components/PageHeader.vue';
+import ProjectList from './components/ProjectList.vue';
+import PageHeader from './components/PageHeader.vue';
 import { useProjectList } from 'src/composables/use-project-list';
 import { ProjectModel } from 'src/core/models';
 

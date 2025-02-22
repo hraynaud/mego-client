@@ -25,8 +25,8 @@
 // } from 'src/composables/use-endorsement-list';
 import { ComputedRef, computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
-import EndorsementPathList from '../components/EndorsementPathList.vue';
-import PageHeader from '../components/PageHeader.vue';
+import EndorsementPathList from './components/EndorsementPathList.vue';
+import PageHeader from './components/PageHeader.vue';
 import {
   SearchParams,
   useEndorsementStore,

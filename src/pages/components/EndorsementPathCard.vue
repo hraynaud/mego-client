@@ -19,10 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { EndorsementPathModel } from '../core/models';
-import UserAvatar from '../components/UserAvatar.vue';
-import EndorsementPath from '../components/EndorsementPath.vue';
-import { AvatarData } from '../components/UserAvatar.vue';
+import { EndorsementPathModel } from '../../core/models';
+import UserAvatar from './UserAvatar.vue';
+import EndorsementPath from './EndorsementPath.vue';
+import { AvatarData } from './UserAvatar.vue';
 
 const props = defineProps<{
   e: EndorsementPathModel;
@@ -38,7 +38,7 @@ const avatarLargeData = <AvatarData>(<unknown>{
 });
 </script>
 <style lang="scss">
-@import '../css/endorsement-card.scss';
+@import '../../css/endorsement-card.scss';
 </style>
 <style lang="scss" scoped>
 .endorsement-card {

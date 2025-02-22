@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import CustQInput from 'src/components/custom/CustQInput.vue';
+import CustQInput from 'src/pages/components/custom/CustQInput.vue';
 
 export interface HeaderData {
   header: string;

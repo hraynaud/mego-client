@@ -19,10 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { PathAvatar } from '../core/models';
+import { PathAvatar } from '../../core/models';
 import { RouterLink } from 'vue-router';
-import UserAvatar from '../components/UserAvatar.vue';
-import { AvatarData } from '../components/UserAvatar.vue';
+import UserAvatar from './UserAvatar.vue';
+import { AvatarData } from './UserAvatar.vue';
 
 const profilePath = (id: string) => `/person/${id}`;
 

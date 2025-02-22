@@ -22,9 +22,9 @@
 import { ProjectModel } from 'src/core/models';
 import { projectApi,projectService } from 'src/core/services';
 import { ref, computed, watch, onMounted } from 'vue';
-import ProjectProfileCard from '../components/ProjectProfileCard.vue';
+import ProjectProfileCard from './components/ProjectProfileCard.vue';
 import { useRoute } from 'vue-router';
-import PageHeader from 'src/components/PageHeader.vue';
+import PageHeader from 'src/pages/components/PageHeader.vue';
 
 const route = useRoute();
 

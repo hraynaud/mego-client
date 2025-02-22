@@ -71,8 +71,8 @@
 
 import { ComputedRef, computed, ref, Ref } from 'vue';
 import { useQuasar } from 'quasar';
-import EndorsementPathList from '../components/EndorsementPathList.vue';
-import PageHeader from '../components/PageHeader.vue';
+import EndorsementPathList from './components/EndorsementPathList.vue';
+import PageHeader from './components/PageHeader.vue';
 import {
   SearchParams,
   useEndorsementStore,

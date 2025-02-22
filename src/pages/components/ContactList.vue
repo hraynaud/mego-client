@@ -8,8 +8,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PersonModel } from '../core/models';
-import PersonCard from '../components/PersonCard.vue';
+import { PersonModel } from '../../core/models';
+import PersonCard from './PersonCard.vue';
 import { RouterLink } from 'vue-router';
 
 defineProps<{ people: PersonModel[] }>();

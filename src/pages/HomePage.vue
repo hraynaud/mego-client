@@ -30,10 +30,10 @@
   </q-page>
 </template>
 <script setup lang="ts">
-import PageHeader from 'src/components/PageHeader.vue';
-import PersonCard from 'src/components/PersonCard.vue';
-import ProjectCard from 'src/components/ProjectCard.vue';
-// import ProjectList from '../components/ProjectList.vue';
+import PageHeader from 'src/pages/components/PageHeader.vue';
+import PersonCard from 'src/pages/components/PersonCard.vue';
+import ProjectCard from 'src/pages/components/ProjectCard.vue';
+// import ProjectList from './components/ProjectList.vue';
 // import { useProjectList } from 'src/composables/use-project-list';
 import {
   peopleApi,

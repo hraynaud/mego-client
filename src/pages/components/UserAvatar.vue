@@ -36,5 +36,5 @@ defineProps<{
 }>();
 </script>
 <style lang="scss">
-@import '../css/user-avatar.scss';
+@import '../../css/user-avatar.scss';
 </style>

@@ -70,21 +70,23 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import ContactForm from '../components/ContactForm.vue';
-import TopicForm from '../components/TopicForm.vue';
-import CustQInput from 'src/components/custom/CustQInput.vue';
-import ThingAvatar, { ThingAvatarData } from 'src/components/ThingAvatar.vue';
+import ContactForm from './ContactForm.vue';
+import TopicForm from './TopicForm.vue';
+import CustQInput from './custom/CustQInput.vue';
+import ThingAvatar, {
+  ThingAvatarData,
+} from 'src/pages/components/ThingAvatar.vue';
 import {
   topicService,
   contactService,
   endorsementService,
-} from '../core/services';
+} from '../../core/services';
 
 import {
   EndorsementFormModel,
   PersonFormModel,
   TopicFormModel,
-} from '../core/models';
+} from '../../core/models';
 
 interface FormSelectOption {
   id: string;

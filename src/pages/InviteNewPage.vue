@@ -10,6 +10,6 @@
   </q-page>
 </template>
 <script setup>
-import InviteForm from '../components/InviteForm.vue';
+import InviteForm from './components/InviteForm.vue';
 </script>
 <style lang=""></style>

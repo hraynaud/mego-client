@@ -12,8 +12,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { EndorsementModel } from '../core/models';
-import EndorsementCard from '../components/EndorsementCard.vue';
+import { EndorsementModel } from '../../core/models';
+import EndorsementCard from './EndorsementCard.vue';
 
 defineProps<{
   endorsements: EndorsementModel[];

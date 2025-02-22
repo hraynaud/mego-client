@@ -1,21 +1,18 @@
 <template>
-      <q-card class="project-card">
+      <q-card class="person-card">
         <q-card-section horizontal>
           <q-card-section class="q-pa-sm">
             <div class="text-center card-header">
-            <q-avatar icon="assignment_add"  class="avatar large icon project">
-            </q-avatar>
+              <user-avatar :data="avatarLargeData" cls="large"/>
             </div>
           </q-card-section>
           <q-card-section>
-            <user-avatar :data="userAvatarData" cls="medium"/>
               <div>
-                {{ p.description }}
+                {{ p.bio }}
               </div>
           </q-card-section>
         </q-card-section>
       </q-card>
-
 
 
       <q-card>
@@ -35,34 +32,42 @@
       </q-card>
 </template>
 <script setup lang="ts" allowjs: true>
-import { ProjectModel } from '../core/models';
-import { AvatarData } from '../components/UserAvatar.vue';
-import UserAvatar from '../components/UserAvatar.vue';
+import { PersonModel } from '../../core/models';
+import { AvatarData } from './UserAvatar.vue';
+import UserAvatar from './UserAvatar.vue';
 import { defineProps, computed } from 'vue';
 
 
 const props = defineProps<{
-  p: ProjectModel,
+  p: PersonModel,
 }>();
 
-const userAvatarData = computed<AvatarData>(()=>{ return {
-  imgUrl: props.p?.ownerProfileImageUrl,
-  isVisible:  props.p?.ownerAvatarUrl == 'anonymous.png' ? false : true,
+const avatarLargeData = computed<AvatarData>(()=>{ return {
+  imgUrl: props.p?.profileImageUrl,
+  isVisible:  props.p?.profileImageUrl == 'anonymous.png' ? false : true,
+  icon: 'psychology',
+  role: undefined,
   tooltip: false
 } as AvatarData})
 
 </script>
-<style lang="scss">
-@import "../css/user-avatar.scss";
-</style>
-<style lang="scss" scoped>
-.project-card {
 
+<style lang="scss" scoped>
+
+.person-card {
   .name {
     padding-top: 15px;
     font-weight: bold;
   }
+
 }
 
+.mini-profile {
+  text-align: center;
+  .item-count {
+    color: $pink-12;
+    $h-tags: ('h1');
+  }
+}
 
 </style>
