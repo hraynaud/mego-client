@@ -3,14 +3,16 @@
     <q-header elevated class="bg-gray">
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        <q-toolbar-title v-if="$q.screen.gt.sm" shrink="true"
-          >Konmego</q-toolbar-title
-        >
+        <q-toolbar-title v-if="$q.screen.gt.sm" shrink>Konmego</q-toolbar-title>
 
-        <div class="q-pr-sm">{{ name }}</div>
-        <q-avatar size="36px" class="q-mb-sm q-mr-md">
-          <img :src="avatar" />
-        </q-avatar>
+        <NavItem
+          icon="logout"
+          route="/login"
+          clickable
+          v-ripple
+          @click.prevent="logout"
+          >Logout
+        </NavItem>
       </q-toolbar>
     </q-header>
 
@@ -22,87 +24,37 @@
       :width="200"
       :breakpoint="500"
       bordered
-      class="bg-grey-3"
+      class=""
     >
       <q-scroll-area class="fit">
         <q-list padding>
-          <q-item clickable v-ripple to="/">
-            <q-item-section avatar>
-              <q-icon name="home" />
-            </q-item-section>
+          <!-- <NavItem icon="groups" route="/contacts"> Friends </NavItem> -->
+          <!-- <q-item-label header>Personal</q-item-label> -->
 
-            <q-item-section> Home </q-item-section>
-          </q-item>
-          <q-expansion-item
-            dense
-            dense-toggle=""
-            clickable
-            v-ripple
-            :content-inset-level="0.25"
-            to="/chat"
+          <NavExpansionItem
+            :imgSrc="currUserAvatar"
+            :label="name"
+            class="q-mt-xl"
           >
-            <template v-slot:header>
-              <q-item-section avatar>
-                <q-icon name="approval" />
-              </q-item-section>
+            <NavItem icon="account_circle" route="/person/me">
+              My Profile
+            </NavItem>
+            <NavItem icon="rocket" route="/projects/new">
+              Launch Project
+            </NavItem>
+            <NavItem icon="thumb_up" route="/endorsements/new">
+              Endorse Someone
+            </NavItem>
+          </NavExpansionItem>
+          <q-separator spaced />
+          <q-item-label header>Community</q-item-label>
+          <NavItem icon="forum" route="/"> Activity </NavItem>
+          <NavItem icon="engineering" route="/projects">Projects </NavItem>
 
-              <q-item-section> Chat </q-item-section>
-            </template>
-          </q-expansion-item>
-
-          <q-expansion-item
-            dense
-            dense-toggle=""
-            clickable
-            v-ripple
-            :content-inset-level="0.25"
-            to="/projects"
-          >
-            <template v-slot:header>
-              <q-item-section avatar>
-                <q-icon name="construction" />
-              </q-item-section>
-              <q-item-section> Projects </q-item-section>
-            </template>
-            <q-item clickable v-ripple to="/projects/new">
-              <q-item-section avatar>
-                <q-icon name="add_circle" />
-              </q-item-section>
-
-              <q-item-section>New</q-item-section>
-            </q-item>
-          </q-expansion-item>
-
-          <q-item clickable v-ripple to="/person/me">
-            <q-item-section avatar>
-              <q-icon name="person" />
-            </q-item-section>
-
-            <q-item-section> Me </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple to="/contacts">
-            <q-item-section avatar>
-              <q-icon name="group" />
-            </q-item-section>
-
-            <q-item-section> Contacts </q-item-section>
-          </q-item>
-          <q-item clickable v-ripple to="/endorsements/new">
-            <q-item-section avatar>
-              <q-icon name="add_circle" />
-            </q-item-section>
-
-            <q-item-section> Create New</q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple @click.prevent="logout">
-            <q-item-section avatar>
-              <q-icon name="logout" />
-            </q-item-section>
-
-            <q-item-section> Logout </q-item-section>
-          </q-item>
+          <NavItem route="/endorsements" icon="hub">Talent Pool</NavItem>
+          <q-separator spaced />
+          <q-item-label header>Ask Mego AI</q-item-label>
+          <NavItem icon="assistant" route="/chat"> Chat </NavItem>
         </q-list>
       </q-scroll-area>
 
@@ -128,47 +80,48 @@
   </q-layout>
 </template>
 
-<script>
-import { ref } from 'vue';
-import { authService } from 'src/core/services';
+<script setup lang="ts">
+import { onBeforeMount, ref } from 'vue';
+import { authService, peopleApi, peopleService } from 'src/core/services';
 import { useRouter } from 'vue-router';
+import NavItem from 'src/pages/components/NavItem.vue';
+import NavExpansionItem from 'src/pages/components/NavExpansionItem.vue';
+import { PersonModel } from 'src/core/models';
+const miniState = ref(false);
+const router = useRouter();
+const user = authService.currentUser();
+const name = user.name;
+const currUserAvatar = user.avatar;
+const drawer = ref(false);
+const me = ref({} as PersonModel);
+function drawerClick(e: { stopPropagation: () => void }) {
+  if (miniState.value) {
+    miniState.value = false;
 
-export default {
-  setup() {
-    const miniState = ref(false);
-    const router = useRouter();
-    const user = authService.currentUser();
-    const name = user.name;
-    const avatar = user.avatar;
-    const search = ref();
+    // notice we have registered an event with capture flag;
+    // we need to stop further propagation as this click is
+    // intended for switching drawer to "normal" mode only
+    e.stopPropagation();
+  }
+}
+function logout() {
+  authService.logout();
+  router.replace('/auth/login');
+}
 
-    return {
-      drawer: ref(false),
-      miniState,
-      name,
-      avatar,
-      search,
+const loadme = () => {
+  const id = authService.currentUser()['uid'];
 
-      drawerClick(e) {
-        // if in "mini" state and user
-        // click on drawer, we switch it to "normal" mode
-        if (miniState.value) {
-          miniState.value = false;
-
-          // notice we have registered an event with capture flag;
-          // we need to stop further propagation as this click is
-          // intended for switching drawer to "normal" mode only
-          e.stopPropagation();
-        }
-      },
-      logout() {
-        authService.logout();
-        router.replace('/auth/login');
-      },
-    };
-  },
+  peopleApi.findPerson(id).then(function (resp: { data: { data: unknown } }) {
+    me.value = peopleService.buildPerson(resp.data.data);
+  });
 };
+
+onBeforeMount(() => {
+  loadme();
+});
 </script>
+
 <style lang="scss">
 .GPL {
   &__toolbar {
@@ -178,5 +131,18 @@ export default {
   &__toolbar-input {
     width: 70%;
   }
+}
+
+.q-item__section--avatar {
+  color: inherit;
+  min-width: 0px;
+}
+
+.q-item__section--side > .q-icon {
+  font-size: 20px;
+}
+
+.q-item__section--side {
+  padding-right: 14px;
 }
 </style>

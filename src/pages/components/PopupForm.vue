@@ -2,7 +2,7 @@
   <q-card class="form-card" style="width: 325px">
     <q-card-section class="header q-px-none q-py-sm">
       <div class="q-pl-md">
-        <q-avatar :icon="data.icon" class="icon1" />
+        <q-avatar :icon="data.icon" class="icon" />
 
         <span class="q-ml-lg">{{ data.header }}</span>
       </div>
@@ -27,7 +27,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import CustQInput from 'src/pages/components/custom/CustQInput.vue';
 
 export interface HeaderData {
   header: string;
@@ -60,7 +59,7 @@ const validateAndSubmit = async () => {
   background-color: $secondary;
 }
 
-.icon1 {
+.icon {
   width: 40px;
   height: 40px;
   font-size: 90px;

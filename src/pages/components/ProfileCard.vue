@@ -1,17 +1,20 @@
-<template>
+<template lan="html">
       <q-card class="person-card">
         <q-card-section horizontal>
           <q-card-section class="q-pa-sm">
             <div class="text-center card-header">
               <user-avatar :data="avatarLargeData" cls="large"/>
             </div>
+
           </q-card-section>
-          <q-card-section>
-              <div>
-                {{ p.bio }}
-              </div>
+        <q-card-section class="q-pa-none">
+          <q-card-section class="q-pa-sm">
+            {{ p.bio }}
           </q-card-section>
+
+
         </q-card-section>
+      </q-card-section>
       </q-card>
 
 
@@ -20,6 +23,9 @@
           <q-card-section-item >
             <p class="text-h6 ">Ask me about</p>
           </q-card-section-item>
+
+
+
           <q-card-section-item  >
             <q-chip color="teal" text-color="white" icon="bookmark">fencing</q-chip>
             <q-chip color="teal" text-color="white" icon="bookmark">Art</q-chip>
@@ -28,6 +34,19 @@
               Bookmark
             </q-chip>
           </q-card-section-item>
+          <q-chip text-color="black" style="font-weight: 600;">
+              <div style="font-weight: 900;"> {{ p.endorsees?.length}} &nbsp;</div>
+              Connections
+            </q-chip>
+            <q-chip text-color="black" style="font-weight: 600;">
+              <div style="font-weight: 900;"> {{ p.endorsers?.length}} &nbsp;</div>
+              Endorsers
+            </q-chip>
+
+            <q-chip text-color="black" style="font-weight: 600;">
+              <div style="font-weight: 900;"> {{ p.endorsees?.length}} &nbsp;</div>
+              Endorsements
+            </q-chip>
         </q-card-section>
       </q-card>
 </template>

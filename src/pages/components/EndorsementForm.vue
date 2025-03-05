@@ -1,64 +1,46 @@
 <template>
-  <q-form
-    @submit="onSubmit"
-    @reset="onReset"
-    name="endorsement"
-    class="q-pa-xl row"
-  >
-    <q-card class="col-5 form-card offset-md-1">
-      <div class="header text-center q-mb-sm">New Endorsement</div>
-      <div class="text-center card-header">
-        <thing-avatar :data="avatarData" cls="large project" />
-      </div>
-
-      <q-card-section>
-        <q-select
-          v-model="currEndorsee"
-          :options="contacts"
-          class="q-py-sm"
-          label="Current Contacts"
-          lazy-rules="ondemand"
-          outlined
-          dense
-          use-input
-        >
-          <template v-slot:after>
-            <q-icon
-              name="person_add_alt_1"
-              @click="showNewContactForm"
-              size="20px"
-            />
-          </template>
-        </q-select>
-
-        <q-select
-          v-model="selectedTopic"
-          :options="topics"
-          class="q-py-sm"
-          label="Topic"
-          outlined
-          dense
-          use-input
-        >
-          <template v-slot:after>
-            <q-icon name="topic" @click="showNewTopicForm"></q-icon>
-          </template>
-        </q-select>
-
-        <CustQInput
-          v-model="blurb"
-          type="textarea"
-          label="Description"
-          hint="Say more about why you are making this endorsement"
+  <CustFormCard icon="thumb_up" @submit="onSubmit" @reset="onReset">
+    <template #header> New Endorsement </template>
+    <q-select
+      v-model="currEndorsee"
+      :options="contacts"
+      class="q-py-sm"
+      label="Current Contacts"
+      lazy-rules="ondemand"
+      outlined
+      dense
+      use-input
+    >
+      <template v-slot:after>
+        <q-icon
+          name="person_add_alt_1"
+          @click="showNewContactForm"
+          size="20px"
         />
-      </q-card-section>
-      <q-card-actions align="right" class="q-py-sm">
-        <q-btn label="Submit" type="submit" color="primary" flat no-caps />
-        <q-btn label="Cancel" color="primary" flat class="q-ml-sm" no-caps />
-      </q-card-actions>
-    </q-card>
-  </q-form>
+      </template>
+    </q-select>
 
+    <q-select
+      v-model="selectedTopic"
+      :options="topics"
+      class="q-py-sm"
+      label="Topic"
+      outlined
+      dense
+      use-input
+    >
+      <template v-slot:after>
+        <q-icon name="topic" @click="showNewTopicForm"></q-icon>
+      </template>
+    </q-select>
+
+    <CustQInput
+      v-model="blurb"
+      type="textarea"
+      label="Description"
+      hint="Say more about why you are making this endorsement"
+    />
+  </CustFormCard>
   <q-dialog v-model="newContactVisible" @before-show="clearNewContact">
     <ContactForm v-model="newContact" @submit="handleContactSubmit" />
   </q-dialog>
@@ -72,10 +54,9 @@
 import { ref, onMounted } from 'vue';
 import ContactForm from './ContactForm.vue';
 import TopicForm from './TopicForm.vue';
+import CustFormCard from './CustFormCard.vue';
 import CustQInput from './custom/CustQInput.vue';
-import ThingAvatar, {
-  ThingAvatarData,
-} from 'src/pages/components/ThingAvatar.vue';
+
 import {
   topicService,
   contactService,
@@ -104,11 +85,6 @@ const newEndorsement: EndorsementFormModel = { description: undefined };
 const newContact = ref<PersonFormModel>({});
 const newTopic = ref<TopicFormModel>({});
 
-const avatarData: ThingAvatarData = {
-  icon: 'thumb_up',
-  imgUrl: undefined,
-  role: undefined,
-};
 function onSubmit() {
   if (isValidEndorsement()) {
     setEndorsee();
@@ -202,6 +178,10 @@ const isValidNewContact = (): boolean => {
   return noNulls(newContact.value);
 };
 
+const isValidNewTopic = (): boolean => {
+  return noNulls(newTopic.value);
+};
+
 function showNewContactForm() {
   currEndorsee.value = null;
   clearNewContact();
@@ -251,24 +231,6 @@ const handleContactSubmit = () => {
   hideNewContact();
 };
 
-const isValidNewTopic = (): boolean => {
-  return Object.values(newTopic.value).every((value) => value != null);
-};
-
 const noNulls = (data: object): boolean =>
   Object.values(data).every((value) => value != null);
 </script>
-
-<style lang="scss" scoped>
-.form-card {
-  border-radius: 8px;
-}
-.header {
-  font-weight: 300;
-  padding-top: 4%;
-  height: 175px;
-  font-size: 2.125em;
-  color: white;
-  background-color: $secondary;
-}
-</style>
