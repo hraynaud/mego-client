@@ -3,39 +3,21 @@
     <q-header elevated class="bg-gray">
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        <q-toolbar-title v-if="$q.screen.gt.sm" shrink>Konmego</q-toolbar-title>
+        <q-toolbar-title v-if="$q.screen.gt.sm">Konmego</q-toolbar-title>
 
-        <NavItem
-          icon="logout"
-          route="/login"
-          clickable
-          v-ripple
-          @click.prevent="logout"
-          >Logout
+        <NavItem icon="logout" route="/login" clickable v-ripple @click.prevent="logout">Logout
         </NavItem>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="drawer"
-      show-if-above
-      :mini="!drawer || miniState"
-      @click.capture="drawerClick"
-      :width="200"
-      :breakpoint="500"
-      bordered
-      class=""
-    >
+    <q-drawer v-model="drawer" show-if-above :mini="!drawer || miniState" @click.capture="drawerClick" :width="200"
+      :breakpoint="500" bordered class="">
       <q-scroll-area class="fit">
         <q-list padding>
           <!-- <NavItem icon="groups" route="/contacts"> Friends </NavItem> -->
           <!-- <q-item-label header>Personal</q-item-label> -->
 
-          <NavExpansionItem
-            :imgSrc="currUserAvatar"
-            :label="name"
-            class="q-mt-xl"
-          >
+          <NavExpansionItem :imgSrc="currUserAvatar" :label="name" class="q-mt-xl">
             <NavItem icon="account_circle" route="/person/me">
               My Profile
             </NavItem>
@@ -64,14 +46,7 @@
           to mini-mode
         -->
       <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
-        <q-btn
-          dense
-          round
-          unelevated
-          color="accent"
-          icon="chevron_left"
-          @click="miniState = true"
-        />
+        <q-btn dense round unelevated color="accent" icon="chevron_left" @click="miniState = true" />
       </div>
     </q-drawer>
     <q-page-container>
@@ -138,7 +113,7 @@ onBeforeMount(() => {
   min-width: 0px;
 }
 
-.q-item__section--side > .q-icon {
+.q-item__section--side>.q-icon {
   font-size: 20px;
 }
 
