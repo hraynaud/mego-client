@@ -9,46 +9,13 @@
 
       <div class="row q-gutter-md">
         <div class="col">
-          <q-card>
-            <q-card-section>Completed</q-card-section>
-            <q-card-section>
-              <q-list separator>
-                <q-expansion-item v-for="item in project.progress" :key="item" :label="item" icon="check_circle_outline"
-                  class="completed">
-                  {{ item }}
-                </q-expansion-item>
-              </q-list>
-            </q-card-section>
-          </q-card>
+          <TaskListCard :items="project.progress" cls="completed" icon="check_circle_outline" header="Completed" />
         </div>
         <div class="col">
-          <q-card>
-            <q-card-section>Todo</q-card-section>
-            <q-card-section>
-              <q-list separator>
-
-                <q-expansion-item v-for="item in project.openItems" :key="item" :label="item" icon="rotate_right"
-                  class="in-progress">
-                  {{ item }}
-                </q-expansion-item>
-              </q-list>
-            </q-card-section>
-          </q-card>
+          <TaskListCard :items="project.progress" cls="in-progress" icon="rotate_right" header="Todo" />
         </div>
         <div class="col">
-          <q-card>
-            <q-card-section>
-              Blocked
-            </q-card-section>
-            <q-card-section>
-              <q-list separator>
-                <q-expansion-item v-for="item in project.roadBlocks" :key="item" :label="item" icon="block"
-                  class="blocked">
-                  {{ item }}
-                </q-expansion-item>
-              </q-list>
-            </q-card-section>
-          </q-card>
+          <TaskListCard :items="project.roadBlocks" cls="blocked" icon="block" header="Blocked" />
         </div>
       </div>
     </div>
@@ -77,6 +44,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 import ProjectProfileCard from './components/ProjectProfileCard.vue';
 import { useRoute } from 'vue-router';
 import PageHeader from 'src/pages/components/PageHeader.vue';
+import TaskListCard from './components/TaskListCard.vue'
 
 const route = useRoute();
 
