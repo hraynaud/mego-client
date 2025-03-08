@@ -7,6 +7,9 @@ export class ProjectModel {
   ownerAvatarUrl: string;
   ownerProfileImageUrl: string;
   topicName: string;
+  progress: string[];
+  openItems: string[];
+  roadBlocks: string[];
 
   constructor(
     id: string,
@@ -16,7 +19,10 @@ export class ProjectModel {
     startDate: Date,
     ownerAvatarUrl: string,
     ownerProfileImageUrl: string,
-    topicName: string
+    topicName: string,
+    progress: string[],
+    openItems: string[],
+    roadBlocks: string[]
   ) {
     this.id = id;
     this.name = name;
@@ -26,5 +32,8 @@ export class ProjectModel {
     this.ownerAvatarUrl = ownerAvatarUrl;
     this.ownerProfileImageUrl = ownerProfileImageUrl;
     this.topicName = topicName;
+    this.progress = progress;
+    this.openItems = openItems;
+    this.roadBlocks = roadBlocks;
   }
 }

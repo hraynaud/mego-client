@@ -1,7 +1,6 @@
 import { ProjectModel } from '../models';
 import { apiService } from './api.service';
-const build = (p: any) => {
-  console.log('attrs', p);
+const build = (p: unknown) => {
   return new ProjectModel(
     p.id,
     p.attributes.name,
@@ -10,7 +9,10 @@ const build = (p: any) => {
     p.attributes.startDate,
     p.attributes.ownerAvatarUrl,
     p.attributes.ownerProfileImageUrl,
-    p.attributes.topicName
+    p.attributes.topicName,
+    p.attributes.progress,
+    p.attributes.openItems,
+    p.attributes.roadblocks
   );
 };
 
