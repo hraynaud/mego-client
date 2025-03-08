@@ -1,104 +1,72 @@
 <template>
-  <!-- <q-page class="window-height row justify-center"> -->
-  <div class="col-8 q-my-lg" style="min-height: 100vh; text-align: center">
-    <q-card>
-      <q-card-section class="">
-        <h4 class="text-h5 q-my-md">Create a Project</h4>
-      </q-card-section>
-      <div class="q-pa-md project-form">
-        <q-form @submit="onSubmit" @reset="onReset" class="" name="project">
-          <div class="row">
-            <div class="col-12">
-              <q-input
-                type="textarea"
-                v-model="description"
-                outlined
-                label="What are trying to do?"
-                hint="Describe you project is as much detail as you can"
-                lazy-rules="ondemand"
-                :rules="[
-                  (val) =>
-                    (val && val.length > 0) ||
-                    'Please enter project description',
-                ]"
-              />
-            </div>
-          </div>
+  <CustFormCard icon="engineering" @submit="onSubmit" @reset="onReset">
+    <!--content for header slot-->
+    <template #header> New Project </template>
 
-          <div class="row justify-between q-py-md">
-            <div class="col-5">
-              <q-input
-                v-model="startDate"
-                type="date"
-                outlined
-                stack-label
-                label="Start Date"
-              />
-            </div>
-            <div class="col-5">
-              <q-input
-                class=""
-                v-model="deadline"
-                outlined
-                type="date"
-                stack-label
-                label="Deadline"
-              />
-            </div>
-          </div>
-          <div class="row q-py-md">
-            <div class="col">
-              <q-select
-                v-model="topic"
-                single
-                outlined
-                :options="topics"
-                label="Topic"
-                use-chips
-              />
-            </div>
-          </div>
-          <div class="row q-py-md">
-            <div class="col">
-              <q-input
-                v-model="name"
-                outlined
-                label="Project Name*"
-                lazy-rules="ondemand"
-                :rules="[
-                  (val) =>
-                    (val && val.length > 0) || 'Please enter a project name',
-                ]"
-              />
-            </div>
-          </div>
-          <div class="row q-py-xl">
-            <q-btn label="Submit" type="submit" color="primary" />
-            <q-btn
-              label="Reset"
-              type="reset"
-              color="primary"
-              flat
-              class="q-ml-sm"
-            />
-          </div>
-        </q-form>
+    <!--Default slot content here-->
+    <CustQInput
+      v-model="description"
+      type="textarea"
+      label="What are trying to do?"
+      hint="Describe you project is as much detail as you can"
+      :rules="[
+        (val) => (val && val.length > 0) || 'Please enter project description',
+      ]"
+    />
+
+    <div class="row justify-between q-py-md">
+      <div class="col-5">
+        <CustQInput
+          v-model="startDate"
+          label="Start Date"
+          type="date"
+          :rules="[(val) => (val && val.length > 0) || 'Start Date required']"
+        />
       </div>
-    </q-card>
-  </div>
-  <!-- </q-page> -->
+      <div class="col-5">
+        <CustQInput
+          v-model="deadline"
+          label="Deadline"
+          type="date"
+          :rules="[
+            (val) => (val && val.length > 0) || 'Deadline date required',
+          ]"
+        />
+      </div>
+    </div>
+
+    <q-select
+      v-model="topic"
+      dense
+      single
+      outlined
+      :options="topics"
+      label="Topic"
+      use-chips
+    />
+
+    <CustQInput
+      v-model="name"
+      label="Project name"
+      :rules="[(val) => (val && val.length > 0) || 'Project name required']"
+    />
+  </CustFormCard>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { topicService, projectService } from '../core/services';
-import { ProjectModel } from '../core/models';
+import { topicService, projectService } from '../../core/services';
+import { ProjectModel } from '../../core/models';
 import { useRouter } from 'vue-router';
+import CustQInput from './custom/CustQInput.vue';
+import CustFormCard from './CustFormCard.vue';
+
 const router = useRouter();
 interface FormTopic {
   id: string;
   label: string;
 }
+
 const arrTopic: FormTopic[] = [];
 const name = ref();
 const description = ref();

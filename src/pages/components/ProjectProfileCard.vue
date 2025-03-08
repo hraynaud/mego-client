@@ -1,16 +1,11 @@
 <template>
   <q-card class="project-card">
     <q-card-section horizontal>
-      <!-- <q-card-section class="q-pa-sm">
-        <div class="text-center card-header">
-          <q-avatar icon="assignment_add" class="avatar large icon project">
-          </q-avatar>
-        </div>
-      </q-card-section> -->
+
       <q-card-section class="q-py-xl">
         <q-item>
           <q-item-section avatar>
-            <user-avatar :data="userAvatarData" cls="medium" />
+            <user-avatar :data="userAvatarData" cls="large" />
           </q-item-section>
 
           <q-item-section class="description">
