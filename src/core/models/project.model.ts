@@ -1,3 +1,8 @@
+interface Task {
+  name: string;
+  notes: string;
+  status: string;
+}
 export class ProjectModel {
   id: string;
   name: string;
@@ -10,6 +15,7 @@ export class ProjectModel {
   progress: string[];
   openItems: string[];
   roadBlocks: string[];
+  tasks: Task[];
 
   constructor(
     id: string,
@@ -20,9 +26,10 @@ export class ProjectModel {
     ownerAvatarUrl: string,
     ownerProfileImageUrl: string,
     topicName: string,
-    progress: string[],
-    openItems: string[],
-    roadBlocks: string[]
+    progress: string[], //deprecated
+    openItems: string[], //deprecated
+    roadBlocks: string[], //deprecated
+    tasks: Task[]
   ) {
     this.id = id;
     this.name = name;
@@ -35,5 +42,6 @@ export class ProjectModel {
     this.progress = progress;
     this.openItems = openItems;
     this.roadBlocks = roadBlocks;
+    this.tasks = tasks;
   }
 }
