@@ -22,21 +22,16 @@
 <script setup lang="ts">
 import PageHeader from 'src/pages/components/PageHeader.vue';
 import ProjectCard from 'src/pages/components/ProjectCard.vue';
-// import ProjectList from './components/ProjectList.vue';
-// import { useProjectList } from 'src/composables/use-project-list';
 import {
   peopleApi,
   peopleService,
   authService,
-  projectApi,
   projectService,
 } from '../core/services';
 import { PersonModel, ProjectModel } from 'src/core/models';
-
 import { ref, onBeforeMount } from 'vue';
 
 const me = ref({} as PersonModel);
-
 const loadme = () => {
   const id = authService.currentUser()['uid'];
 

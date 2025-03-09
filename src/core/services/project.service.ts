@@ -30,6 +30,14 @@ const create = async (payload: ProjectModel): Promise<unknown> => {
   }
 };
 
+const search = async (payload: unknown) => {
+  try {
+    return await projectApi.search(payload);
+  } catch (err) {
+    return err;
+  }
+};
+
 const random = async () => {
   try {
     return await projectApi.random();
@@ -46,5 +54,6 @@ export const projectService = {
   build,
   create,
   random,
+  search,
   find,
 };

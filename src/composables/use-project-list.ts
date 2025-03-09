@@ -1,25 +1,16 @@
 import { computed } from 'vue';
-import { projectApi, projectService } from '../core/services';
+import { projectService } from '../core/services';
 import { useProjectStore } from 'src/stores/projects-store';
 
 const projectStore = useProjectStore();
 export function useProjectList(params: unknown) {
-  const loadProjects = () => {
-    projectApi
-      .searchProjects(params)
-      .then((resp: unknown) => {
-        if (resp) {
-          setProjects(resp);
-        }
-      })
-      .catch((error: unknown): void => {
-        console.log(error);
-      });
+  const loadProjects = async () => {
+    const resp = await projectService.search(params);
+    if (resp) {
+      setProjects(resp);
+    }
   };
-
-  const setProjects = (resp: any) => {
-    const data = resp.data.projects.data;
-
+  const setProjects = (data: any) => {
     data.map((p: any) => {
       projects.value.push(projectService.build(p));
     });
