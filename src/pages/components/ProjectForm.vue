@@ -4,76 +4,43 @@
     <template #header> New Project </template>
 
     <!--Default slot content here-->
-    <CustQInput
-      v-model="description"
-      type="textarea"
-      label="What are trying to do?"
-      hint="Describe you project is as much detail as you can"
-      :rules="[
+    <CustQInput v-model="description" type="textarea" label="What are trying to do?"
+      hint="Describe you project is as much detail as you can" rows="15" :rules="[
         (val) => (val && val.length > 0) || 'Please enter project description',
-      ]"
-    />
+      ]" :customClass="'q-pb-xl'" />
 
-    <div class="row justify-between q-py-md">
-      <div class="col-5">
-        <CustQInput
-          v-model="startDate"
-          label="Start Date"
-          type="date"
-          :rules="[(val) => (val && val.length > 0) || 'Start Date required']"
-        />
-      </div>
-      <div class="col-5">
-        <CustQInput
-          v-model="deadline"
-          label="Deadline"
-          type="date"
-          :rules="[
-            (val) => (val && val.length > 0) || 'Deadline date required',
-          ]"
-        />
-      </div>
-    </div>
+    <q-btn flat color="primary" label="Add Task" no-caps @click="showNewTaskForm" />
+    <q-dialog v-model="newTaskVisible" @before-show="clearNewTask">
+      <ProjectTaskForm v-model="newTask" @submit="handleTaskSubmit" />
+    </q-dialog>
 
-    <q-select
-      v-model="topic"
-      dense
-      single
-      outlined
-      :options="topics"
-      label="Topic"
-      use-chips
-    />
+    <q-expansion-item label="Task and Timeline" icon="calendar_month">
 
-    <CustQInput
-      v-model="name"
-      label="Project name"
-      :rules="[(val) => (val && val.length > 0) || 'Project name required']"
-    />
+
+    </q-expansion-item>
+
+    <q-separator />
+
   </CustFormCard>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { topicService, projectService } from '../../core/services';
+import { projectService } from '../../core/services';
 import { ProjectModel } from '../../core/models';
 import { useRouter } from 'vue-router';
 import CustQInput from './custom/CustQInput.vue';
 import CustFormCard from './CustFormCard.vue';
+import ProjectTaskForm, { Task } from './ProjectTaskForm.vue';
 
 const router = useRouter();
-interface FormTopic {
-  id: string;
-  label: string;
-}
-
-const arrTopic: FormTopic[] = [];
 const name = ref();
-const description = ref();
+const description = ref('');
 const startDate = ref();
 const deadline = ref();
-const topic = ref();
-const topics = ref(arrTopic);
+const topic = ref('');
+const newTaskVisible = ref(false);
+const newTask = ref<Task>({ name: 'do something', status: 'not-started', notes: '' })
 
 const onSubmit = () => {
   const projectModel: ProjectModel = {
@@ -86,6 +53,9 @@ const onSubmit = () => {
     topicImage: '',
     ownerAvatarUrl: '',
     ownerProfileImageUrl: '',
+    progress: [],
+    openItems: [],
+    roadBlocks: []
   };
   projectService.create(projectModel).then((res) => {
     const project = res.data;
@@ -95,22 +65,36 @@ const onSubmit = () => {
 
 const onReset = () => {
   name.value = null;
-  description.value = null;
+  description.value = '';
   deadline.value = null;
   startDate.value = null;
-  topic.value = null;
+  topic.value = '';
+};
+
+
+
+function showNewTaskForm() {
+  clearNewTask();
+  newTaskVisible.value = true;
+}
+
+const clearNewTask = () => {
+  newTask.value = { name: '', status: 'todo', notes: '' };
+};
+
+const hideNewTask = () => (newTaskVisible.value = false);
+
+const handleTaskSubmit = () => {
+  // const addMeTopic = {
+  //   value: '',
+  //   label: `${newTaks.value.name}`,
+  // };
+  console.log('tasks:', newTask)
+  window.alert(JSON.stringify(newTask.value))
+  hideNewTask();
 };
 
 onMounted(() => {
-  topicService.getTopics().then((res) => {
-    const data = res.data.data;
-
-    data.map((topic: any) => {
-      const topx: FormTopic = { id: topic.id, label: topic.attributes.name };
-      console.log('!!!topic', topx);
-
-      topics.value.push(topx);
-    });
-  });
+  //no-op
 });
 </script>

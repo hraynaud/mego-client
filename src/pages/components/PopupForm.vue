@@ -1,5 +1,5 @@
 <template>
-  <q-card class="form-card" style="width: 325px">
+  <q-card class="form-card">
     <q-card-section class="header q-px-none q-py-sm">
       <div class="q-pl-md">
         <q-avatar :icon="data.icon" class="icon" />
@@ -12,13 +12,7 @@
         <slot />
       </q-form>
       <q-card-actions align="right">
-        <q-btn
-          label="Done"
-          color="primary"
-          @click="validateAndSubmit"
-          flat
-          no-caps
-        />
+        <q-btn label="Done" color="primary" @click="validateAndSubmit" flat no-caps />
         <q-btn label="Cancel" color="primary" flat v-close-popup no-caps />
       </q-card-actions>
     </q-card-section>
@@ -51,7 +45,9 @@ const validateAndSubmit = async () => {
 <style lang="scss" scoped>
 .form-card {
   border-radius: 8px;
+  width: 525px;
 }
+
 .header {
   font-weight: 300;
   font-size: 24px;
