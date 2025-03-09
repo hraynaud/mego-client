@@ -1,6 +1,6 @@
 <template>
   <q-form class="q-pa-xl row">
-    <q-card class="col-5 form-card offset-md-1">
+    <q-card class="col-7 form-card offset-md-1">
       <div class="header text-center q-mb-sm">
         <slot name="header"></slot>
       </div>
@@ -8,7 +8,9 @@
         <thing-avatar :data="avatarData" cls="large project" />
       </div>
 
-      <q-card-section> <slot></slot></q-card-section>
+      <q-card-section>
+        <slot></slot>
+      </q-card-section>
       <q-card-actions align="right" class="q-py-sm">
         <q-btn label="Submit" type="submit" color="primary" flat no-caps />
         <q-btn label="Cancel" color="primary" flat class="q-ml-sm" no-caps />
@@ -38,6 +40,7 @@ const avatarData: ThingAvatarData = {
 .form-card {
   border-radius: 8px;
 }
+
 .header {
   font-weight: 300;
   padding-top: 4%;

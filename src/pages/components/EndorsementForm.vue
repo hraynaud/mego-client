@@ -1,45 +1,21 @@
 <template>
   <CustFormCard icon="thumb_up" @submit="onSubmit" @reset="onReset">
     <template #header> New Endorsement </template>
-    <q-select
-      v-model="currEndorsee"
-      :options="contacts"
-      class="q-py-sm"
-      label="Current Contacts"
-      lazy-rules="ondemand"
-      outlined
-      dense
-      use-input
-    >
+    <q-select v-model="currEndorsee" :options="contacts" class="q-py-sm" label="Current Contacts" lazy-rules="ondemand"
+      outlined dense use-input>
       <template v-slot:after>
-        <q-icon
-          name="person_add_alt_1"
-          @click="showNewContactForm"
-          size="20px"
-        />
+        <q-icon name="person_add_alt_1" @click="showNewContactForm" size="20px" />
       </template>
     </q-select>
 
-    <q-select
-      v-model="selectedTopic"
-      :options="topics"
-      class="q-py-sm"
-      label="Topic"
-      outlined
-      dense
-      use-input
-    >
+    <q-select v-model="selectedTopic" :options="topics" class="q-py-sm" label="Topic" outlined dense use-input>
       <template v-slot:after>
         <q-icon name="topic" @click="showNewTopicForm"></q-icon>
       </template>
     </q-select>
 
-    <CustQInput
-      v-model="blurb"
-      type="textarea"
-      label="Description"
-      hint="Say more about why you are making this endorsement"
-    />
+    <CustQInput v-model="blurb" type="textarea" rows="15" label="Description"
+      hint="Say more about why you are making this endorsement" />
   </CustFormCard>
   <q-dialog v-model="newContactVisible" @before-show="clearNewContact">
     <ContactForm v-model="newContact" @submit="handleContactSubmit" />
