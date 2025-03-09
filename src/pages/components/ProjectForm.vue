@@ -9,6 +9,12 @@
         (val) => (val && val.length > 0) || 'Please enter project description',
       ]" :customClass="'q-pb-xl'" />
 
+
+    <q-select v-model="topic" dense single outlined :options="topics" label="Topic" use-chips />
+
+    <CustQInput v-model="name" label="Project name"
+      :rules="[(val) => (val && val.length > 0) || 'Project name required']" />
+
     <q-btn flat color="primary" label="Add Task" no-caps @click="showNewTaskForm" />
     <q-dialog v-model="newTaskVisible" @before-show="clearNewTask">
       <ProjectTaskForm v-model="newTask" @submit="handleTaskSubmit" />
@@ -26,19 +32,26 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { projectService } from '../../core/services';
+import { topicService, projectService } from '../../core/services';
 import { ProjectModel } from '../../core/models';
 import { useRouter } from 'vue-router';
 import CustQInput from './custom/CustQInput.vue';
 import CustFormCard from './CustFormCard.vue';
 import ProjectTaskForm, { Task } from './ProjectTaskForm.vue';
 
+interface FormTopic {
+  id: string;
+  label: string;
+}
+
+const arrTopic: FormTopic[] = [];
 const router = useRouter();
 const name = ref();
 const description = ref('');
 const startDate = ref();
 const deadline = ref();
-const topic = ref('');
+const topic = ref();
+const topics = ref(arrTopic);
 const newTaskVisible = ref(false);
 const newTask = ref<Task>({ name: 'do something', status: 'not-started', notes: '' })
 
@@ -89,12 +102,21 @@ const handleTaskSubmit = () => {
   //   value: '',
   //   label: `${newTaks.value.name}`,
   // };
-  console.log('tasks:', newTask)
+
   window.alert(JSON.stringify(newTask.value))
   hideNewTask();
 };
 
 onMounted(() => {
-  //no-op
+  topicService.getTopics().then((res) => {
+    const data = res.data.data;
+
+    data.map((topic: any) => {
+      const topx: FormTopic = { id: topic.id, label: topic.attributes.name };
+
+
+      topics.value.push(topx);
+    });
+  });
 });
 </script>
