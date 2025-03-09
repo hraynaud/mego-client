@@ -1,8 +1,6 @@
 <template>
   <q-page>
-    <div class="q-pa-md">
-      <page-header>Projects</page-header>
-    </div>
+    <page-header icon="engineering">Projects</page-header>
     <div class="q-pa-md">
       <div class="q-gutter-md row items-start">
         <ProjectList :projects="projects"></ProjectList>
