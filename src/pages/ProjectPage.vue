@@ -39,7 +39,7 @@
 </template>
 <script setup lang="ts" allowJs: true>
 import { ProjectModel } from 'src/core/models';
-import { projectApi, projectService } from 'src/core/services';
+import { projectService } from 'src/core/services';
 import { ref, computed, watch, onMounted } from 'vue';
 import ProjectProfileCard from './components/ProjectProfileCard.vue';
 import { useRoute } from 'vue-router';
@@ -47,7 +47,6 @@ import PageHeader from 'src/pages/components/PageHeader.vue';
 import TaskListCard from './components/TaskListCard.vue'
 
 const route = useRoute();
-
 const project = ref({} as ProjectModel);
 const projectName = computed(() => `${project.value.name}`)
 
@@ -59,15 +58,10 @@ watch(
   }
 )
 
-const loadProject = () => {
-  const id = route.params.projectId;
-  projectApi
-    .findProject(id)
-    .then(function (resp: { data: unknown }) {
-      project.value = projectService.build(resp.data.data)
-      console.log(project.value)
-
-    })
+const loadProject = async () => {
+  const id: string = route.params.projectId as string;
+  const resp = await projectService.find(id)
+  project.value = projectService.build(resp)
 }
 
 onMounted(() => {

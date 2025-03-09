@@ -1,61 +1,42 @@
 import { ProjectModel } from '../../models';
 import { apiService } from '../api.service';
 
-interface formProject {
-  project: ProjectModel;
-}
-
-export interface RandomProjectsResponses {
-  id?: string;
-  attributes: {
-    created_at?: string;
-    name?: string;
-    description?: string;
-    start_date?: string;
-    deadline?: string;
-    icon?: null;
-    progress?: string[];
-    open_items?: string[];
-    roadblocks?: string[];
-    tags?: string[];
-    comments?: string[];
-    hero_image_url?: string;
-    status?: string;
-    ownerAvatarUrl?: string;
-    ownerProfileImageUrl?: string;
-  };
-}
-
-const searchProjects = (payload: unknown) => {
+const search = (payload: unknown) => {
   return apiService.post('/projects_search', { payload });
 };
 
-const randomProjects = () => {
-  const data = apiService.post('/projects_random', {});
-  return data;
+const random = async () => {
+  const resp = await apiService.post('/projects_random', {
+    project: { topic_id: 123 },
+  });
+  return resp.data.data;
 };
 
-const findProject = (id: string): unknown => {
-  return apiService.get(`/projects/${id}`);
+const find = async (id: string) => {
+  const resp = await apiService.get(`/projects/${id}`);
+  debugger;
+  return resp.data.data;
 };
 
-const newProject = (project: formProject) => {
-  apiService.post('/projects', { project });
+const create = async (payload: ProjectModel) => {
+  const resp = await apiService.post('/projects', { project: payload });
+  debugger;
+  return resp.data;
 };
 
-const deleteProject = () => {
+const del = () => {
   console.log('delete project');
 };
 
-const updateProject = () => {
+const update = () => {
   console.log('update project');
 };
 
 export const projectApi = {
-  findProject,
-  newProject,
-  deleteProject,
-  updateProject,
-  searchProjects,
-  randomProjects,
+  find,
+  create,
+  del,
+  update,
+  search,
+  random,
 };

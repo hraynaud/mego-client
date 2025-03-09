@@ -1,8 +1,8 @@
 import { http } from 'boot/axios';
 import { Method } from 'axios';
 
-function post(path: string, payload: unknown) {
-  return execute('POST', path, payload, {});
+async function post(path: string, payload: unknown) {
+  return await execute('POST', path, payload, {});
 }
 
 function get(path: string, params = {}) {
@@ -18,15 +18,22 @@ function del(path: string, id: number | string) {
   return execute('DELETE', `${path}/${id}`, null, null);
 }
 
-function execute(
+async function execute(
   method: Method,
   path: string,
   payload: unknown | null,
   params: unknown
 ) {
-  return http
-    .request({ method: method, data: payload, params: params, url: path })
-    .catch(errHandler);
+  try {
+    return await http.request({
+      method: method,
+      data: payload,
+      params: params,
+      url: path,
+    });
+  } catch (error) {
+    return errHandler(error);
+  }
 }
 
 /*

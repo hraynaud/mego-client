@@ -1,32 +1,50 @@
 import { ProjectModel } from '../models';
-import { apiService } from './api.service';
-const build = (p: unknown) => {
+import { projectApi } from './api/project.api';
+const build = <
+  T extends { id: string; type: string; attributes: ProjectModel }
+>(
+  p: T
+) => {
+  const attr = p.attributes;
   return new ProjectModel(
     p.id,
-    p.attributes.name,
-    p.attributes.description,
-    p.attributes.topicImage,
-    p.attributes.startDate,
-    p.attributes.ownerAvatarUrl,
-    p.attributes.ownerProfileImageUrl,
-    p.attributes.topicName,
-    p.attributes.progress,
-    p.attributes.openItems,
-    p.attributes.roadblocks
+    attr.name,
+    attr.description,
+    attr.topicImage,
+    attr.startDate,
+    attr.ownerAvatarUrl,
+    attr.ownerProfileImageUrl,
+    attr.topicName,
+    attr.progress,
+    attr.openItems,
+    attr.roadBlocks,
+    attr.tasks
   );
 };
 
-const create = (project: ProjectModel) => {
-  return apiService
-    .post('/projects', project)
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return Promise.reject(err);
-    });
+const create = async (payload: ProjectModel): Promise<unknown> => {
+  try {
+    return await projectApi.create(payload);
+  } catch (err) {
+    return await Promise.reject(err);
+  }
 };
+
+const random = async () => {
+  try {
+    return await projectApi.random();
+  } catch (err) {
+    return err;
+  }
+};
+
+const find = async (id: string) => {
+  return await projectApi.find(id);
+};
+
 export const projectService = {
   build,
   create,
+  random,
+  find,
 };

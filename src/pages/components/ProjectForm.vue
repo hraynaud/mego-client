@@ -55,7 +55,7 @@ const topics = ref(arrTopic);
 const newTaskVisible = ref(false);
 const newTask = ref<Task>({ name: 'do something', status: 'not-started', notes: '' })
 
-const onSubmit = () => {
+const onSubmit = async () => {
   const projectModel: ProjectModel = {
     name: name.value,
     description: description.value,
@@ -66,14 +66,15 @@ const onSubmit = () => {
     topicImage: '',
     ownerAvatarUrl: '',
     ownerProfileImageUrl: '',
-    progress: [],
+    progress: ['this', 'that'],
     openItems: [],
-    roadBlocks: []
+    roadBlocks: [],
+    tasks: []
   };
-  projectService.create(projectModel).then((res) => {
-    const project = res.data;
-    router.replace(`/project/${project['id']}`);
-  });
+
+
+  const project = await projectService.create(projectModel)
+  router.replace(`/project/${project['id']}`);
 };
 
 const onReset = () => {
