@@ -1,32 +1,28 @@
 import { ProjectModel } from '../models';
 import { projectApi } from './api/project.api';
-const build = <
-  T extends { id: string; type: string; attributes: ProjectModel }
->(
-  p: T
-) => {
-  const attr = p.attributes;
+const build = <T extends { id: string; attributes: ProjectModel }>(obj: T) => {
+  const proj = obj.attributes;
   return new ProjectModel(
-    p.id,
-    attr.name,
-    attr.description,
-    attr.topicImage,
-    attr.startDate,
-    attr.ownerAvatarUrl,
-    attr.ownerProfileImageUrl,
-    attr.topicName,
-    attr.progress,
-    attr.openItems,
-    attr.roadBlocks,
-    attr.tasks
+    obj.id,
+    proj.name,
+    proj.description,
+    proj.topicImage,
+    proj.startDate,
+    proj.ownerAvatarUrl,
+    proj.ownerProfileImageUrl,
+    proj.topicName,
+    proj.progress,
+    proj.openItems,
+    proj.roadBlocks,
+    proj.tasks
   );
 };
 
-const create = async (payload: ProjectModel): Promise<unknown> => {
+const create = async (payload: ProjectModel) => {
   try {
     return await projectApi.create(payload);
   } catch (err) {
-    return await Promise.reject(err);
+    return err;
   }
 };
 
