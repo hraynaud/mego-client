@@ -57,7 +57,7 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import { authService, peopleApi, peopleService } from 'src/core/services';
+import { authService, peopleService } from 'src/core/services';
 import { useRouter } from 'vue-router';
 import NavItem from 'src/pages/components/NavItem.vue';
 import NavExpansionItem from 'src/pages/components/NavExpansionItem.vue';
@@ -84,14 +84,12 @@ function logout() {
   router.replace('/auth/login');
 }
 
-const loadme = () => {
+const loadme = async () => {
   const id = authService.currentUser()['uid'];
+  const data = await peopleService.find(id)
+  me.value = peopleService.build(data);
 
-  peopleApi.findPerson(id).then(function (resp: { data: { data: unknown } }) {
-    me.value = peopleService.buildPerson(resp.data.data);
-  });
 };
-
 onBeforeMount(() => {
   loadme();
 });

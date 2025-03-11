@@ -1,6 +1,6 @@
 <template>
 
-  <q-card-section class="q-py-md q-mt-xs page-banner">
+  <q-card-section class="q-py-xs q-mt-none page-banner">
     <q-item>
       <q-item-section class="description">
         <h3 class="text-center q-ma-xs">
@@ -8,7 +8,7 @@
         </h3>
       </q-item-section>
       <q-item-section avatar>
-        <q-avatar icon="assignment_add" class="avatar large icon project" />
+        <q-avatar :icon="icon" class="avatar large icon project" />
       </q-item-section>
     </q-item>
   </q-card-section>

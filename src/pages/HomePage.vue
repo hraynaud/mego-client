@@ -23,34 +23,23 @@
 import PageHeader from 'src/pages/components/PageHeader.vue';
 import ProjectCard from 'src/pages/components/ProjectCard.vue';
 import {
-  peopleApi,
-  peopleService,
-  authService,
   projectService,
 } from '../core/services';
-import { PersonModel, ProjectModel } from 'src/core/models';
+import { ProjectModel } from 'src/core/models';
 import { ref, onBeforeMount } from 'vue';
 
-const me = ref({} as PersonModel);
-const loadme = () => {
-  const id = authService.currentUser()['uid'];
 
-  peopleApi.findPerson(id).then(function (resp: { data: { data: unknown } }) {
-    me.value = peopleService.buildPerson(resp.data.data);
-  });
-};
 
 const projects = ref<ProjectModel[]>([]);
 
 const loadProjects = async () => {
   const resp = await projectService.random();
-  resp.map((p: unknown) => {
+  resp.map((p: ProjectModel) => {
     projects.value.push(projectService.build(p));
   });
 };
 
 onBeforeMount(() => {
-  loadme();
   loadProjects();
 });
 </script>
