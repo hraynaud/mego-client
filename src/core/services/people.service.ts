@@ -1,18 +1,43 @@
 import { PersonModel } from '../models';
+import { peopleApi } from './api/people.api';
 
-const buildPerson = (p: any) => {
+const build = <T extends { id: string; attributes: PersonModel }>(obj: T) => {
+  const person = obj.attributes;
   return new PersonModel(
-    p.attributes.firstName,
-    p.attributes.lastName,
-    p.id,
-    p.attributes.endorsees,
-    p.attributes.endorsers,
-    p.attributes.bio,
-    p.attributes.profileImageUrl,
-    p.attributes.avatarUrl
+    obj.id,
+    person.firstName,
+    person.lastName,
+    person.endorsees,
+    person.endorsers,
+    person.bio,
+    person.profileImageUrl,
+    person.avatarUrl
   );
 };
 
+const create = async (payload: PersonModel) => {
+  try {
+    return await peopleApi.create(payload);
+  } catch (err) {
+    return err;
+  }
+};
+const find = async (id: string) => {
+  return await peopleApi.find(id);
+};
+
+const del = () => {
+  console.log('delete project');
+};
+
+const update = () => {
+  console.log('update project');
+};
+
 export const peopleService = {
-  buildPerson,
+  build,
+  find,
+  create,
+  del,
+  update,
 };

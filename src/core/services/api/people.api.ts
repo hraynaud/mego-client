@@ -1,8 +1,5 @@
 import { PersonModel } from '../../models';
 import { apiService } from '../api.service';
-interface formPerson {
-  person: PersonModel;
-}
 
 // const searchPersons = (params: any | undefined): any => {
 //   return apiService.post('/persons_search', params);
@@ -12,27 +9,27 @@ const relationships = (params: any | undefined): any => {
   return apiService.get(`/user_relationships/${params['group']}`, params);
 };
 
-const findPerson = (id: string): any => {
-  return apiService.get(`/people/${id}`);
+const find = async (id: string): any => {
+  const resp = await apiService.get(`/people/${id}`);
+  return resp.data.data;
 };
 
-const newPerson = (person: formPerson) => {
-  apiService.post('/people', person);
+const create = async (person: PersonModel) => {
+  return await apiService.post('/people', person);
 };
-('');
 
-const deletePerson = () => {
+const del = () => {
   console.log('delete person');
 };
 
-const updatePerson = () => {
+const update = () => {
   console.log('update person');
 };
 
 export const peopleApi = {
-  newPerson,
-  findPerson,
-  deletePerson,
-  updatePerson,
+  create,
+  find,
+  del,
+  update,
   relationships,
 };

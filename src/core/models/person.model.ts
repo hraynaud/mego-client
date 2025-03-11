@@ -1,9 +1,9 @@
 import { EndorsementModel } from './endorsement.model';
 
 export class PersonModel {
+  id: number | string;
   firstName: string;
   lastName: string;
-  id: number | string;
   endorsees: EndorsementModel[] | undefined;
   endorsers: EndorsementModel[] | undefined;
   profileImageUrl?: string;
@@ -19,9 +19,9 @@ export class PersonModel {
   }
 
   constructor(
+    id: number | string,
     firstName: string,
     lastName: string,
-    id: number | string,
     endorsees?: EndorsementModel[],
     endorsers?: EndorsementModel[],
     bio?: string,

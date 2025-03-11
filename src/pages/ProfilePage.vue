@@ -1,21 +1,21 @@
 <template>
   <q-page style="max-height: 90vh; overflow-y: scroll">
-    <page-header cls="avatar-left-large">{{fullName}}</page-header>
+    <page-header cls="avatar-left-large">{{ fullName }}</page-header>
 
     <profile-card :p="profile" />
 
     <q-card class="q-my-xs">
       <q-card-section>
         <p class="text-h6">Endorsers</p>
-          <endorsement-list :endorsements="endorsers" :deleteable=false role="endorser"/>
+        <endorsement-list :endorsements="endorsers" :deleteable=false role="endorser" />
       </q-card-section>
     </q-card>
 
     <q-card class="q-my-xs">
-        <q-card-section>
-          <p class="text-h6">Endorsees</p>
-          <endorsement-list :endorsements="endorsees" :deleteable=true role="endorsee"/>
-        </q-card-section>
+      <q-card-section>
+        <p class="text-h6">Endorsees</p>
+        <endorsement-list :endorsements="endorsees" :deleteable=true role="endorsee" />
+      </q-card-section>
     </q-card>
 
 
@@ -38,7 +38,7 @@
 </template>
 <script setup lang="ts" allowJs: true>
 import { EndorsementModel, PersonModel } from 'src/core/models';
-import { authService, peopleApi, peopleService } from 'src/core/services';
+import { authService, peopleService } from 'src/core/services';
 import { ref, computed, watch, onMounted } from 'vue';
 import { useProfileStore } from 'src/stores/profile-store';
 import { useEndorsementEvent } from 'src/composables/use-endorsement-event';
@@ -67,17 +67,13 @@ watch(
   }
 )
 
-const loadUser = () => {
+const loadUser = async () => {
 
   const id = route.params.userId == 'me' ? authService.currentUser()['uid'] : route.params.userId;
+  const person = await peopleService.find(id);
 
-  peopleApi
-    .findPerson(id)
-    .then(function (resp: { data: any }) {
-      profile.value = peopleService.buildPerson(resp.data.data);
-      profileStore.initEndorsements(profile.value.endorsers as [EndorsementModel], profile.value.endorsees as [EndorsementModel],)
-
-    })
+  profile.value = peopleService.build(person);
+  profileStore.initEndorsements(profile.value.endorsers as [EndorsementModel], profile.value.endorsees as [EndorsementModel])
 }
 
 onMounted(() => {
