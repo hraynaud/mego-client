@@ -108,16 +108,13 @@ const handleTaskSubmit = () => {
   hideNewTask();
 };
 
-onMounted(() => {
-  topicService.getTopics().then((res) => {
-    const data = res.data.data;
+onMounted(async () => {
+  const data = await topicService.list();
 
-    data.map((topic: any) => {
-      const topx: FormTopic = { id: topic.id, label: topic.attributes.name };
-
-
-      topics.value.push(topx);
-    });
+  data.map((topic: any) => {
+    const topx: FormTopic = { id: topic.id, label: topic.attributes.name };
+    topics.value.push(topx);
   });
 });
+
 </script>

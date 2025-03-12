@@ -61,44 +61,41 @@ const newEndorsement: EndorsementFormModel = { description: undefined };
 const newContact = ref<PersonFormModel>({});
 const newTopic = ref<TopicFormModel>({});
 
-function onSubmit() {
+async function onSubmit() {
   if (isValidEndorsement()) {
     setEndorsee();
     setTopic();
     newEndorsement.description = blurb.value;
-    endorsementService
-      .newEndorsement(newEndorsement)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => alert(error))
-      .finally(() => clearall());
+    try {
+      const data = await endorsementService
+        .create(newEndorsement)
+      console.log(data);
+    }
+    catch (error) {
+      alert(error)
+    }
+    finally {
+      clearall();
+    }
   } else {
     alert('Invalid');
   }
 }
 
-onMounted(() => {
-  topicService.getTopics().then((res: any) => {
-    const data = res.data.data;
-
-    data.map((topic: any) => {
-      const topx: FormSelectOption = {
-        value: topic.id,
-        label: topic.attributes.name,
-      };
-
-      topics.value.push(topx);
+onMounted(async () => {
+  const topicList = await topicService.list();
+  topicList.map((topic: any) => {
+    topics.value.push({
+      value: topic.id,
+      label: topic.attributes.name,
     });
+  });
 
-    contactService.getContacts().then((res: any) => {
-      const data = res.data.data;
-      data.map((contact: any) => {
-        contacts.value.push({
-          value: contact.id,
-          label: `${contact.attributes.firstName} ${contact.attributes.lastName}`,
-        });
-      });
+  const contactList = await contactService.list();
+  contactList.map((contact: any) => {
+    contacts.value.push({
+      value: contact.id,
+      label: `${contact.attributes.firstName} ${contact.attributes.lastName}`,
     });
   });
 });
@@ -118,7 +115,6 @@ const isValidEndorsement = (): boolean => {
 };
 
 const setEndorsee = () => {
-  debugger;
   if (currEndorsee.value && currEndorsee.value.value !== '') {
     newEndorsement.endorseeId = currEndorsee.value.value;
   } else {
@@ -131,7 +127,6 @@ const setEndorsee = () => {
 };
 
 const setTopic = () => {
-  debugger;
   if (selectedTopic.value && selectedTopic.value.value !== '') {
     newEndorsement.topicId = selectedTopic.value.value;
   } else {

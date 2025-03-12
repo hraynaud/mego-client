@@ -29,7 +29,7 @@ const update = () => {
 };
 
 export const endorsementService = {
-  newEndorsement: create,
+  create,
   del,
   update,
   search,

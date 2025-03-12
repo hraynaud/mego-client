@@ -5,21 +5,22 @@ const create = (topic: TopicModel) => {
   apiService.post('/topics', topic);
 };
 
-const deleteTopic = () => {
+const del = () => {
   console.log('delete topic');
 };
 
-const updateTopic = () => {
+const update = () => {
   console.log('update topic');
 };
 
-const getTopics = () => {
-  return apiService.get('/topics');
+const list = async () => {
+  const res = await apiService.get('/topics');
+  return res.data.data;
 };
 
 export const topicService = {
   create,
-  deleteTopic,
-  updateTopic,
-  getTopics,
+  del,
+  update,
+  list,
 };

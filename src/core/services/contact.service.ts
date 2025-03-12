@@ -1,26 +1,27 @@
 import { PersonFormModel } from '../models';
 import { apiService } from './api.service';
 
-const getContacts = (params?: any): any => {
-  return apiService.get('/contacts', params);
+const list = async (params?: any): any => {
+  const res = await apiService.get('/contacts', params);
+  return res.data.data;
 };
 
-const newContact = (contact: PersonFormModel) => {
+const create = (contact: PersonFormModel) => {
   apiService.post('/contacts', contact);
 };
 
-const deleteContact = () => {
+const del = () => {
   console.log('delete contact');
 };
 
-const updateContact = () => {
+const update = () => {
   // should only update relationship status with contact and nothing
   console.log('update contact');
 };
 
 export const contactService = {
-  getContacts,
-  newContact,
-  deleteContact,
-  updateContact,
+  list,
+  create,
+  del,
+  update,
 };
