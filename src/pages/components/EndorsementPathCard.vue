@@ -44,9 +44,11 @@ const avatarLargeData = <AvatarData>(<unknown>{
 .endorsement-card {
   width: 230px;
   height: 300px;
+
   .topic {
     height: 65px;
   }
+
   .description {
     height: 125px;
   }
