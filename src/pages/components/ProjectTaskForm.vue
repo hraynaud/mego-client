@@ -39,7 +39,7 @@ const task = defineModel<Task>({
 });
 
 const headerData: HeaderData = {
-  icon: 'contact_page',
+  icon: 'assignment',
   header: 'Add Task',
 };
 </script>

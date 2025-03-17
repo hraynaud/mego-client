@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ProjectModel } from '../core/models';
+import { ProjectModel } from '../../core/models';
 import ProjectCard from './ProjectCard.vue';
 
 defineProps<{ projects: ProjectModel[] }>();

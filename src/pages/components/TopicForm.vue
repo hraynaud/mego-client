@@ -1,18 +1,9 @@
 <template>
   <PopupForm :data="headerData">
-    <CustQInput
-      v-model="topic.name"
-      label="Name"
-      :rules="[(val) => !!val || 'First name is required']"
-    />
-    <CustQInput
-      v-model="topic.description"
-      type="textarea"
-      label="Description"
-      :rules="[
-        (val) => (val && val.length > 0) || 'Please enter an description',
-      ]"
-    />
+    <CustQInput v-model="topic.name" label="Name" :rules="[(val) => !!val || 'First name is required']" />
+    <CustQInput v-model="topic.description" type="textarea" label="Description" :rules="[
+      (val) => (val && val.length > 0) || 'Please enter an description'
+    ]" />
   </PopupForm>
 </template>
 
@@ -27,7 +18,7 @@ const topic = defineModel<TopicFormModel>({
 });
 
 const headerData: HeaderData = {
-  icon: 'label',
+  icon: 'topic',
   header: 'Add Topic',
 };
 </script>

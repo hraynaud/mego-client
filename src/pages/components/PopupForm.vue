@@ -58,6 +58,6 @@ const validateAndSubmit = async () => {
 .icon {
   width: 40px;
   height: 40px;
-  font-size: 90px;
+  font-size: 64px;
 }
 </style>
