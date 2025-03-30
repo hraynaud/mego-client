@@ -2,17 +2,8 @@
   <q-separator />
   <q-card-section class="row items-center endorsement-path-wrapper">
     <div class="q-py-sm path">
-      <router-link
-        v-for="p in path"
-        :key="p.id"
-        :to="profilePath(p.id)"
-        class="path-el"
-      >
-        <user-avatar
-          :data="getPathElementAvatarData(p as PathAvatar)"
-          class="path-el-content"
-          :cls="'tiny' + ' ' + roler(p)"
-        />
+      <router-link v-for="p in path" :key="p.id" :to="profilePath(p.id)" class="path-el">
+        <user-avatar :data="getPathElementAvatarData(p as PathAvatar)" :cls="'tiny' + ' ' + roler(p)" />
       </router-link>
     </div>
   </q-card-section>
@@ -63,6 +54,7 @@ const roler = (p: PathAvatar) => {
         font-size: 24px;
       }
     }
+
     &.tiny.psychology {
       .q-avatar__content {
         font-size: 32px;
@@ -79,11 +71,7 @@ const roler = (p: PathAvatar) => {
 .path {
   height: auto;
   min-width: 160px;
-
   padding: 8px;
-  .path-el-content {
-    display: inline;
-  }
 
   .path-el:not(:last-child) {
     margin-right: 27px;

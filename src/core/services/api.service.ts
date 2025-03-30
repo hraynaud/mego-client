@@ -1,5 +1,8 @@
 import { http } from 'boot/axios';
 import { Method } from 'axios';
+import { AxiosResponse } from 'axios';
+import { API_PREFIX, SESSION_AUTH_KEY } from '../../core/models/constants';
+import { authService } from './auth.service';
 
 async function post(path: string, payload: unknown) {
   return await execute('POST', path, payload, {});
@@ -69,6 +72,58 @@ function errHandler(error: any) {
   return Promise.reject(msg);
 }
 
+const extractReponseData = (resp: AxiosResponse<any>) => {
+  return resp.data.data;
+};
+
+const resolveApiPrefix = (url: string) => {
+  return authService.isLoggedIn() ? `${API_PREFIX}${url}` : url;
+};
+
+export interface StreamOptions {
+  onChunk: (chunk: string) => void;
+  onComplete?: () => void;
+  onError?: (error: Event) => void;
+}
+
+const sendStream = (message: string, opts: StreamOptions): EventSource => {
+  // Get the auth token
+  const authToken = sessionStorage.getItem(SESSION_AUTH_KEY);
+
+  // Use the same URL formatting as your axios interceptor would
+  let url = `/chat/stream?message=${encodeURIComponent(message)}`;
+  url = resolveApiPrefix(url); // Apply the same URL transformation as axios
+
+  // Add auth token as a query parameter since EventSource doesn't support custom headers
+  if (authToken) {
+    url += `&authorization=${encodeURIComponent(authToken)}`;
+  }
+
+  // Create a new SSE connection
+  const eventSource = new EventSource(`${process.env.SERVER_URL}${url}`);
+
+  // Handle message chunks
+  eventSource.onmessage = (event: MessageEvent) => {
+    const chunk = JSON.parse(event.data);
+    opts.onChunk(chunk.data);
+  };
+
+  // Handle completion (when connection is closed by server)
+  eventSource.addEventListener('complete', () => {
+    eventSource.close();
+    if (opts.onComplete) opts.onComplete();
+  });
+
+  // Handle errors
+  eventSource.onerror = (error: Event) => {
+    console.error('EventSource encountered an error:', error);
+    eventSource.close();
+    if (opts.onError) opts.onError(error);
+  };
+
+  return eventSource;
+};
+
 export const apiService = {
   post,
   get,
@@ -76,4 +131,7 @@ export const apiService = {
   put,
   setHeader,
   getHeader,
+  extractReponseData,
+  sendStream,
+  resolveApiPrefix,
 };

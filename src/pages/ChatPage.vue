@@ -12,28 +12,15 @@
 
     <q-page-sticky position="bottom" class="q-mt-lg" expand>
       <div class="col q-px-xl q-py-lg q-mx-xl">
-        <q-input
-          rounded
-          outlined
-          borderless
-          autogrow
-          v-model="message"
-          type="text"
-          placeholder="ask me anything"
-          dense
-          @keyup.enter="sendMessage"
-        >
+        <q-input rounded outlined borderless autogrow v-model="message" type="text" placeholder="ask me anything" dense
+          @keyup.enter="sendMessage">
           <template v-slot:before>
             <q-avatar size="32px">
               <img src="../assets/AI Avatar.svg" />
             </q-avatar>
           </template>
           <template v-slot:append>
-            <q-icon
-              name="arrow_circle_up"
-              class="cursor-pointer"
-              @click="sendMessage"
-            />
+            <q-icon name="arrow_circle_up" class="cursor-pointer" @click="sendMessage" />
           </template>
         </q-input>
       </div>
@@ -46,7 +33,8 @@
   flex: 1;
   padding: 16px;
   overflow-y: auto;
-  max-height: calc(100vh - 80px); /* Adjusts for the chat input box */
+  max-height: calc(100vh - 80px);
+  /* Adjusts for the chat input box */
 }
 
 .chat-message {
@@ -72,7 +60,6 @@
 import { ComputedRef, computed, ref, Ref } from 'vue';
 import { useQuasar } from 'quasar';
 import EndorsementPathList from './components/EndorsementPathList.vue';
-import PageHeader from './components/PageHeader.vue';
 import {
   SearchParams,
   useEndorsementStore,
@@ -94,11 +81,9 @@ const endorsements: ComputedRef<EndorsementPathModel[]> = computed(
   () => eStore.endorsements
 );
 
-const unsubscribe = eStore.$onAction(
+eStore.$onAction(
   ({
     name, // name of the action
-    store, // store instance, same as `someStore`
-    args, // array of parameters passed to the action
     after, // hook after the action returns or resolves
     onError, // hook if the action throws or rejects
   }) => {
@@ -111,11 +96,11 @@ const unsubscribe = eStore.$onAction(
 
     after((result) => {
       if (name == 'setEndorsements') {
+        console.log(`!!! ${result}`)
         $q.loading.hide();
       }
     });
 
-    // this will trigger if the action throws or returns a promise that rejects
     onError((error) => {
       console.warn(
         `Failed "${name}" after ${Date.now() - startTime}ms.\nError: ${error}.`
@@ -124,7 +109,7 @@ const unsubscribe = eStore.$onAction(
   }
 );
 
-const gotopage = () => {
+const executeSearch = () => {
   if (query.value !== undefined) {
     seachParams.value.page = current.value;
     seachParams.value.query = query.value;
@@ -137,7 +122,7 @@ const sendMessage = () => {
     messages.value.push(message.value);
     query.value = message.value;
     message.value = ''; // Clear input after sending
-    gotopage();
+    executeSearch();
   }
 };
 </script>

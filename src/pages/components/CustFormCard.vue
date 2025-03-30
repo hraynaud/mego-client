@@ -1,6 +1,6 @@
 <template>
-  <q-form class="q-pa-xl row">
-    <q-card class="col-7 form-card offset-md-1">
+  <q-form class="q-pa-lg">
+    <q-card class=" form-card offset-md-0" :class="cls">
       <div class="header text-center q-mb-sm">
         <slot name="header"></slot>
       </div>

@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "d3": "^5.12.0",
     "jwt-decode": "^3.1.2",
+    "markdown-it": "^14.1.0",
     "pinia": "^2.0.11",
     "quasar": "^2.14.3",
     "register-service-worker": "^1.6.2",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@quasar/app-vite": "^1.7.3",
     "@types/jwt-decode": "^3.1.0",
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^12.20.21",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",

@@ -2,8 +2,7 @@ import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance } from 'axios';
 const { sessionStorage } = window;
 import { SESSION_AUTH_KEY } from '../core/models/constants';
-import { authService } from '../core/services';
-import { config } from 'process';
+import { apiService } from '../core/services';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -17,9 +16,8 @@ declare module '@vue/runtime-core' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-
 const http = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: process.env.SERVER_URL,
 
   headers: {
     'Content-Type': 'application/json',
@@ -27,19 +25,22 @@ const http = axios.create({
 });
 
 http.interceptors.request.use(
-  function (config) {
-    config.url = apiUrl(config.url!);
-    config.headers['Authorization'] = sessionStorage.getItem(SESSION_AUTH_KEY);
-    return config;
+  (config) => {
+    if (config.url) {
+      if (config.url?.includes('/stream')) {
+        console.warn('Axios should not be used for streaming endpoints');
+      }
+      config.url = apiService.resolveApiPrefix(config.url);
+      config.headers['Authorization'] =
+        sessionStorage.getItem(SESSION_AUTH_KEY);
+      return config;
+    }
   },
   function (error) {
     // Do something with request error
     return Promise.reject(error);
   }
 );
-
-const apiUrl = (url: string) =>
-  authService.isLoggedIn() ? `/api/v1${url}` : url;
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
