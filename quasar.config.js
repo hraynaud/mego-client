@@ -55,9 +55,9 @@ module.exports = configure(function (ctx) {
       },
 
       env: {
-        SERVER_URL: ctx.dev
-          ? 'http://localhost:3000'
-          : 'htt://www.yousfulee.com',
+        SERVER_URL:
+          process.env.SERVER_URL ||
+          (ctx.dev ? 'http://localhost:3000' : 'https://konmego.fly.dev'),
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
