@@ -4,12 +4,7 @@
       <h4 class="text-h5 text-white q-my-md">Invite a friend</h4>
     </q-card-section>
     <div class="q-pa-md invite-form">
-      <q-form
-        @submit="onSubmit"
-        @reset="onReset"
-        class="q-px-sm q-pt-md q-pb-lg"
-        name="endorsement"
-      >
+      <q-form @submit="onSubmit" @reset="onReset" class="q-px-sm q-pt-md q-pb-lg" name="endorsement">
         <div class="q-mt-l q-mb-xl">
           <h6>Contact Info</h6>
           <div class="row justify-between">
@@ -17,12 +12,7 @@
               <q-input v-model="firstName" stack-label label="First Name" />
             </div>
             <div class="col-5">
-              <q-input
-                class=""
-                v-model="lastName"
-                stack-label
-                label="Last Name"
-              />
+              <q-input class="" v-model="lastName" stack-label label="Last Name" />
             </div>
           </div>
           <div class="row q-mt-md">
@@ -34,13 +24,7 @@
 
         <div class="row q-py-xl">
           <q-btn label="Submit" type="submit" color="primary" />
-          <q-btn
-            label="Reset"
-            type="reset"
-            color="primary"
-            flat
-            class="q-ml-sm"
-          />
+          <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
         </div>
       </q-form>
     </div>
@@ -50,8 +34,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
-import { inviteService } from '../core/services';
-import { InviteFormModel } from '../core/models';
+import { inviteService } from '../../core/services';
+import { InviteFormModel } from '../../core/models';
 
 const firstName = ref();
 const lastName = ref();
@@ -83,6 +67,5 @@ function clearNewContact() {
 }
 </script>
 <style scoped lang="scss">
-.invite-form {
-}
+.invite-form {}
 </style>
