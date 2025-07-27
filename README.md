@@ -70,4 +70,4 @@ RUN quasar build
 ```
 
 then on deploy do this:
-fly deploy --build-arg SERVER_URL=https://konmego.fly.dev
+fly deploy --build-arg SERVER_URL=https://konmego-server.fly.dev
