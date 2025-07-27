@@ -29,4 +29,4 @@ FROM pierrezemb/gostatic
 COPY --from=build /app/dist/spa /srv/http/
 
 # Set command to serve with fallback for SPA routing
-CMD ["-port", "3000","-fallback", "index.html"]
+CMD ["-port", "9000","-fallback", "index.html"]
