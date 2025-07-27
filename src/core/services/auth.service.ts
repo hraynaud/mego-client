@@ -28,15 +28,11 @@ function logout() {
 async function signup(
   email: string,
   password: string,
-  firstName: string,
-  lastName: string,
   inviteCode: string | undefined
 ) {
   const response = await apiService.post('/register', {
     email,
     password,
-    firstName,
-    lastName,
     inviteCode,
   });
   return handleSignup(response);
